@@ -1,0 +1,160 @@
+import 'react-native-gesture-handler';
+import React, {useEffect} from 'react';
+import { StyleSheet, Text, View, Pressable} from 'react-native';
+import { SvgComponent} from '../../../assets/jsxSvg/MainPageLogo'
+import MarqueeText from 'react-native-marquee';
+import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Gender } from '../gender/Gender'
+import { Catalog } from '../catalog/Catalog'
+
+
+
+
+
+
+const Stack = createStackNavigator();
+
+
+
+
+
+
+
+
+
+function HomeScreen({ navigation }) {
+ 
+
+    return (
+      <View style={styles.mainScreen}>
+        <View style={styles.mainContainer}>
+        <SvgComponent  style={styles.tinyLogo}></SvgComponent>
+        </View>
+        <MarqueeText
+            style={styles.marquee}
+            duration={4000}
+            marqueeOnStart
+            loop={true}
+            marqueeDelay={0}
+            marqueeResetDelay={0}
+          >
+            <Text>Миша Егор Нина Андрей</Text>
+          </MarqueeText>
+  
+  
+          <View style={styles.mainContainer}>
+            <Pressable style={styles.mainBtnContainer}
+            onPress={() => navigation.navigate('Gender')}>
+            <LinearGradient
+          // Button Linear Gradient
+          colors={['#5DADC1', '#4E9DB1', '#5DADC1']}
+          style={styles.buttonName}>
+          <Text style={styles.textBtnName}>Выбрать имя ребенку</Text>
+        </LinearGradient>
+            </Pressable>
+          <Pressable  onPress={() => navigation.navigate('Catalog')} style={styles.hollowBtn}>
+            <Text style={styles.hollowBtnText}>Энциклопедия имен</Text>
+          </Pressable>
+          </View>
+  
+      </View>
+    );
+  }
+
+
+
+
+
+
+  export function Home() {
+   
+
+
+ 
+
+  
+
+    const navigation = useNavigation()
+
+    return (
+      <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+        <Stack.Screen options={{headerShown: false}} name="HomeScreen" component={HomeScreen} />
+        {/* <Stack.Screen options={{headerShown: false}} name="Catalog" component={Catalog} /> */}  
+        <Stack.Screen name="Gender" component={Gender} options={{headerShown: false }} />        
+      </Stack.Navigator>
+    );
+
+
+  }
+
+
+
+
+
+
+  const styles = StyleSheet.create({
+    tinyLogo: {
+      marginTop: 80,
+      marginBottom: 40
+    },
+    mainScreen: {
+      backgroundColor: '#fff',
+      flex: 1,
+      width: '100%'
+    },
+    mainContainer: {
+      marginHorizontal: 28,
+      alignItems: 'center'
+    },
+    marquee: {
+      fontSize: 50,
+      marginBottom: 60
+    },
+    nameBtn: {
+      width: '100%',
+      alignItems: 'center',
+    },
+    textBtnName: {
+      color: '#fff',
+      fontSize: 16,
+      fontFamily: 'Gilroy'
+    
+    },
+    buttonName: {
+      width: '100%',
+      alignItems: 'center',
+      borderRadius: 14,
+      paddingVertical: 19,
+      marginBottom: 2
+    },
+    mainBtnContainer: {
+      backgroundColor: '#3A7F91',
+      borderRadius: 14,
+      width: '100%',
+      marginBottom: 20
+    },
+    hollowBtn: {
+      width: '100%',
+      alignItems: 'center',
+      borderRadius: 14,
+      paddingVertical: 19,
+      borderColor: '#5DADC1',
+      borderWidth: 1
+    },
+    hollowBtnText: {
+      color: '#5DADC1',
+      fontSize: 16,
+      fontFamily: 'Gilroy'
+      
+    }
+    
+  
+  })
+  
+  
+  
+  

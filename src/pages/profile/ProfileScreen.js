@@ -1,7 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button } from 'react-native';
+import { StyleSheet, Modal, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons'; 
 import { NavigationContainer,  useScrollToTop } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileHeader } from './ProfileHeader'
@@ -28,6 +29,7 @@ export  function ProfileScreen({route}) {
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
+const [modalVisible, setModalVisible] = useState(false);
 
 
 useEffect(() => {
@@ -48,13 +50,15 @@ useEffect(() => {
 
 if (isLoading == false) { 
 
+
+
     return (
-      <ScrollView style={styles.profile} >
+      <ScrollView style={styles.profile}>
         <View style={styles.profileHeader}>
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
-         <View style={{flexDirection:'row', justifyContent: 'center'}}>
+         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
            {data.colors.map((prop, key) => {
          return (
            <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
@@ -90,11 +94,41 @@ if (isLoading == false) {
 
           {data.props_name.map((prop, key) => {
          return (
-           <Text style={styles.profilePopularPersonText} key={key}>{prop}</Text>
+           <View>
+             <View style={{
+               flexDirection: 'row',
+               justifyContent: 'space-between'
+             }}>
+             <Text style={styles.charTitle} key={key}>Характеристика {key + 1}</Text>
+             <TouchableOpacity  onPress={() => {
+                setModalVisible(true);
+              }}>
+             <Feather name="info" size={18} color="#58A7BB" />
+             </TouchableOpacity>
+             </View>
+            <Text style={styles.profilePopularPersonText} key={key}>{prop}</Text>
+           </View>
          );
       })}
 
         
+        </View>
+
+        <TouchableOpacity>
+          <Text>Up</Text>
+        </TouchableOpacity>
+
+        <View   style={styles.modal}>
+        <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+        }}>
+         
+          </Modal>
+
         </View>
 
 
@@ -139,7 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#3C3C3C',
     marginTop: 35,
-    marginBottom: 17,
+    marginBottom: 5 ,
     lineHeight: 33
   },
   profileSureName: {
@@ -202,5 +236,26 @@ const styles = StyleSheet.create({
   },
   profileTextBlock: {
     marginBottom: 40
+  },
+  charTitle: {
+    marginBottom: 10,
+    fontSize: 16
+  },
+  modal: {
+    margin: 20,
+    backgroundColor: '#000',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    height: 20,
+    width: 20
   }
 })

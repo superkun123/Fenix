@@ -1,12 +1,13 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Modal, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; 
 import { NavigationContainer,  useScrollToTop } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileHeader } from './ProfileHeader'
 import { useFonts } from 'expo-font';
+import Modal from 'react-native-modal';
 
 
 
@@ -19,9 +20,10 @@ export  function ProfileScreen({route}) {
 
 
 
+  let modalText = 'Текст'
 
  
-
+ 
 
 
 
@@ -29,7 +31,29 @@ export  function ProfileScreen({route}) {
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
-const [modalVisible, setModalVisible] = useState(false);
+const [isModalVisible, setModalVisible] = useState(false);
+
+
+const changeText = (prop) => {
+  modalText = 'Текст'
+}
+
+
+changeText()
+
+
+// changeText('Новый текст') 
+
+
+  
+const toggleModal = () => {
+  setModalVisible(!isModalVisible);
+};
+
+
+
+
+
 
 
 useEffect(() => {
@@ -44,8 +68,10 @@ useEffect(() => {
 
 
 
-// ${route.params.paramKey}
 
+
+
+// ${route.params.paramKey}
 
 
 if (isLoading == false) { 
@@ -53,7 +79,34 @@ if (isLoading == false) {
 
 
     return (
+
+      
       <ScrollView style={styles.profile}>
+        <View>
+          
+        <Modal isVisible={isModalVisible} 
+        animationOutTiming={500}
+        onBackdropPress={() => setModalVisible(false)}
+        backdropTransitionInTiming={500}
+          backdropTransitionOutTiming={0}
+          animationInTiming={500}
+          hideModalContentWhileAnimating={true}>
+          <View style={styles.modalBody}>
+            <Text style={styles.modalTitle}>Характер</Text>
+            <Text style={styles.modalDesc}>Каждое имя содержит уникальный характер, многое зависит от выбора имени</Text>
+          <View style={styles.modalFooter}>
+          <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={toggleModal}>
+            <Text style={styles.closeModalText}>Закрыть</Text>
+          </TouchableOpacity>
+          </View>
+          
+          </View>
+
+        </Modal>
+
+
+        </View>
+
         <View style={styles.profileHeader}>
          <Text style={styles.profileName}>
          {route.params.paramKey}
@@ -90,23 +143,27 @@ if (isLoading == false) {
         <View style={styles.profileTextBlock}>
           <Text style={styles.profilePopularPersonTitle}>Характеристики</Text>
 
+
          
 
           {data.props_name.map((prop, key) => {
+
+
+
          return (
            <View>
              <View style={{
                flexDirection: 'row',
                justifyContent: 'space-between'
              }}>
-             <Text style={styles.charTitle} key={key}>Характеристика {key + 1}</Text>
-             <TouchableOpacity  onPress={() => {
-                setModalVisible(true);
-              }}>
+             <Text style={styles.charTitle} key={key}>{prop.title}</Text>
+             <TouchableOpacity  onPress={toggleModal}>
              <Feather name="info" size={18} color="#58A7BB" />
              </TouchableOpacity>
+           
              </View>
-            <Text style={styles.profilePopularPersonText} key={key}>{prop}</Text>
+            <Text style={styles.profilePopularPersonText} key={key}>{prop.text}</Text>
+
            </View>
          );
       })}
@@ -118,18 +175,10 @@ if (isLoading == false) {
           <Text>Up</Text>
         </TouchableOpacity>
 
-        <View   style={styles.modal}>
-        <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
-         
-          </Modal>
 
-        </View>
+
+     
+       
 
 
 
@@ -241,21 +290,37 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16
   },
-  modal: {
-    margin: 20,
-    backgroundColor: '#000',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    height: 20,
-    width: 20
+  modalBody: {
+    backgroundColor: '#fff',
+    borderRadius: 18,
+    padding: 18,
+    paddingBottom: 12
+  },
+  modalTitle: {
+    fontFamily: 'GilroyMedium',
+    fontSize: 17,
+    marginBottom: 7,
+    textAlign: 'center'  
+  },
+  modalDesc: {
+    fontFamily: 'Gilroy',
+    fontSize: 13,
+    marginBottom: 19,
+    textAlign: 'center'  
+  },
+  modalFooter: {
+    borderTopColor: '#E0E0E0',
+    borderTopWidth: 1,
+    marginLeft: -18,
+    marginRight: -18,
+    padding: 10,
+    alignItems: 'center'
+  },
+  closeModalText: {
+    fontSize: 17,
+    color: '#5AA9BD',
+    fontFamily: 'GilroyMedium'
   }
+
+
 })

@@ -46,7 +46,7 @@ useEffect(() => {
 
 
 
-
+if (isLoading == false) { 
 
     return (
       <ScrollView style={styles.profile} >
@@ -54,10 +54,15 @@ useEffect(() => {
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
-         <View style={{flexDirection:'row'}}>
-           <View>
-        
+         <View style={{flexDirection:'row', justifyContent: 'center'}}>
+           {data.colors.map((prop, key) => {
+         return (
+           <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
+             {/* <Text>{prop.color}</Text> */}
            </View>
+         );
+      })}
+          
          </View>
          <Text style={styles.profileSureName}>
          {/* Иван Петрович Николаев ИПН, НИП */}
@@ -80,11 +85,14 @@ useEffect(() => {
 
         <View style={styles.profileTextBlock}>
           <Text style={styles.profilePopularPersonTitle}>Характеристики</Text>
-          {/* {data.props_name.map((prop, key) => {
+
+         
+
+          {data.props_name.map((prop, key) => {
          return (
            <Text style={styles.profilePopularPersonText} key={key}>{prop}</Text>
          );
-      })} */}
+      })}
 
         
         </View>
@@ -95,6 +103,15 @@ useEffect(() => {
 
       </ScrollView>
     );
+  } else {
+
+    return (
+      <View style={styles.profileEpmty} >
+        <ActivityIndicator size="large" color="#5DADC1"/>
+      </View>
+    )
+
+  }
   }
 
 
@@ -109,6 +126,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF7ED',
     paddingLeft: 40,
     paddingRight: 40
+  },
+  profileEpmty: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#FFF7ED',
   },
   profileName: {
     fontFamily: 'Gilroy',

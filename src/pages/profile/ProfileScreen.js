@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,  useScrollToTop } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileHeader } from './ProfileHeader'
 import { useFonts } from 'expo-font';
@@ -17,18 +17,9 @@ import { useFonts } from 'expo-font';
 export  function ProfileScreen({route}) {
 
 
-  // const [loaded] = useFonts({
-  //   Gilroy: require('../../../assets/fonts/Gilroy-Regular.ttf'),
-  // });
-  
-  // if (!loaded) {
-  //   return null;
-  // }
 
 
-  
-
-// Хз, фигня какая-то
+ 
 
 
 
@@ -41,9 +32,9 @@ const [data, setData] = useState([]);
 
 useEffect(() => {
   // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.paramKey}`)
+  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
     .then((response) => response.json())
-    .then((json) => setData(json.names))
+    .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
 }, []);
@@ -51,48 +42,56 @@ useEffect(() => {
 
 
 
+// ${route.params.paramKey}
 
 
 
 
 
     return (
-      <ScrollView style={styles.profile}>
+      <ScrollView style={styles.profile} >
         <View style={styles.profileHeader}>
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
+         <View style={{flexDirection:'row'}}>
+           <View>
+        
+           </View>
+         </View>
          <Text style={styles.profileSureName}>
          {/* Иван Петрович Николаев ИПН, НИП */}
          {route.params.description}
          </Text>
          <Text style={styles.profileTranscription}>
-         
+           {data.name_translit}
          </Text>
          <Text style={styles.profileSimilarNames}>
-         Игорёк, Игорёчек, Игорюша
+         {data.variants}
          </Text>
          <Text style={styles.profileNameDesc}>
-         Имя Игорь русское, славянское, православное. Скандинавского происхождения, означает «воинственный»..
+         {data.description}
          </Text>
         </View>
         <View style={styles.profileTextBlock}>
           <Text style={styles.profilePopularPersonTitle}>Известные люди</Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Святославич ((1151—1202) князь новгород-северский, князь черниговский, из рода Ольговичей, сын Святослава Ольговича; главный герой «Слова о полку Игореве») </Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Стравинский (русский композитор, дирижёр и пианист, один из крупнейших представителей мировой музыкальной культуры XX века) </Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Бриль (джазовый пианист) </Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Северянин  (русский поэт «серебряного века»)</Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Кио цирковой (артист- иллюзионист )</Text> 
+          <Text style={styles.profilePopularPersonText}>{data.peoples}</Text>
         </View>
 
         <View style={styles.profileTextBlock}>
-          <Text style={styles.profilePopularPersonTitle}>Характер</Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Святославич ((1151—1202) князь новгород-северский, князь черниговский, из рода Ольговичей, сын Святослава Ольговича; главный герой «Слова о полку Игореве») </Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Стравинский (русский композитор, дирижёр и пианист, один из крупнейших представителей мировой музыкальной культуры XX века) </Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Бриль (джазовый пианист) </Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Северянин  (русский поэт «серебряного века»)</Text>
-          <Text style={styles.profilePopularPersonText}>Игорь Кио цирковой (артист- иллюзионист )</Text> 
+          <Text style={styles.profilePopularPersonTitle}>Характеристики</Text>
+          {/* {data.props_name.map((prop, key) => {
+         return (
+           <Text style={styles.profilePopularPersonText} key={key}>{prop}</Text>
+         );
+      })} */}
+
+        
         </View>
+
+
+
+    
 
       </ScrollView>
     );

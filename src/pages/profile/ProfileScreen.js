@@ -32,6 +32,7 @@ let modalText = 'Текст'
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
 const [isModalVisible, setModalVisible] = useState(false);
+const [descText, setText] = useState('123');
 
 
 
@@ -74,6 +75,9 @@ useEffect(() => {
 if (isLoading == false) { 
 
 
+  
+
+
 
     return (
 
@@ -90,12 +94,12 @@ if (isLoading == false) {
             hideModalContentWhileAnimating={true}>
             <View style={styles.modalBody}>
               <Text style={styles.modalTitle}>Характер</Text>
+
               
-              {data.props_name.map((prop, key) => {
-         return (
-          <Text style={styles.modalDesc}>{prop.desc}</Text>
-         );
-      })}
+            
+          <Text style={styles.modalDesc}>{descText}</Text>
+    
+   
 
               
             <View style={styles.modalFooter}>

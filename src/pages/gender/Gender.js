@@ -15,19 +15,28 @@ import { SvgComponentUnknown } from '../../../assets/jsxSvg/unknownIcon'
 const Stack = createStackNavigator();
 
 
-
-
 function GenderScreen({ navigation }) {
+
+  let gender_id
+
+
+
+const sendGender = (gender) => {
+  navigation.navigate('FatherName')
+  gender_id = gender
+}
+
+
  
 
     return (
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
-            <Pressable  onPress={() => navigation.navigate('FatherName')} style={styles.genderBtn}>
+            <Pressable  onPress={() => sendGender(2)} style={styles.genderBtn}>
             <SvgComponentGirl style={styles.svgGenger}></SvgComponentGirl>
             <Text style={styles.genderLabel}>Девочка</Text>
             </Pressable>
-            <Pressable  onPress={() => navigation.navigate('FatherName')} style={styles.genderBtn}>
+            <Pressable  onPress={() => sendGender(1)} style={styles.genderBtn}>
             <SvgComponentBoy style={styles.svgGenger}></SvgComponentBoy>
             <Text style={styles.genderLabel}>Мальчик</Text>
             </Pressable>

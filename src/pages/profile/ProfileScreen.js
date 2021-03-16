@@ -44,9 +44,10 @@ const [descText, setText] = useState('123');
 
 
   
-const toggleModal = () => {
-  setModalVisible(!isModalVisible);
-};
+// function toggleModal() {
+//   setModalVisible(!isModalVisible);
+//   setText(prop.text)
+// };
 
 
 
@@ -103,7 +104,8 @@ if (isLoading == false) {
 
               
             <View style={styles.modalFooter}>
-            <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={toggleModal}>
+            <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={() => {
+                setModalVisible(!isModalVisible);}}>
               <Text style={styles.closeModalText}>Закрыть</Text>
             </TouchableOpacity>
             </View>
@@ -164,7 +166,10 @@ if (isLoading == false) {
                justifyContent: 'space-between'
              }}>
              <Text style={styles.charTitle} key={key}>{prop.title}</Text>
-             <TouchableOpacity  onPress={toggleModal}>
+             <TouchableOpacity  onPress={() => {
+                setModalVisible(!isModalVisible);
+                setText(prop.text)
+             }}>
              <Feather name="info" size={18} color="#58A7BB" />
              </TouchableOpacity>
            

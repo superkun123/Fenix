@@ -37,6 +37,11 @@ export default function App() {
   const [loaded] = useFonts({
     Gilroy: require('./assets/fonts/Gilroy-Regular.ttf'),
     GilroyMedium: require('./assets/fonts/gilroy-medium.ttf'),
+    Podkova: require('./assets/fonts/Podkova-Bold.ttf'),
+    Bebas: require('./assets/fonts/BebasNeue-Regular.ttf'),
+    Caption: require('./assets/fonts/PTSerifCaption-Italic.ttf'),
+    Raleway:  require('./assets/fonts/Raleway-Bold.ttf'),
+
   });
   
   if (!loaded) {

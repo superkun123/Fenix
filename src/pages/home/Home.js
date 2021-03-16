@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Gender } from '../gender/Gender'
 import { Catalog } from '../catalog/Catalog'
+import TextTicker from 'react-native-text-ticker'
 
 
 
@@ -34,7 +35,22 @@ function HomeScreen({ navigation }) {
         <View style={styles.mainContainer}>
         <SvgComponent  style={styles.tinyLogo}></SvgComponent>
         </View>
-        <MarqueeText
+        <TextTicker
+          style={{ fontSize: 36 }}
+          style={styles.marquee}
+          duration={10000}
+          loop
+          bounce={false}
+          scroll={false}
+          scrollSpeed={10000}
+          repeatSpacer={0}
+          marqueeDelay={0}
+        >
+            <Text> <Text style={{fontFamily: 'Podkova', color: '#5B8F9C'}}>Миша</Text> <Text style={{fontFamily: 'Bebas', color: '#C2D2C5', textTransform: 'uppercase'}}>Егор</Text> <Text style={{fontFamily: 'Caption', color: '#E1AFA4'}}>Нина</Text> <Text style={{fontFamily: 'Raleway', color: '#242E51'}}>Андрей</Text> 
+            </Text>
+          
+        </TextTicker>
+        {/* <MarqueeText
             style={styles.marquee}
             duration={4000}
             marqueeOnStart
@@ -43,7 +59,7 @@ function HomeScreen({ navigation }) {
             marqueeResetDelay={0}
           >
             <Text>Миша Егор Нина Андрей</Text>
-          </MarqueeText>
+          </MarqueeText> */}
   
   
           <View style={styles.mainContainer}>
@@ -111,8 +127,8 @@ function HomeScreen({ navigation }) {
       alignItems: 'center'
     },
     marquee: {
-      fontSize: 50,
-      marginBottom: 60
+      marginBottom: 60,
+      fontSize: 36
     },
     nameBtn: {
       width: '100%',

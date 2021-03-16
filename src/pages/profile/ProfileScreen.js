@@ -20,7 +20,7 @@ export  function ProfileScreen({route}) {
 
 
 
-  let modalText = 'Текст'
+let modalText = 'Текст'
 
  
  
@@ -34,12 +34,9 @@ const [data, setData] = useState([]);
 const [isModalVisible, setModalVisible] = useState(false);
 
 
-const changeText = (prop) => {
-  modalText = 'Текст'
-}
 
 
-changeText()
+
 
 
 // changeText('Новый текст') 
@@ -83,26 +80,35 @@ if (isLoading == false) {
       
       <ScrollView style={styles.profile}>
         <View>
-          
-        <Modal isVisible={isModalVisible} 
-        animationOutTiming={500}
-        onBackdropPress={() => setModalVisible(false)}
-        backdropTransitionInTiming={500}
-          backdropTransitionOutTiming={0}
-          animationInTiming={500}
-          hideModalContentWhileAnimating={true}>
-          <View style={styles.modalBody}>
-            <Text style={styles.modalTitle}>Характер</Text>
-            <Text style={styles.modalDesc}>Каждое имя содержит уникальный характер, многое зависит от выбора имени</Text>
-          <View style={styles.modalFooter}>
-          <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={toggleModal}>
-            <Text style={styles.closeModalText}>Закрыть</Text>
-          </TouchableOpacity>
-          </View>
-          
-          </View>
 
-        </Modal>
+        <Modal isVisible={isModalVisible} 
+          animationOutTiming={500}
+          onBackdropPress={() => setModalVisible(false)}
+          backdropTransitionInTiming={500}
+            backdropTransitionOutTiming={0}
+            animationInTiming={500}
+            hideModalContentWhileAnimating={true}>
+            <View style={styles.modalBody}>
+              <Text style={styles.modalTitle}>Характер</Text>
+              
+              {data.props_name.map((prop, key) => {
+         return (
+          <Text style={styles.modalDesc}>{prop.desc}</Text>
+         );
+      })}
+
+              
+            <View style={styles.modalFooter}>
+            <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={toggleModal}>
+              <Text style={styles.closeModalText}>Закрыть</Text>
+            </TouchableOpacity>
+            </View>
+            
+            </View>
+  
+          </Modal>
+
+   
 
 
         </View>
@@ -147,9 +153,6 @@ if (isLoading == false) {
          
 
           {data.props_name.map((prop, key) => {
-
-
-
          return (
            <View>
              <View style={{

@@ -156,7 +156,7 @@ export function Collection() {
         <Stack.Screen name="ProfileMini" component={ProfileMini}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,
-            elevation: 0
+            elevation: 0,
           },
           } } />
 
@@ -170,6 +170,8 @@ export function Collection() {
 
            <Stack.Screen name="Filter" component={Filter}  options={{ title: 'Фильтр', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
+            shadowOpacity: 0,
+            elevation: 0,
           },
           } } />
       </Stack.Navigator>

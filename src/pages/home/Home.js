@@ -13,6 +13,7 @@ import { Catalog } from '../catalog/Catalog'
 import TextTicker from 'react-native-text-ticker'
 import * as RootNavigation from '../../../RootNavigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useLinkTo } from '@react-navigation/native';
 
 
 
@@ -29,7 +30,11 @@ const Tab = createBottomTabNavigator();
 
 
 
+
 function HomeScreen({ navigation }) {
+  const linkTo = useLinkTo();
+
+
  
 
     return (
@@ -74,7 +79,7 @@ function HomeScreen({ navigation }) {
           <Text style={styles.textBtnName}>Выбрать имя ребенку</Text>
         </LinearGradient>
             </Pressable>
-          <Pressable  onPress={() => navigation.navigate(Catalog)} style={styles.hollowBtn}>
+          <Pressable  onPress={() => navigation.navigate('Catalog')} style={styles.hollowBtn}>
             <Text style={styles.hollowBtnText}>Энциклопедия имен</Text>
           </Pressable>
           </View>
@@ -101,7 +106,7 @@ function HomeScreen({ navigation }) {
     return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         <Stack.Screen options={{headerShown: false}} name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen options={{headerShown: false}} name="Catalog" component={Catalog} />  
+        {/* <Stack.Screen options={{headerShown: false}} name="Catalog" component={Catalog} />   */}
         <Stack.Screen name="Gender" component={Gender} options={{headerShown: false }} />        
       </Stack.Navigator>
     );

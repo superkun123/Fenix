@@ -22,6 +22,8 @@ export  function ProfileMini({route}) {
 
 const navigation = useNavigation();
 
+let name = route.params.paramKey
+let id = route.params.description
 
 
 const [isLoading, setLoading] = useState(true);
@@ -91,7 +93,14 @@ if (isLoading == false) {
          </Text>
         </View>
         <View>
-            <Text style={styles.showmore}>Подробнее</Text>
+            <Text style={styles.showmore} onPress={() => {
+                
+                navigation.navigate('Home'), {
+                    paramKey: name,
+                    description: id,
+            }
+        }} 
+            >Подробнее</Text>
         </View>
 
 

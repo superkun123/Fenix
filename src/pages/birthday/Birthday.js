@@ -10,6 +10,8 @@ import { SvgComponentCake } from '../../../assets/jsxSvg/cake'
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg from 'react-native-svg';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
+
 
 
 
@@ -50,13 +52,19 @@ function BirthdayScreen({ navigation }) {
     return (
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
-        <SvgComponentCake></SvgComponentCake>
+        <SvgComponentCake style={styles.cake}></SvgComponentCake>
+        <View style={{flexDirection: 'row'}}>
         <View>
-        <Button onPress={showDatepicker} title="Show date picker!" />
+        <Pressable style={styles.dateBtn} onPress={showDatepicker} title="Введите дату">
+          <Text style={{fontFamily: 'GilroyMedium', fontSize: 16}}>Введите дату</Text>
+        </Pressable>
       </View>
       <View>
-        <Button onPress={showTimepicker} title="Show time picker!" />
+        <Pressable style={styles.dateBtn} onPress={showTimepicker} title="Введите время">
+          <Text style={{fontFamily: 'GilroyMedium', fontSize: 16}}>Введте время</Text>
+          </Pressable>
       </View>
+        </View>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -67,6 +75,27 @@ function BirthdayScreen({ navigation }) {
           onChange={onChange}
         />
       )}
+      <View>
+        <Text style={styles.BirthdayText}>
+        Укажите день рождения малыша, это позволит определить знак зодиака, значение по китайскому календарю, дни рождения известных людей, исторические события.
+        </Text>
+      </View>
+      <Pressable style={styles.mainBtnContainer}
+            onPress={() => navigation.navigate('Birthday')}>
+            <LinearGradient
+          // Button Linear Gradient
+          colors={['#5DADC1', '#4E9DB1', '#5DADC1']}
+          style={styles.buttonName}>
+          <Text style={styles.textBtnName}>Далее</Text>
+          <SvgComponentArrowRight style={[styles.box, {
+            transform: [{ translateX: 50 }]
+          }]}></SvgComponentArrowRight>
+        </LinearGradient>
+    </Pressable>
+    <Pressable  onPress={() => navigation.navigate('Birthday')} style={styles.hollowBtn}>
+            <Text style={styles.hollowBtnText}>Пропустить</Text>
+          </Pressable>
+
         </View>      
       </View>
     );
@@ -86,9 +115,7 @@ export function Birthday() {
   
   
       return (
-        //   <View>
-        //       <Text>123321</Text>
-        //   </View>
+
         <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         <Stack.Screen name="BirthdayScreen" component={BirthdayScreen} options={{headerShown: false}} />
 
@@ -112,9 +139,61 @@ export function Birthday() {
         marginTop: 30,
         flex: 1,
         alignItems: 'center',
-        paddingTop: 70,
-        paddingHorizontal: 24,
+        paddingTop: 30,
+        paddingHorizontal: 20,
+        shadowOpacity: 0.3
       },
+      cake: {
+        marginBottom: 37
+      },
+      BirthdayText: {
+        textAlign: 'center',
+        fontSize: 12,
+        marginBottom: 20,
+        fontFamily: 'Gilroy',
+        lineHeight: 20
+      },
+      dateBtn: {
+        fontSize: 16,
+        fontFamily: 'GilroyMedium',
+        padding: 10
+
+      },
+      textBtnName: {
+        color: '#fff',
+        fontSize: 16,
+        fontFamily: 'Gilroy',
+      
+      },
+      buttonName: {
+        width: '100%',
+        alignItems: 'center',
+        borderRadius: 14,
+        paddingVertical: 19,
+        marginBottom: 2,
+        flexDirection: 'row',
+        justifyContent: 'center'
+      },
+      mainBtnContainer: {
+        backgroundColor: '#3A7F91',
+        borderRadius: 14,
+        width: '100%',
+        marginBottom: 15,
+        marginTop: 5
+      },
+      hollowBtn: {
+        width: '100%',
+        alignItems: 'center',
+        borderRadius: 14,
+        paddingVertical: 19,
+        borderColor: '#5DADC1',
+        borderWidth: 1
+      },
+      hollowBtnText: {
+        color: '#5DADC1',
+        fontSize: 16,
+        fontFamily: 'Gilroy' 
+      }
 
 
   })

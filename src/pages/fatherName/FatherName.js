@@ -13,6 +13,8 @@ import { Birthday } from '../birthday/Birthday';
 
 
 
+
+
 const Stack = createStackNavigator();
 
 
@@ -22,6 +24,22 @@ function FatherNameScreen({ navigation }) {
 
   const [value, onChangeTextName] = React.useState('');
   const [valuetext, onChangeText] = React.useState('');
+
+
+let father_name
+
+
+
+const setFatherName = () => {
+  father_name = value
+}
+
+const setFatherSurename = () => {
+  father_surename = valuetext
+}
+
+
+
 
  
 

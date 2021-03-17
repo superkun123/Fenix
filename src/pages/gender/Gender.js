@@ -17,7 +17,7 @@ const Stack = createStackNavigator();
 
 function GenderScreen({ navigation }) {
 
-  let gender_id
+let gender_id
 
 
 
@@ -25,6 +25,7 @@ const sendGender = (gender) => {
   navigation.navigate('FatherName')
   gender_id = gender
 }
+
 
 
  

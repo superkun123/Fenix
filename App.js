@@ -21,6 +21,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { navigationRef } from './RootNavigation';
+
 
 
 
@@ -56,7 +58,7 @@ export default function App() {
 
 
  
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
 
 screenOptions={({ route }) => ({

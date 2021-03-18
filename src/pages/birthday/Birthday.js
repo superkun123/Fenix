@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Svg from 'react-native-svg';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
+import { TabActions } from '@react-navigation/native';
 
 
 
@@ -47,6 +48,9 @@ function BirthdayScreen({ navigation }) {
     };
 
 
+    const jumpToAction = TabActions.jumpTo('Подборка', { user: 'Satya' });
+
+
  
 
     return (
@@ -65,7 +69,8 @@ function BirthdayScreen({ navigation }) {
           </Pressable>
       </View>
         </View>
-      {show && (
+        <View>
+        {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
@@ -75,13 +80,14 @@ function BirthdayScreen({ navigation }) {
           onChange={onChange}
         />
       )}
+        </View>
       <View>
         <Text style={styles.BirthdayText}>
         Укажите день рождения малыша, это позволит определить знак зодиака, значение по китайскому календарю, дни рождения известных людей, исторические события.
         </Text>
       </View>
       <Pressable style={styles.mainBtnContainer}
-            onPress={() => navigation.navigate('Birthday')}>
+            onPress={() => navigation.dispatch(jumpToAction)}>
             <LinearGradient
           // Button Linear Gradient
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}
@@ -92,7 +98,7 @@ function BirthdayScreen({ navigation }) {
           }]}></SvgComponentArrowRight>
         </LinearGradient>
     </Pressable>
-    <Pressable  onPress={() => navigation.navigate('Birthday')} style={styles.hollowBtn}>
+    <Pressable  onPress={() => navigation.dispatch(jumpToAction)} style={styles.hollowBtn}>
             <Text style={styles.hollowBtnText}>Пропустить</Text>
           </Pressable>
 
@@ -151,13 +157,14 @@ export function Birthday() {
         fontSize: 12,
         marginBottom: 20,
         fontFamily: 'Gilroy',
-        lineHeight: 20
+        lineHeight: 20,
+        shadowOpacity: 0
       },
       dateBtn: {
         fontSize: 16,
         fontFamily: 'GilroyMedium',
-        padding: 10
-
+        padding: 10,
+        shadowOpacity: 0
       },
       textBtnName: {
         color: '#fff',

@@ -95,7 +95,7 @@ if (isLoading == false) {
         <View>
             <Text style={styles.showmore} onPress={() => {
                 
-                navigation.navigate('ProfileScreen'), {
+                navigation.navigate('Filter'), {
                     paramKey: 'Егор',
                     description: 12,
             }

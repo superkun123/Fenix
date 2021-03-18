@@ -14,6 +14,7 @@ import TextTicker from 'react-native-text-ticker'
 import * as RootNavigation from '../../../RootNavigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useLinkTo } from '@react-navigation/native';
+import { TabActions } from '@react-navigation/native';
 
 
 
@@ -33,6 +34,7 @@ const Tab = createBottomTabNavigator();
 
 function HomeScreen({ navigation }) {
   const linkTo = useLinkTo();
+  const jumpToAction = TabActions.jumpTo('Каталог', { user: 'Satya' });
 
 
  
@@ -79,7 +81,7 @@ function HomeScreen({ navigation }) {
           <Text style={styles.textBtnName}>Выбрать имя ребенку</Text>
         </LinearGradient>
             </Pressable>
-          <Pressable  onPress={() => navigation.navigate('Catalog')} style={styles.hollowBtn}>
+          <Pressable  onPress={() => navigation.dispatch(jumpToAction)} style={styles.hollowBtn}>
             <Text style={styles.hollowBtnText}>Энциклопедия имен</Text>
           </Pressable>
           </View>

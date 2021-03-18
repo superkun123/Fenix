@@ -95,7 +95,7 @@ if (isLoading == false) {
         <View>
             <Text style={styles.showmore} onPress={() => {
                 
-                navigation.navigate('Каталог', {
+                navigation.navigate('Подборка', {
                   screen: 'ProfileScreen',
                   params: { 
                     paramKey: name,

@@ -8,6 +8,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileHeader } from './ProfileHeader'
 import { useFonts } from 'expo-font';
 import Modal from 'react-native-modal';
+import { useRef } from 'react';
+import { SvgComponentArrowTop } from '../../../assets/jsxSvg/arrowTopWhite'
+import Svg from 'react-native-svg';
 
 
 
@@ -22,6 +25,9 @@ export  function ProfileScreen({route}) {
 
 let modalText = 'Текст'
 
+
+
+
  
  
 
@@ -33,8 +39,15 @@ const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
 const [isModalVisible, setModalVisible] = useState(false);
 const [descText, setText] = useState('123');
+const scrollRef = useRef(); 
 
 
+const onPressTouch = () => {
+  scrollRef.current?.scrollTo({
+      y: 0,
+      animated: true,
+  });
+}
 
 
 
@@ -68,7 +81,7 @@ useEffect(() => {
 
 
 
-
+const inputEl = useRef(null);
 
 // ${route.params.paramKey}
 
@@ -83,7 +96,7 @@ if (isLoading == false) {
     return (
 
       
-      <ScrollView style={styles.profile}>
+      <ScrollView style={styles.profile} ref={scrollRef}>
         <View>
 
         <Modal isVisible={isModalVisible} 
@@ -106,7 +119,7 @@ if (isLoading == false) {
             <View style={styles.modalFooter}>
             <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={() => {
                 setModalVisible(!isModalVisible);}}>
-              <Text style={styles.closeModalText}>Закрыть</Text>
+              <Text style={styles.closeModalText}>Понял</Text>
             </TouchableOpacity>
             </View>
             
@@ -183,9 +196,13 @@ if (isLoading == false) {
         
         </View>
 
-        <TouchableOpacity>
-          <Text>Up</Text>
+
+        <View style={styles.upBtnContainer}>
+        <TouchableOpacity style={styles.upBtn} onPress={onPressTouch}>
+          <SvgComponentArrowTop></SvgComponentArrowTop>
         </TouchableOpacity>
+        </View>
+
 
 
 
@@ -306,7 +323,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 18,
     padding: 18,
-    paddingBottom: 12
+    paddingBottom: 0
   },
   modalTitle: {
     fontFamily: 'GilroyMedium',
@@ -325,13 +342,33 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     marginLeft: -18,
     marginRight: -18,
-    padding: 10,
+    padding: 0,
     alignItems: 'center'
   },
   closeModalText: {
     fontSize: 17,
     color: '#5AA9BD',
-    fontFamily: 'GilroyMedium'
+    fontFamily: 'GilroyMedium',
+    textAlign: 'center'
+  },
+  closeModal: {
+    width: '100%',
+    textAlign: 'center',
+    padding: 10,
+    paddingBottom: 15
+  },
+  upBtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 38,
+    height: 38,
+    borderRadius: 38,
+    backgroundColor: '#5DADC1',
+  },
+  upBtnContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 40
   }
 
 

@@ -22,6 +22,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { navigationRef } from './RootNavigation';
+import  { Provider } from 'react-redux'
+import store from './src/store'
 
 
 
@@ -57,7 +59,7 @@ export default function App() {
   return (
 
 
- 
+ <Provider store={store}>
     <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
 
@@ -109,6 +111,7 @@ screenOptions={({ route }) => ({
 
       </Tab.Navigator>
     </NavigationContainer>
+    </Provider>
 
 
   );

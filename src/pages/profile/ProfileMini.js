@@ -18,9 +18,9 @@ const Stack = createStackNavigator();
 
 
 
-export  function ProfileMini({route}) {
+export  function ProfileMini({route, navigation}) {
 
-const navigation = useNavigation();
+
 
 let name = route.params.paramKey
 let id = route.params.description
@@ -95,9 +95,9 @@ if (isLoading == false) {
         <View>
             <Text style={styles.showmore} onPress={() => {
                 
-                navigation.navigate('Home'), {
-                    paramKey: name,
-                    description: id,
+                navigation.navigate('ProfileScreen'), {
+                    paramKey: 'Егор',
+                    description: 12,
             }
         }} 
             >Подробнее</Text>

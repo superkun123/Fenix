@@ -95,11 +95,14 @@ if (isLoading == false) {
         <View>
             <Text style={styles.showmore} onPress={() => {
                 
-                navigation.navigate('Filter'), {
-                    paramKey: 'Егор',
-                    description: 12,
-            }
-        }} 
+                navigation.navigate('Каталог', {
+                  screen: 'ProfileScreen',
+                  params: { 
+                    paramKey: name,
+                    description: id,
+                  },
+        }) 
+      }}
             >Подробнее</Text>
         </View>
 

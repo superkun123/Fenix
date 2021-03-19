@@ -48,10 +48,28 @@ function BirthdayScreen({ navigation, route }) {
     };
 
 
-    const jumpToAction = TabActions.jumpTo('Подборка', { user: 'Satya' });
+    let genderType = route.params.genderId
+    let fatherName = route.params.fatherFirstName
+    let surName = route.params.fatherSecondName
 
 
- 
+    const jumpToAction = TabActions.jumpTo('Подборка', {
+      screen: 'CollectionScreen',
+      params: { 
+        genderId: route.params.genderId,
+        fatherFirstName: route.params.fatherFirstName,
+        fatherSecondName: route.params.fatherSecondName
+      },
+    });
+
+    const sendData = () => {
+      navigation.dispatch(jumpToAction) 
+    }
+
+
+
+    
+   
 
     return (
       <View style={styles.genderScreen}>

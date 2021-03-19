@@ -74,7 +74,7 @@ const sendData = (gender, firstname, secondName) => {
       value={valuetext}
     />
      <Pressable style={styles.mainBtnContainer}
-            onPress={() => sendData(2, value, valuetext)}>
+            onPress={() => sendData(gender, value, valuetext)}>
             <LinearGradient
           // Button Linear Gradient
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}

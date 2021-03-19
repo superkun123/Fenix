@@ -24,7 +24,7 @@ const Stack = createStackNavigator();
 
 
 
-function CollectionScreen({ navigation }) {
+function CollectionScreen({ navigation, route }) {
 
 
 
@@ -36,7 +36,8 @@ function CollectionScreen({ navigation }) {
 
   useEffect(() => {
     // fetch('http://www.s1928.konversia.net/api/get_names')
-    fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherFirstName}&gender_id=${route.params.genderId}&is_full=1`)
+    // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
       .then((response) => response.json())
       .then((json) => setData(json.names))
       .catch((error) => console.error(error))
@@ -48,7 +49,7 @@ function CollectionScreen({ navigation }) {
   // const userName = ' '
 
 
-
+  
 
 
 
@@ -110,6 +111,9 @@ onPress={() => navigation.navigate('ProfileMini', {
  
       <View style={styles.nameBtnContainer}>
       <Text  style={styles.title}>Подборка</Text>
+      <Text>{route.params.genderId}</Text>
+      <Text>{route.params.fatherFirstName}</Text>
+      <Text>{route.params.fatherSecondName}</Text>
 
       
         <FlatList

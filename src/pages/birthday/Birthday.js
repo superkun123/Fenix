@@ -22,7 +22,7 @@ const Stack = createStackNavigator();
 
 
 
-function BirthdayScreen({ navigation }) {
+function BirthdayScreen({ navigation, route }) {
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
@@ -57,6 +57,7 @@ function BirthdayScreen({ navigation }) {
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
         <SvgComponentCake style={styles.cake}></SvgComponentCake>
+        <Text>{route.params.genderId}</Text>
         <View style={{flexDirection: 'row'}}>
         <View>
         <Pressable style={styles.dateBtn} onPress={showDatepicker} title="Введите дату">

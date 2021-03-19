@@ -22,27 +22,22 @@ function GenderScreen({ navigation }) {
 
 
 const sendGender = (gender) => {
-  navigation.navigate('FatherName' , {
-    gender: gender
-  })
+  navigation.navigate('FatherName', {
+    screen: 'FatherNameScreen',
+    params: { 
+      paramKey: gender,
+    },
+}) 
 }
 
-let gender = 1
+
 
  
 
     return (
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
-            <Pressable  onPress={() =>   {
-                
-                navigation.navigate('FatherName', {
-                  screen: 'FatherNameScreen',
-                  params: { 
-                    paramKey: 1,
-                  },
-        }) 
-      }} style={styles.genderBtn}>
+            <Pressable  onPress={() => sendGender(2)} style={styles.genderBtn}>
             <SvgComponentGirl style={styles.svgGenger}></SvgComponentGirl>
             <Text style={styles.genderLabel}>Девочка</Text>
             </Pressable>
@@ -50,7 +45,7 @@ let gender = 1
             <SvgComponentBoy style={styles.svgGenger}></SvgComponentBoy>
             <Text style={styles.genderLabel}>Мальчик</Text>
             </Pressable>
-            <Pressable  onPress={() => navigation.navigate('FatherName')} style={styles.genderBtn}>
+            <Pressable  onPress={() => sendGender('')} style={styles.genderBtn}>
             <SvgComponentUnknown style={styles.svgGenger}></SvgComponentUnknown>
             <Text style={styles.genderLabel}>Не знаю</Text>
             </Pressable>

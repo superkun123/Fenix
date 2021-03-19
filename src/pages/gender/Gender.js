@@ -18,23 +18,31 @@ const Stack = createStackNavigator();
 
 function GenderScreen({ navigation }) {
 
-let gender_id
 
 
 
 const sendGender = (gender) => {
-  navigation.navigate('FatherName')
-  gender_id = gender
+  navigation.navigate('FatherName' , {
+    gender: gender
+  })
 }
 
-
+let gender = 1
 
  
 
     return (
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
-            <Pressable  onPress={() => sendGender(2)} style={styles.genderBtn}>
+            <Pressable  onPress={() =>   {
+                
+                navigation.navigate('FatherName', {
+                  screen: 'FatherNameScreen',
+                  params: { 
+                    paramKey: 1,
+                  },
+        }) 
+      }} style={styles.genderBtn}>
             <SvgComponentGirl style={styles.svgGenger}></SvgComponentGirl>
             <Text style={styles.genderLabel}>Девочка</Text>
             </Pressable>

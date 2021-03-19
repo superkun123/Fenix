@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 
 
 
-function FatherNameScreen({ navigation }) {
+function FatherNameScreen({route, navigation}) {
 
   const [value, onChangeTextName] = React.useState('');
   const [valuetext, onChangeText] = React.useState('');
@@ -39,7 +39,7 @@ const setFatherSurename = () => {
 }
 
 
-
+let gender = route.params.paramKey
 
  
 
@@ -47,6 +47,7 @@ const setFatherSurename = () => {
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
           <SvgComponentFather style={styles.fatherIcon}></SvgComponentFather>
+          <Text>{gender}</Text>
           <TextInput
       style={styles.input}
       placeholder="Введите имя отца"

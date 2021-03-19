@@ -118,9 +118,9 @@ onPress={() => navigation.navigate('ProfileMini', {
  
       <View style={styles.nameBtnContainer}>
       <Text  style={styles.title}>Подборка</Text>
-      <Text>{route.params.genderId}</Text>
+      {/* <Text>{route.params.genderId}</Text>
       <Text>{route.params.fatherFirstName}</Text>
-      <Text>{route.params.fatherSecondName}</Text>
+      <Text>{route.params.fatherSecondName}</Text> */}
 
       
         <FlatList

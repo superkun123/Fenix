@@ -60,7 +60,7 @@ const sendData = (gender, firstname, secondName) => {
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
           <SvgComponentFather style={styles.fatherIcon}></SvgComponentFather>
-          <Text>{gender}</Text>
+          {/* <Text>{gender}</Text> */}
           <TextInput
       style={styles.input}
       placeholder="Введите имя отца"

@@ -43,7 +43,7 @@ let gender = route.params.paramKey
 
 
 
-const sendGender = (gender, firstname, secondName) => {
+const sendData = (gender, firstname, secondName) => {
   navigation.navigate('Birthday', {
     screen: 'BirthdayScreen',
     params: { 
@@ -74,7 +74,7 @@ const sendGender = (gender, firstname, secondName) => {
       value={valuetext}
     />
      <Pressable style={styles.mainBtnContainer}
-            onPress={() => sendGender(2)}>
+            onPress={() => sendData(2, value, valuetext)}>
             <LinearGradient
           // Button Linear Gradient
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}

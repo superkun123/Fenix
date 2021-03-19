@@ -58,6 +58,8 @@ function BirthdayScreen({ navigation, route }) {
         <View style={styles.mainContainer}>
         <SvgComponentCake style={styles.cake}></SvgComponentCake>
         <Text>{route.params.genderId}</Text>
+        <Text>{route.params.fatherFirstName}</Text>
+        <Text>{route.params.fatherSecondName}</Text>
         <View style={{flexDirection: 'row'}}>
         <View>
         <Pressable style={styles.dateBtn} onPress={showDatepicker} title="Введите дату">

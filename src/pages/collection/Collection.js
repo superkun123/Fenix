@@ -32,19 +32,16 @@ function CollectionScreen({ navigation, route }) {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [gender, setGender] = useState(2)
+ 
 
 
-const rerender = () => {
-  setGender(1)
-}
 
  
 
 
   useEffect(() => {
     // fetch('http://www.s1928.konversia.net/api/get_names')
-    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherFirstName}&gender_id=${gender}&is_full=1`)
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherFirstName}&gender_id=${route.params.genderId}&is_full=1`)
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
       .then((response) => response.json())
       .then((json) => setData(json.names))
@@ -93,7 +90,7 @@ onPress={() => navigation.navigate('ProfileMini', {
 
   const renderItem = ({ item }) => {
 
-    rerender()
+  
 
 
     return (

@@ -85,7 +85,7 @@ const sendData = (gender, firstname, secondName) => {
           }]}></SvgComponentArrowRight>
         </LinearGradient>
     </Pressable>
-    <Pressable  onPress={() => navigation.navigate('Birthday')} style={styles.hollowBtn}>
+    <Pressable  onPress={() =>  sendData(gender, value, valuetext)} style={styles.hollowBtn}>
             <Text style={styles.hollowBtnText}>Пропустить</Text>
           </Pressable>
           </View>

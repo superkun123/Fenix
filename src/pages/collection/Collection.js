@@ -40,14 +40,13 @@ function CollectionScreen({ navigation, route }) {
 
 
   useEffect(() => {
-    // fetch('http://www.s1928.konversia.net/api/get_names')
+    // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&day=${route.params.dayData}&month=${route.params.monthData}&year=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
     fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
-    // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
       .then((response) => response.json())
       .then((json) => setData(json.names))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, [route.params.genderId, route.params.fatherFirstName, route.params.fatherSecondName]);
+  }, [route.params.genderId, route.params.fatherFirstName, route.params.fatherSecondName, route.params.dayData, route.params.monthData, route.params.yearData]);
 
 
 
@@ -107,6 +106,11 @@ onPress={() => navigation.navigate('ProfileMini', {
     <View style={styles.catalog}>
 
       <View style={styles.alphabet}>
+      <Text>{route.params.dayData}</Text>
+      <Text>{route.params.monthData}</Text>
+      <Text>{route.params.yearData}</Text>
+
+      <Text>{route.params.genderId}</Text>
       <TouchableOpacity style={styles.alphabetLetter}>
         <Text>А</Text>
       </TouchableOpacity>

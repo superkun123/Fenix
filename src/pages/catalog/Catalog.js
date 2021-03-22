@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
 import { Filter } from '../filter/Filter'
+import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
 
 

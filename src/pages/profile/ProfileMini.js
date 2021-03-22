@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   profile: {
     flex: 1,
     backgroundColor: '#FFF7ED',
+    minHeight: 500,
     paddingLeft: 26,
     paddingRight: 26,
     marginRight: 25,

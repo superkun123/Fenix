@@ -26,7 +26,7 @@ function BirthdayScreen({ navigation, route }) {
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState( Platform.OS === 'ios' ? true : false);
   
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate || date;
@@ -58,7 +58,10 @@ function BirthdayScreen({ navigation, route }) {
       params: { 
         genderId: route.params.genderId,
         fatherFirstName: route.params.fatherFirstName,
-        fatherSecondName: route.params.fatherSecondName
+        fatherSecondName: route.params.fatherSecondName,
+        yearData: `${date.getFullYear()}`,
+        monthData: `${date.getMonth() + 1}`,
+        dayData: `${date.getDate()}`
       },
     });
 
@@ -93,7 +96,7 @@ function BirthdayScreen({ navigation, route }) {
         <View>
         {show && (
         <DateTimePicker
-          style={{width: 320, backgroundColor: "white"}}
+          style={{width: 320, height: 130}}
           testID="dateTimePicker"
           value={date}
           mode={mode}

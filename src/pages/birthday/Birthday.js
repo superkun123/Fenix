@@ -87,11 +87,11 @@ function BirthdayScreen({ navigation, route }) {
           <Text style={{fontFamily: 'GilroyMedium', fontSize: 16}}>Введите дату</Text>
         </Pressable>
       </View>
-      <View>
+      {/* <View>
         <Pressable style={styles.dateBtn} onPress={showTimepicker} title="Введите время">
           <Text style={{fontFamily: 'GilroyMedium', fontSize: 16}}>Введте время</Text>
           </Pressable>
-      </View>
+      </View> */}
         </View>
         <View>
         {show && (
@@ -101,7 +101,7 @@ function BirthdayScreen({ navigation, route }) {
           value={date}
           mode={mode}
           is24Hour={true}
-          display="default"
+          display="spinner"
           onChange={onChange}
         />
       )}

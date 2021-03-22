@@ -47,7 +47,7 @@ function CollectionScreen({ navigation, route }) {
       .then((json) => setData(json.names))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [route.params.genderId, route.params.fatherFirstName, route.params.fatherFatherName]);
 
 
 

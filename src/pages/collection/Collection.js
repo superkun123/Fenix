@@ -106,9 +106,7 @@ onPress={() => navigation.navigate('ProfileMini', {
     <View style={styles.catalog}>
 
       <View style={styles.alphabet}>
-      <Text>{route.params.dayData}</Text>
-      <Text>{route.params.monthData}</Text>
-      <Text>{route.params.yearData}</Text>
+
 
       <Text>{route.params.genderId}</Text>
       <TouchableOpacity style={styles.alphabetLetter}>

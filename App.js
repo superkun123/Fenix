@@ -101,11 +101,11 @@ screenOptions={({ route }) => ({
                  fontSize: 10
            }}}>
         <Tab.Screen name="Главная" component={Home} 
-          options={({ }) => ({
-            tabBarVisible: false })}  
+          // options={({ }) => ({
+          //   tabBarVisible: false })}  
           />
         <Tab.Screen name="Каталог" component={Catalog} />
-        <Tab.Screen name="Подборка" component={Collection} />
+        <Tab.Screen name="Подборка" component={Collection}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
         <Tab.Screen name="Избранное" component={Favorite}  />
         <Tab.Screen name="Поиск" component={Search} />
 

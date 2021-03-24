@@ -24,6 +24,8 @@ const [fullData, setFullData] = useState([]);
 
 
 useEffect(() => {
+  setLoading(true);
+
   fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
     .then(response => response.json())
     .then(response => {
@@ -60,30 +62,31 @@ const contains = ({ name }, query) => {
 
 
 
-function renderHeader(props) {
-  return (
-    <View
-      // style={{
-      //   backgroundColor: '#fff',
-      //   marginHorizontal: 15,
-      //   paddingHorizontal: 20,
-      //   paddingVertical: 15,
-      //   borderRadius: 25,
-      //   marginBottom: 30
-      // }}
-    >
-      <TextInput
-        autoCapitalize="none"
-        autoCorrect={false}
-        // clearButtonMode="always"
-        value={query}
-        onChangeText={queryText => handleSearch(queryText)}
-        placeholder="Поиск"
-        // style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
-      />
-    </View>
-  );
-}
+// function renderHeader(props) {
+//   return (
+//     <View
+//       style={{
+//         backgroundColor: '#fff',
+//         marginHorizontal: 15,
+//         paddingHorizontal: 20,
+//         paddingVertical: 15,
+//         borderRadius: 25,
+//         marginBottom: 30
+//       }}
+//     >
+//       <TextInput
+//         autoCapitalize="none"
+//         key={1}
+//         autoCorrect={false}
+//         // clearButtonMode="always"
+//         value={query}
+//         onChangeText={queryText => handleSearch(queryText)}
+//         placeholder="Поиск"
+//         style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+//       />
+//     </View>
+//   );
+// }
 
 
 const Item = ({ item, onPress, style }) => (
@@ -130,10 +133,12 @@ const Item = ({ item, onPress, style }) => (
 
 const renderItem = ({ item }) => {
 
+  let key = 0
+
 
   return (
     <Item
-      key={item.id}
+      key={key+1}
       item={item}
       onPress={() => setSelectedId(item.id)}
     />
@@ -142,12 +147,36 @@ const renderItem = ({ item }) => {
 
 
 
+
+
   return (
       <View style={{ flex: 1, backgroundColor: '#FAFAFA'}}>
       <Text style={styles.mainTitle}>Поиск</Text>
 
       <FlatList
-        ListHeaderComponent={renderHeader}
+        ListHeaderComponent={
+          <View
+      style={{
+        backgroundColor: '#fff',
+        marginHorizontal: 15,
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        borderRadius: 25,
+        marginBottom: 30
+      }}
+    >
+      <TextInput
+        autoCapitalize="none"
+        key={1}
+        autoCorrect={false}
+        // clearButtonMode="always"
+        value={query}
+        onChangeText={queryText => handleSearch(queryText)}
+        placeholder="Поиск"
+        style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+      />
+    </View>
+        }
         data={data}
         renderItem={renderItem}
         key={renderItem.item}

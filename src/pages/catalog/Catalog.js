@@ -35,7 +35,6 @@ function CatalogScreen({ navigation }) {
 
 
   useEffect(() => {
-    // fetch('http://www.s1928.konversia.net/api/get_names')
     fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
       .then((response) => response.json())
       .then((json) => setData(json.names))

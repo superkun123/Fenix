@@ -58,6 +58,12 @@ if (isLoading == false) {
     return (
 
       <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
+         <View style={styles.profile3}>
+
+        </View>
+        <View style={styles.profile2}>
+
+        </View>
       <View style={styles.profile}>
         <View>
 
@@ -140,6 +146,7 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     borderRadius: 20,
     shadowColor: "#333",
+    zIndex: 1,
     shadowOffset:{
     width: 0,
     height: 0,
@@ -147,6 +154,54 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
+  },
+  profile2: {
+    flex: 1,
+    backgroundColor: '#FFF7ED',
+    minHeight: 500,
+    paddingLeft: 26,
+    paddingRight: 26,
+    marginRight: 25,
+    marginLeft: 25,
+    marginTop: 30,
+    marginBottom: 70,
+    borderRadius: 20,
+    shadowColor: "#333",
+    zIndex: 0,
+    width: 320,
+    position: 'absolute',
+    transform: [{ rotate: "2deg" }, {translateY: 10}],
+    shadowOffset:{
+      width: 0,
+      height: 0,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+  },
+  profile3: {
+    flex: 1,
+    backgroundColor: '#FFF7ED',
+    minHeight: 500,
+    paddingLeft: 26,
+    paddingRight: 26,
+    marginRight: 25,
+    marginLeft: 25,
+    marginTop: 30,
+    marginBottom: 70,
+    borderRadius: 20,
+    shadowColor: "#333",
+    zIndex: -1,
+    width: 320,
+    position: 'absolute',
+    transform: [{ rotate: "-3deg" }, {translateY: 10}],
+    shadowOffset:{
+      width: 0,
+      height: 0,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 2,
+      elevation: 1,
   },
   profileEpmty: {
     justifyContent: 'center',

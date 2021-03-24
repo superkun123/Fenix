@@ -108,7 +108,7 @@ onPress={() => navigation.navigate('ProfileMini', {
       <View style={styles.alphabet}>
 
 
-      <Text>{route.params.genderId}</Text>
+     
       <TouchableOpacity style={styles.alphabetLetter}>
         <Text>А</Text>
       </TouchableOpacity>

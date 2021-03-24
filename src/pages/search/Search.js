@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TextInput, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable, Alert } from 'react-native';
 import { ProfileScreen } from '../profile/ProfileScreen'
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -16,17 +16,19 @@ const Stack = createStackNavigator();
 // let id = route.params.description
 
 
-const [isLoading, setLoading] = useState(true);
+const [isLoading, setLoading] = useState(false);
 const [data, setData] = useState([]);
 const [query, setQuery] = useState('');
 const [fullData, setFullData] = useState([]);
 
 
 
+
+
 useEffect(() => {
   setLoading(true);
 
-  fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
+  fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true')
     .then(response => response.json())
     .then(response => {
       setData(response.names);
@@ -34,15 +36,17 @@ useEffect(() => {
       // ADD THIS
       setFullData(response.names);
 
+      setLoading(false);
     })
-    .catch((error) => console.error(error))
-    .finally(() => setLoading(false));
+    .catch(err => {
+      setLoading(false);
+    });
 }, []);
 
 
 
 const handleSearch = text => {
-  const formattedQuery = text.toLowerCase();
+  const formattedQuery = text;
   const filteredData = filter(fullData, user => {
     return contains(user, formattedQuery);
   });
@@ -50,8 +54,9 @@ const handleSearch = text => {
   setQuery(text);
 };
 
-const contains = ({ name }, query) => {
-  
+const contains = ({name}, query) => {
+
+
 
   if (name.includes(query)) {
     return true;
@@ -138,7 +143,7 @@ const renderItem = ({ item }) => {
 
   return (
     <Item
-      key={key+1}
+      key={key}
       item={item}
       onPress={() => setSelectedId(item.id)}
     />
@@ -166,10 +171,8 @@ const renderItem = ({ item }) => {
       }}
     >
       <TextInput
-        autoCapitalize="none"
-        key={1}
         autoCorrect={false}
-        // clearButtonMode="always"
+        clearButtonMode="always"
         value={query}
         onChangeText={queryText => handleSearch(queryText)}
         placeholder="Поиск"
@@ -177,10 +180,11 @@ const renderItem = ({ item }) => {
       />
     </View>
         }
+        // extradata={fullData}
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
-        keyExtractor={(item) => item.id}
+        // keyExtractor={(item) => item.id}
         style={styles.FlatListCatalog}
       />
       

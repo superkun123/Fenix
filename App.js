@@ -24,6 +24,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { navigationRef } from './RootNavigation';
 import  { Provider } from 'react-redux'
 import store from './src/store'
+import {
+  SafeAreaView,
+  SafeAreaProvider,
+  SafeAreaInsetsContext,
+  useSafeAreaInsets,
+  initialWindowMetrics,
+} from 'react-native-safe-area-context';
+
 
 
 
@@ -60,6 +68,7 @@ export default function App() {
 
 
  <Provider store={store}>
+   <SafeAreaProvider>
     <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
 
@@ -96,8 +105,8 @@ screenOptions={({ route }) => ({
          },
          showIcon: true,
           style: {
-                 paddingTop: 3,
-                 paddingBottom: 3,
+                //  paddingTop: 3,
+                //  paddingBottom: 3,
                  fontSize: 10
            }}}>
         <Tab.Screen name="Главная" component={Home} 
@@ -111,6 +120,8 @@ screenOptions={({ route }) => ({
 
       </Tab.Navigator>
     </NavigationContainer>
+    
+    </SafeAreaProvider>
     </Provider>
 
 

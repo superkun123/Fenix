@@ -1,11 +1,16 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TextInput, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { ProfileScreen } from '../profile/ProfileScreen'
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import filter from 'lodash.filter';
 
 
+const Stack = createStackNavigator();
 
 
-export function Search({route, navigation}) {
+ function SearchScreen({route, navigation}) {
 
 // let name = route.params.paramKey
 // let id = route.params.description
@@ -13,16 +18,72 @@ export function Search({route, navigation}) {
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
+const [query, setQuery] = useState('');
+const [fullData, setFullData] = useState([]);
+
 
 
 useEffect(() => {
   fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
-    .then((response) => response.json())
-    .then((json) => setData(json.names))
+    .then(response => response.json())
+    .then(response => {
+      setData(response.names);
+
+      // ADD THIS
+      setFullData(response.names);
+
+    })
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
 }, []);
 
+
+
+const handleSearch = text => {
+  const formattedQuery = text.toLowerCase();
+  const filteredData = filter(fullData, user => {
+    return contains(user, formattedQuery);
+  });
+  setData(filteredData);
+  setQuery(text);
+};
+
+const contains = ({ name }, query) => {
+  
+
+  if (name.includes(query)) {
+    return true;
+  }
+
+  // return false;
+};
+
+
+
+function renderHeader(props) {
+  return (
+    <View
+      // style={{
+      //   backgroundColor: '#fff',
+      //   marginHorizontal: 15,
+      //   paddingHorizontal: 20,
+      //   paddingVertical: 15,
+      //   borderRadius: 25,
+      //   marginBottom: 30
+      // }}
+    >
+      <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        // clearButtonMode="always"
+        value={query}
+        onChangeText={queryText => handleSearch(queryText)}
+        placeholder="Поиск"
+        // style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+      />
+    </View>
+  );
+}
 
 
 const Item = ({ item, onPress, style }) => (
@@ -41,7 +102,7 @@ const Item = ({ item, onPress, style }) => (
     </Text>)}
     onPress={() => {
                 
-      navigation.navigate('Каталог', {
+      navigation.navigate('Поиск', {
         screen: 'ProfileScreen',
         params: { 
           paramKey: item.name,
@@ -86,6 +147,7 @@ const renderItem = ({ item }) => {
       <Text style={styles.mainTitle}>Поиск</Text>
 
       <FlatList
+        ListHeaderComponent={renderHeader}
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
@@ -95,6 +157,33 @@ const renderItem = ({ item }) => {
       
     </View>
   
+  );
+}
+
+
+
+
+export function Search() {
+  
+
+
+  const navigation = useNavigation()
+ 
+  return (
+      <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+        <Stack.Screen options={{headerShown: false}} name="SearchScreen" component={SearchScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
+       
+
+<Stack.Screen name="ProfileScreen" component={ProfileScreen}  options={{ title: 'Подробнее', headerTitleStyle: {
+            fontFamily: 'GilroyMedium',
+            shadowOpacity: 0,
+            elevation: 0
+          },
+          } } />
+            
+
+    
+      </Stack.Navigator>
   );
 }
 
@@ -116,7 +205,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35
   },
   FlatListCatalog: {
-    paddingTop: 10
+    paddingTop: 10,
+    marginBottom: 20
   }
 
 

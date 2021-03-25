@@ -120,6 +120,25 @@ onPress={() => navigation.navigate('ProfileScreen', {
 
   );
 
+
+  const ItemAlpha = ({ item, onPress, style }) => (
+    <Pressable
+    style={({pressed}) => [
+      {
+        backgroundColor: pressed ? '#5DADC1' : '#fff',
+      },
+      
+    ]}
+  children={({ pressed }) => (
+    <Text style={{ color: pressed ? '#FFF' : '#222'}}>
+      {item.title}
+    </Text>)}
+    >
+    </Pressable>
+
+  )
+
+
   const renderItem = ({ item }) => {
 
 
@@ -131,18 +150,170 @@ onPress={() => navigation.navigate('ProfileScreen', {
       />
     );
   };
+
+
+  const renderItemAlpha = ({ item }) => {
+
+
+    return (
+      <ItemAlpha
+        key={item.id}
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+      />
+    );
+  };
+
+
+
+  let alphabet = [
+    {
+      id: 0,
+      title: 'А'
+    },
+    {
+      id: 1,
+      title: 'Б'
+    },
+    {
+      id: 2,
+      title: 'В'
+    },
+    {
+      id: 3,
+      title: 'Г'
+    },
+    {
+      id: 4,
+      title: 'Д'
+    },
+    {
+      id: 5,
+      title: 'Е'
+    },
+    {
+      id: 6,
+      title: 'Ё'
+    },
+    {
+      id: 7,
+      title: 'Ж'
+    },
+    {
+      id: 8,
+      title: 'З'
+    },
+    {
+      id: 9,
+      title: 'И'
+    },
+    {
+      id: 10,
+      title: 'Й'
+    },
+    {
+      id: 11,
+      title: 'К'
+    },
+    {
+      id: 12,
+      title: 'Л'
+    },
+    {
+      id: 13,
+      title: 'М'
+    },
+    {
+      id: 14,
+      title: 'Н'
+    },
+    {
+      id: 15,
+      title: 'О'
+    },
+    {
+      id: 16,
+      title: 'П'
+    },
+    {
+      id: 17,
+      title: 'Р'
+    },
+    {
+      id: 18,
+      title: 'С'
+    },
+    {
+      id: 19,
+      title: 'Т'
+    },
+    {
+      id: 20,
+      title: 'У'
+    },
+    {
+      id: 21,
+      title: 'Ф'
+    },
+    {
+      id: 22,
+      title: 'Х'
+    },
+    {
+      id: 23,
+      title: 'Ц'
+    },
+    {
+      id: 24,
+      title: 'Ч'
+    },
+    {
+      id: 25,
+      title: 'Ш'
+    },
+    {
+      id: 26,
+      title: 'Щ'
+    },
+    {
+      id: 27,
+      title: 'Ъ'
+    },
+    {
+      id: 28,
+      title: 'Ы'
+    },
+    {
+      id: 29,
+      title: 'Ь'
+    },
+    {
+      id: 30,
+      title: 'Э'
+    },
+    {
+      id: 31,
+      title: 'Ю'
+    },
+    {
+      id: 32,
+      title: 'Я'
+    }
+
+  ]
  
   return (
   
     <View style={styles.catalog}>
 
       <View style={styles.alphabet}>
-      <TouchableOpacity style={styles.alphabetLetter}>
-        <Text>А</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text>Б</Text>
-      </TouchableOpacity>
+      <FlatList
+        data={alphabet}
+        renderItem={renderItemAlpha}
+        key={renderItemAlpha.item}
+        keyExtractor={(item) => item.id}
+        style={styles.FlatListAlphabet}
+      />
         {/* <Text>А Б В Г Д</Text> */}
       </View>
  
@@ -292,6 +463,9 @@ elevation: 5,
       paddingLeft: 60,
       paddingRight: 60,
       flex: 1
+    },
+    FlatListAlphabet: {
+      backgroundColor: '#000'
     }
 
   });

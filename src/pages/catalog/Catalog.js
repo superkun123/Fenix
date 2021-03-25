@@ -125,8 +125,9 @@ onPress={() => navigation.navigate('ProfileScreen', {
     <Pressable
     style={({pressed}) => [
       {
-        backgroundColor: pressed ? '#5DADC1' : '#fff',
+        backgroundColor: pressed ? '#5DADC1' : '#FAFAFA',
       },
+      styles.alphaword
       
     ]}
   children={({ pressed }) => (
@@ -304,9 +305,19 @@ onPress={() => navigation.navigate('ProfileScreen', {
  
   return (
   
-    <View style={styles.catalog}>
+<View style={styles.catalog}>
 
-      <View style={styles.alphabet}>
+<View style={styles.header}>
+      <Text  style={styles.title}>Каталог имен</Text>
+      <Text  style={styles.subtitle}>323 имени</Text>
+      <Pressable  onPress={() => navigation.navigate('Filter')}  style={styles.settings}>
+      <Ionicons name="ios-settings-outline" size={24} color="black" />
+      </Pressable>
+</View>
+
+
+<View style={styles.content}>
+<View style={styles.alphabet2}>
       <FlatList
         data={alphabet}
         renderItem={renderItemAlpha}
@@ -314,15 +325,11 @@ onPress={() => navigation.navigate('ProfileScreen', {
         keyExtractor={(item) => item.id}
         style={styles.FlatListAlphabet}
       />
-        {/* <Text>А Б В Г Д</Text> */}
-      </View>
- 
-      <View style={styles.nameBtnContainer}>
-      <Text  style={styles.title}>Каталог имен</Text>
-      <Text  style={styles.subtitle}>323 имени</Text>
+</View>
 
-      
-        <FlatList
+
+<View style={styles.namesContainer}>
+<FlatList
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
@@ -330,21 +337,59 @@ onPress={() => navigation.navigate('ProfileScreen', {
         style={styles.FlatListCatalog}
       />
       
+      
+</View>
+
+
+</View>
+
+
+{/* <View styles={styles.content}>
+  <Text>123</Text> */}
+{/* <View style={styles.alphabet2}>
+      <FlatList
+        data={alphabet}
+        renderItem={renderItemAlpha}
+        key={renderItemAlpha.item}
+        keyExtractor={(item) => item.id}
+        style={styles.FlatListAlphabet}
+      />
+        <Text>А Б В Г Д</Text>
+</View> */}
+
+{/* <View style={styles.namesContainer}>
+<FlatList
+        data={data}
+        renderItem={renderItem}
+        key={renderItem.item}
+        keyExtractor={(item) => item.id}
+        style={styles.FlatListCatalog}
+      />
+      <Text>123</Text>
+      
+</View> */}
+ 
+
+
+{/* </View>
+   */}
+   
+   
+
+      
+    
     
 
 
  
     
-      </View>
+  
 
  
 
 
-      <StatusBar style="auto" />
 
-      <Pressable  onPress={() => navigation.navigate('Filter')}  style={styles.settings}>
-      <Ionicons name="ios-settings-outline" size={24} color="black" />
-      </Pressable>
+  
     </View>
    
   
@@ -397,6 +442,28 @@ const styles = StyleSheet.create({
       lineHeight: 33,
       fontFamily: 'GilroyMedium'
     },
+    content: {
+      flex: 1,
+      width: '100%',
+      backgroundColor: '#FAFAFA',
+      flexDirection: 'row'
+    },
+    alphabet2: {
+      flex: 0.1,
+      marginRight: 0,
+      zIndex: 10,
+      maxWidth: 30,
+      marginLeft: 10,
+      marginRight: -5
+    },
+
+    namesContainer: {
+      flex: 1,
+      marginLeft: -30
+    },
+    header: {
+      backgroundColor: '#FAFAFA'
+    },
     nameBtn: {
       fontFamily: 'Gilroy',
       color: '#5DADC1',
@@ -421,6 +488,7 @@ elevation: 5,
     nameBtnContainer: {
       flex: 1,
       justifyContent: "center",
+      // marginLeft: -30
     },
     namebtnText: {
       fontFamily: 'Gilroy',
@@ -444,28 +512,32 @@ elevation: 5,
       right: 16
     },
     catalog: {
-      flex: 1,
-      flexDirection: "row",
+      // flex: 1,
+      height: '100%',
       backgroundColor: "#FAFAFA",
-      alignItems: 'flex-start'
     },
     alphabet: {
-      flex: 0.3,
+      // flex: 0.1,
       color: "#292929",
       marginTop: 114,
-      position: 'absolute',
       left: 13,
+      zIndex: 10
     },
-    alphabetLetter: {
-      marginBottom: 10
+    alphaword: {
+      marginBottom: 5,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 30,
+      paddingVertical: 2.5
     },
     FlatListCatalog: {
-      paddingLeft: 60,
+      marginLeft: 60,
       paddingRight: 60,
       flex: 1
     },
     FlatListAlphabet: {
-      backgroundColor: '#000'
+      backgroundColor: '#FAFAFA',
+      paddingHorizontal: 2.5
     }
 
   });

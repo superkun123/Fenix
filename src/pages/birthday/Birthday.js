@@ -178,7 +178,6 @@ export function Birthday() {
         alignItems: 'center',
         paddingTop: 30,
         paddingHorizontal: 20,
-        shadowOpacity: 0.3
       },
       cake: {
         marginBottom: 37

@@ -62,7 +62,7 @@ const contains = ({name}, query) => {
     return true;
   }
 
-  // return false;
+  return false;
 };
 
 

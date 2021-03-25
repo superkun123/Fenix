@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
 import { Filter } from '../filter/Filter'
+import filter from 'lodash.filter';
 import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
 
@@ -32,15 +33,53 @@ function CatalogScreen({ navigation }) {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [query, setQuery] = useState('');
+  const [fullData, setFullData] = useState([]);
+
+
+
+
 
 
   useEffect(() => {
-    fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
-      .then((response) => response.json())
-      .then((json) => setData(json.names))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+    setLoading(true);
+  
+    fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
+      .then(response => response.json())
+      .then(response => {
+        setData(response.names);
+  
+        // ADD THIS
+        setFullData(response.names);
+  
+        setLoading(false);
+      })
+      .catch(err => {
+        setLoading(false);
+      });
   }, []);
+
+
+
+  const handleSearch = text => {
+    const formattedQuery = text;
+    const filteredData = filter(fullData, user => {
+      return contains(user, formattedQuery);
+    });
+    setData(filteredData);
+    setQuery(text);
+  };
+  
+  const contains = ({name}, query) => {
+  
+  
+  
+    if (name.includes(query)) {
+      return true;
+    }
+  
+    return false;
+  };
 
 
 

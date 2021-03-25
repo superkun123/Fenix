@@ -71,14 +71,15 @@ function CatalogScreen({ navigation }) {
   };
   
   const contains = ({name}, query) => {
+
+    
+      if (name.startsWith(query)) {
+        return true;
+      }
+      return false;
+        
   
-  
-  
-    if (name.includes(query)) {
-      return true;
-    }
-  
-    return false;
+   
   };
 
 
@@ -122,6 +123,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
 
 
   const ItemAlpha = ({ item, onPress, style }) => (
+
     <Pressable
     style={({pressed}) => [
       {
@@ -134,7 +136,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
     <Text style={{ color: pressed ? '#FFF' : '#222'}}>
       {item.title}
     </Text>)}
-    onPress={queryText => handleSearch(queryText)}
+    onPress={() => handleSearch(item.title)}
     >
     </Pressable>
 
@@ -307,6 +309,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
   return (
   
 <View style={styles.catalog}>
+  <Text>{query}</Text>
 
 <View style={styles.header}>
       <Text  style={styles.title}>Каталог имен</Text>
@@ -315,6 +318,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
       <Ionicons name="ios-settings-outline" size={24} color="black" />
       </Pressable>
 </View>
+
 
 
 <View style={styles.content}>

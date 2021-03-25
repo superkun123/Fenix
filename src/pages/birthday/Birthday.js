@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 import { SvgComponentFather } from '../../../assets/jsxSvg/fatherIcon'
+import { SvgComponentCakeF } from '../../../assets/jsxSvg/cakeF'
 import { SvgComponentCake } from '../../../assets/jsxSvg/cake'
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg from 'react-native-svg';
@@ -48,6 +49,14 @@ function BirthdayScreen({ navigation, route }) {
     };
 
 
+    function Cake() {
+      if (route.params.genderId == 2) {
+        return <SvgComponentCakeF style={styles.cake}></SvgComponentCakeF>;
+      }
+      return  <SvgComponentCake style={styles.cake}></SvgComponentCake>;
+    }
+
+
     let genderType = route.params.genderId
     let fatherName = route.params.fatherFirstName
     let surName = route.params.fatherSecondName
@@ -77,10 +86,7 @@ function BirthdayScreen({ navigation, route }) {
     return (
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
-        <SvgComponentCake style={styles.cake}></SvgComponentCake>
-        {/* <Text>{route.params.genderId}</Text>
-        <Text>{route.params.fatherFirstName}</Text>
-        <Text>{route.params.fatherSecondName}</Text> */}
+          <Cake></Cake>
         <View style={{flexDirection: 'row'}}>
         <View>
         <Pressable style={styles.dateBtn} onPress={showDatepicker} title="Введите дату">

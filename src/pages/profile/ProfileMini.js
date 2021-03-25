@@ -74,16 +74,16 @@ if (isLoading == false) {
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
-         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
+         {/* <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
            {data.colors.map((prop, key) => {
          return (
            <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
-             {/* <Text>{prop.color}</Text> */}
+            
            </View>
          );
       })}
           
-         </View>
+         </View> */}
          <Text style={styles.profileSureName}>
          {/* Иван Петрович Николаев ИПН, НИП */}
          {route.params.description}

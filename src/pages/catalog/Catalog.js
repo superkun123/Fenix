@@ -134,6 +134,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
     <Text style={{ color: pressed ? '#FFF' : '#222'}}>
       {item.title}
     </Text>)}
+    onPress={queryText => handleSearch(queryText)}
     >
     </Pressable>
 
@@ -324,6 +325,8 @@ onPress={() => navigation.navigate('ProfileScreen', {
         key={renderItemAlpha.item}
         keyExtractor={(item) => item.id}
         style={styles.FlatListAlphabet}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
 </View>
 

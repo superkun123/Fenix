@@ -25,7 +25,7 @@ const Stack = createStackNavigator();
 
 
 
-function CatalogScreen({ navigation }) {
+function CatalogScreen({ navigation, route}) {
 
 
 
@@ -44,7 +44,8 @@ function CatalogScreen({ navigation }) {
   useEffect(() => {
     setLoading(true);
   
-    fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
+    // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&name_type_id=3&sort=${route.params.sort}&gender_id=${route.params.male}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);
@@ -57,7 +58,7 @@ function CatalogScreen({ navigation }) {
       .catch(err => {
         setLoading(false);
       });
-  }, []);
+  }, [route.params.male, route.params.sort]);
 
 
 
@@ -314,6 +315,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
 <View style={styles.header}>
       <Text  style={styles.title}>Каталог имен</Text>
       <Text  style={styles.subtitle}>323 имени</Text>
+      <Text>{route.params.male}</Text>
       <Pressable  onPress={() => navigation.navigate('Filter')}  style={styles.settings}>
       <Ionicons name="ios-settings-outline" size={24} color="black" />
       </Pressable>
@@ -406,7 +408,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
 
 
 
-export function Catalog() {
+export function Catalog({route}) {
   
 
 
@@ -414,7 +416,7 @@ export function Catalog() {
  
   return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} />
+        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{ genderId:route.params.genderId}} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
           },
@@ -441,7 +443,7 @@ export function Catalog() {
 const styles = StyleSheet.create({
 
     title: {
-      marginTop: 50,
+      marginTop: 0,
       color: "#292929",
       marginBottom: 10,
       textAlign: "center",
@@ -469,7 +471,8 @@ const styles = StyleSheet.create({
       marginLeft: -30
     },
     header: {
-      backgroundColor: '#FAFAFA'
+      backgroundColor: '#FAFAFA',
+      marginTop: 20
     },
     nameBtn: {
       fontFamily: 'Gilroy',
@@ -513,7 +516,7 @@ elevation: 5,
     },
     settings: {
       flex: 0.3,
-      marginTop: 55,
+      marginTop: 5,
       alignItems: "flex-end",
       position: 'absolute',
       right: 16

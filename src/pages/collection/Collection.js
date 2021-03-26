@@ -205,7 +205,7 @@ export function Collection() {
 const styles = StyleSheet.create({
 
     title: {
-      marginTop: 50,
+      marginTop: 40,
       color: "#292929",
       marginBottom: 10,
       textAlign: "center",
@@ -254,7 +254,7 @@ elevation: 5,
     },
     settings: {
       flex: 0.3,
-      marginTop: 55,
+      marginTop: 45,
       alignItems: "flex-end",
       position: 'absolute',
       right: 16

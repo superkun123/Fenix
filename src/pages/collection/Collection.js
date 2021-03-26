@@ -10,6 +10,7 @@ import { ProfileMini } from '../profile/ProfileMini'
 import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
 import { Filter } from '../filter/Filter'
+import filter from 'lodash.filter';
 
 
 
@@ -56,14 +57,14 @@ function CollectionScreen({ navigation, route }) {
   //   route.params.yearData]);
 
 
-
+// Не забыть вывести в подборку дату рождения
   
 
   useEffect(() => {
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&name_type_id=3&sort=${route.params.sort}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=${route.params.sort}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);

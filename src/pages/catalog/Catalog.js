@@ -44,8 +44,8 @@ function CatalogScreen({ navigation, route}) {
   useEffect(() => {
     setLoading(true);
   
-    // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&name_type_id=3&sort=${route.params.sort}&gender_id=${route.params.genderId}`)
+    // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc&gender_id=${route.params.genderId}`)
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=${route.params.sort}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);

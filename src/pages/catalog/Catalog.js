@@ -45,7 +45,7 @@ function CatalogScreen({ navigation, route}) {
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&name_type_id=3&sort=${route.params.sort}&gender_id=${route.params.male}`)
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&name_type_id=3&sort=${route.params.sort}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);
@@ -58,7 +58,7 @@ function CatalogScreen({ navigation, route}) {
       .catch(err => {
         setLoading(false);
       });
-  }, [route.params.male, route.params.sort]);
+  }, [route.params.genderId, route.params.sort]);
 
 
 
@@ -315,7 +315,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
 <View style={styles.header}>
       <Text  style={styles.title}>Каталог имен</Text>
       <Text  style={styles.subtitle}>{data.length} имени</Text>
-      <Pressable  onPress={() => navigation.navigate('Filter')}  style={styles.settings}>
+      <Pressable  onPress={() => navigation.navigate('Filter', {namesValue: data.length})}  style={styles.settings}>
       <Ionicons name="ios-settings-outline" size={24} color="black" />
       </Pressable>
 </View>

@@ -47,8 +47,24 @@ const maleType = () => {
 }
 
 
+const categoryType = () => {
+
+  if (selectedCategory == 'Русское') {
+    return 3
+
+  } else if (selectedCategory == 'Европейское') {
+    return 1
+
+  } else if (selectedCategory == 'Азиатское') {
+    return 2
+  }
+}
+
+
+
 const male = maleType()
 const sort = sortType()
+const category = categoryType()
 
 
 // const [isLoading, setLoading] = useState(true);
@@ -125,6 +141,7 @@ onValueChange={(itemValue, itemIndex) =>
 setSelectedCategory(itemValue)
 }>
 <Picker.Item label="Русское" value="Русское" />
+<Picker.Item style={{fontFamily:'Gilroy', fontSize: 15}} label="Европейское" value="Европейское" />
 <Picker.Item style={{fontFamily:'Gilroy', fontSize: 15}} label="Азиатское" value="Азиатское" />
 </Picker>
 
@@ -178,13 +195,13 @@ setSelectedSort(itemValue)
           <Pressable style={styles.mainBtnContainer}
           onPress={() => {
             // Pass params back to home screen
-            navigation.navigate('CatalogScreen', { sort: sort, male: male });
+            navigation.navigate('CatalogScreen', { sort: sort, genderId: male, category: category });
           }}>
           <LinearGradient
           // Button Linear Gradient
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}
           style={styles.buttonName}>
-          <Text style={styles.textBtnName}>Показать 48 имен</Text>
+          <Text style={styles.textBtnName}>Показать {route.params.namesValue} имен</Text>
         </LinearGradient>
             </Pressable>
       </View>

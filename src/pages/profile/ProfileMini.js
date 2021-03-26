@@ -9,6 +9,7 @@ import { ProfileHeader } from './ProfileHeader'
 import { useFonts } from 'expo-font';
 import Modal from 'react-native-modal';
 import { ProfileScreen } from '../profile/ProfileScreen'
+import Swiper from 'react-native-deck-swiper'
  
 const Stack = createStackNavigator();
 
@@ -29,6 +30,10 @@ let id = route.params.description
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
 
+const [isFullLoading, setFullLoading] = useState(true);
+const [fullData, setFullData] = useState([1,2,3,4,5]);
+const [index, setIndex] = useState(0)
+
 
 
 
@@ -42,6 +47,61 @@ useEffect(() => {
 }, []);
 
 
+
+useEffect(() => {
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true`)
+    .then((response) => response.json())
+    .then((json) => setFullData(json.name))
+    .catch((error) => console.error(error))
+    .finally(() => setFullLoading(false));
+}, []);
+
+
+
+const Card = (card) => {
+  return <View style={styles.profile}>
+  <View>
+
+
+  </View>
+
+  <View style={styles.profileHeader}>
+   <Text style={styles.profileName}>
+   {route.params.paramKey}
+   </Text>
+
+   <Text style={styles.profileSureName}>
+   {/* Иван Петрович Николаев ИПН, НИП */}
+   {route.params.description}
+   </Text>
+   <Text style={styles.profileTranscription}>
+     {data.name_translit}
+   </Text>
+   <Text style={styles.profileSimilarNames}>
+   {data.variants}
+   </Text>
+   <Text style={styles.profileNameDesc}>
+   {data.description}
+   </Text>
+  </View>
+  <View>
+      <Text style={styles.showmore} onPress={() => {
+          
+          navigation.navigate('Подборка', {
+            screen: 'ProfileScreen',
+            params: { 
+              paramKey: name,
+              description: id,
+            },
+  }) 
+}}
+      >Подробнее</Text>
+  </View>
+
+
+</View>
+}
 
 
 
@@ -58,12 +118,9 @@ if (isLoading == false) {
     return (
 
       <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
-         <View style={styles.profile3}>
 
-        </View>
-        <View style={styles.profile2}>
 
-        </View>
+        
       <View style={styles.profile}>
         <View>
 
@@ -74,16 +131,8 @@ if (isLoading == false) {
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
-         {/* <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
-           {data.colors.map((prop, key) => {
-         return (
-           <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
-            
-           </View>
-         );
-      })}
-          
-         </View> */}
+
+         
          <Text style={styles.profileSureName}>
          {/* Иван Петрович Николаев ИПН, НИП */}
          {route.params.description}
@@ -114,6 +163,20 @@ if (isLoading == false) {
 
 
       </View>
+      
+
+
+        <Swiper
+        cards={data}
+        cardIndex={index}
+        renderCard={(card) => <Card card={card}/>}
+        >
+
+        </Swiper>
+
+
+
+
       </ScrollView>
     );
   } else {

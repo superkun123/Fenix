@@ -315,7 +315,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
 <View style={styles.header}>
       <Text  style={styles.title}>Каталог имен</Text>
       <Text  style={styles.subtitle}>{data.length} имени</Text>
-      <Pressable  onPress={() => navigation.navigate('Filter', {namesValue: data.length})}  style={styles.settings}>
+      <Pressable  onPress={() => navigation.navigate('Filter', {namesValue: data.length, parentPage: 'CatalogScreen'})}  style={styles.settings}>
       <Ionicons name="ios-settings-outline" size={24} color="black" />
       </Pressable>
 </View>

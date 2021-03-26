@@ -335,7 +335,7 @@ onPress={() => navigation.navigate('ProfileMini', {
 <View style={styles.header}>
       <Text  style={styles.title}>Подборка</Text>
       <Text  style={styles.subtitle}>{data.length} имени</Text>
-      <Pressable  onPress={() => navigation.navigate('Filter', {namesValue: data.length})}  style={styles.settings}>
+      <Pressable  onPress={() => navigation.navigate('Filter', {namesValue: data.length, parentPage: 'CollectionScreen'})}  style={styles.settings}>
       <Ionicons name="ios-settings-outline" size={24} color="black" />
       </Pressable>
 </View>

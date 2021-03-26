@@ -62,6 +62,10 @@ const categoryType = () => {
 
 
 
+const parentPage = route.params.parentPage
+
+
+
 const male = maleType()
 const sort = sortType()
 const category = categoryType()
@@ -195,7 +199,7 @@ setSelectedSort(itemValue)
           <Pressable style={styles.mainBtnContainer}
           onPress={() => {
             // Pass params back to home screen
-            navigation.navigate('CatalogScreen', { sort: sort, genderId: male, category: category });
+            navigation.navigate(parentPage, { sort: sort, genderId: male, category: category });
           }}>
           <LinearGradient
           // Button Linear Gradient

@@ -32,26 +32,79 @@ function CollectionScreen({ navigation, route }) {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [query, setQuery] = useState('');
+  const [fullData, setFullData] = useState([]);
  
 
 
 
  
 
+
+  // useEffect(() => {
+  //   // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&day=${route.params.dayData}&month=${route.params.monthData}&year=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
+  //   fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
+  //     .then((response) => response.json())
+  //     .then((json) => setData(json.names))
+  //     .catch((error) => console.error(error))
+  //     .finally(() => setLoading(false));
+  // }, [route.params.genderId, 
+  //   route.params.fatherFirstName, 
+  //   route.params.fatherSecondName, 
+  //   route.params.dayData, 
+  //   route.params.monthData, 
+  //   route.params.yearData]);
+
+
+
+  
 
   useEffect(() => {
-    // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&day=${route.params.dayData}&month=${route.params.monthData}&year=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
-    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
-      .then((response) => response.json())
-      .then((json) => setData(json.names))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, [route.params.genderId, route.params.fatherFirstName, route.params.fatherSecondName, route.params.dayData, route.params.monthData, route.params.yearData]);
-
-
+    setLoading(true);
+  
+    // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
+    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&name_type_id=3&sort=${route.params.sort}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+      .then(response => response.json())
+      .then(response => {
+        setData(response.names);
+  
+        // ADD THIS
+        setFullData(response.names);
+  
+        setLoading(false);
+      })
+      .catch(err => {
+        setLoading(false);
+      });
+  }, [route.params.genderId, route.params.sort, route.params.genderId, 
+    route.params.fatherFirstName, 
+    route.params.fatherSecondName, 
+    route.params.dayData, 
+    route.params.monthData, 
+    route.params.yearData]);
 
   // const userName = ' '
 
+  const handleSearch = text => {
+    const formattedQuery = text;
+    const filteredData = filter(fullData, user => {
+      return contains(user, formattedQuery);
+    });
+    setData(filteredData);
+    setQuery(text);
+  };
+  
+  const contains = ({name}, query) => {
+
+    
+      if (name.startsWith(query)) {
+        return true;
+      }
+      return false;
+        
+  
+   
+  };
 
   
 
@@ -87,6 +140,27 @@ onPress={() => navigation.navigate('ProfileMini', {
 
   );
 
+
+  const ItemAlpha = ({ item, onPress, style }) => (
+
+    <Pressable
+    style={({pressed}) => [
+      {
+        backgroundColor: pressed ? '#5DADC1' : '#FAFAFA',
+      },
+      styles.alphaword
+      
+    ]}
+  children={({ pressed }) => (
+    <Text style={{ color: pressed ? '#FFF' : '#222'}}>
+      {item.title}
+    </Text>)}
+    onPress={() => handleSearch(item.title)}
+    >
+    </Pressable>
+
+  )
+
   const renderItem = ({ item }) => {
 
   
@@ -100,32 +174,190 @@ onPress={() => navigation.navigate('ProfileMini', {
       />
     );
   };
+
+
+  const renderItemAlpha = ({ item }) => {
+
+
+    return (
+      <ItemAlpha
+        key={item.id}
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+      />
+    );
+  };
+
+
+
+  let alphabet = [
+    {
+      id: 0,
+      title: 'А'
+    },
+    {
+      id: 1,
+      title: 'Б'
+    },
+    {
+      id: 2,
+      title: 'В'
+    },
+    {
+      id: 3,
+      title: 'Г'
+    },
+    {
+      id: 4,
+      title: 'Д'
+    },
+    {
+      id: 5,
+      title: 'Е'
+    },
+    {
+      id: 6,
+      title: 'Ё'
+    },
+    {
+      id: 7,
+      title: 'Ж'
+    },
+    {
+      id: 8,
+      title: 'З'
+    },
+    {
+      id: 9,
+      title: 'И'
+    },
+    {
+      id: 10,
+      title: 'Й'
+    },
+    {
+      id: 11,
+      title: 'К'
+    },
+    {
+      id: 12,
+      title: 'Л'
+    },
+    {
+      id: 13,
+      title: 'М'
+    },
+    {
+      id: 14,
+      title: 'Н'
+    },
+    {
+      id: 15,
+      title: 'О'
+    },
+    {
+      id: 16,
+      title: 'П'
+    },
+    {
+      id: 17,
+      title: 'Р'
+    },
+    {
+      id: 18,
+      title: 'С'
+    },
+    {
+      id: 19,
+      title: 'Т'
+    },
+    {
+      id: 20,
+      title: 'У'
+    },
+    {
+      id: 21,
+      title: 'Ф'
+    },
+    {
+      id: 22,
+      title: 'Х'
+    },
+    {
+      id: 23,
+      title: 'Ц'
+    },
+    {
+      id: 24,
+      title: 'Ч'
+    },
+    {
+      id: 25,
+      title: 'Ш'
+    },
+    {
+      id: 26,
+      title: 'Щ'
+    },
+    {
+      id: 27,
+      title: 'Ъ'
+    },
+    {
+      id: 28,
+      title: 'Ы'
+    },
+    {
+      id: 29,
+      title: 'Ь'
+    },
+    {
+      id: 30,
+      title: 'Э'
+    },
+    {
+      id: 31,
+      title: 'Ю'
+    },
+    {
+      id: 32,
+      title: 'Я'
+    }
+
+  ]
+
  
   return (
   
     <View style={styles.catalog}>
+  <Text>{query}</Text>
 
-      <View style={styles.alphabet}>
-
-
-     
-      <TouchableOpacity style={styles.alphabetLetter}>
-        <Text>А</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text>Б</Text>
-      </TouchableOpacity>
-        {/* <Text>А Б В Г Д</Text> */}
-      </View>
- 
-      <View style={styles.nameBtnContainer}>
+<View style={styles.header}>
       <Text  style={styles.title}>Подборка</Text>
-      {/* <Text>{route.params.genderId}</Text>
-      <Text>{route.params.fatherFirstName}</Text>
-      <Text>{route.params.fatherSecondName}</Text> */}
+      <Text  style={styles.subtitle}>{data.length} имени</Text>
+      <Pressable  onPress={() => navigation.navigate('Filter', {namesValue: data.length})}  style={styles.settings}>
+      <Ionicons name="ios-settings-outline" size={24} color="black" />
+      </Pressable>
+</View>
 
-      
-        <FlatList
+
+
+<View style={styles.content}>
+<View style={styles.alphabet2}>
+      <FlatList
+        data={alphabet}
+        renderItem={renderItemAlpha}
+        key={renderItemAlpha.item}
+        keyExtractor={(item) => item.id}
+        style={styles.FlatListAlphabet}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      />
+</View>
+
+
+<View style={styles.namesContainer}>
+<FlatList
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
@@ -133,22 +365,13 @@ onPress={() => navigation.navigate('ProfileMini', {
         style={styles.FlatListCatalog}
       />
       
-    
+      
+</View>
 
 
- 
-    
-      </View>
+</View>
+</View>
 
- 
-
-
-      <StatusBar style="auto" />
-
-      <Pressable  onPress={() => navigation.navigate('Filter')}  style={styles.settings}>
-      <Ionicons name="ios-settings-outline" size={24} color="black" />
-      </Pressable>
-    </View>
    
   
   );
@@ -157,7 +380,7 @@ onPress={() => navigation.navigate('ProfileMini', {
 
 
 
-export function Collection() {
+export function Collection(route) {
   
 
 
@@ -204,23 +427,46 @@ export function Collection() {
 
 const styles = StyleSheet.create({
 
-    title: {
-      marginTop: 40,
-      color: "#292929",
-      marginBottom: 10,
-      textAlign: "center",
-      fontSize: 24,
-      lineHeight: 33,
-      fontFamily: 'GilroyMedium'
-    },
-    nameBtn: {
-      fontFamily: 'Gilroy',
-      color: '#5DADC1',
-      paddingTop: 19,
-      paddingBottom: 18,
-      alignItems: "center",
-      borderRadius: 6,
-      shadowColor: "#333",
+  title: {
+    marginTop: 0,
+    color: "#292929",
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize: 24,
+    lineHeight: 33,
+    fontFamily: 'GilroyMedium'
+  },
+  content: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#FAFAFA',
+    flexDirection: 'row'
+  },
+  alphabet2: {
+    flex: 0.1,
+    marginRight: 0,
+    zIndex: 10,
+    maxWidth: 30,
+    marginLeft: 10,
+    marginRight: -5
+  },
+
+  namesContainer: {
+    flex: 1,
+    marginLeft: -30
+  },
+  header: {
+    backgroundColor: '#FAFAFA',
+    marginTop: 20
+  },
+  nameBtn: {
+    fontFamily: 'Gilroy',
+    color: '#5DADC1',
+    paddingTop: 19,
+    paddingBottom: 18,
+    alignItems: "center",
+    borderRadius: 6,
+    shadowColor: "#333",
 shadowOffset:{
 width: 0,
 height: 0,
@@ -228,58 +474,66 @@ height: 0,
 shadowOpacity: 0.1,
 shadowRadius: 8,
 elevation: 5,
-      marginBottom: 6,
-      marginRight: 10,
-      marginLeft: 10,
-      marginTop: 6
-    },
+    marginBottom: 6,
+    marginRight: 10,
+    marginLeft: 10,
+    marginTop: 6
+  },
 
-    nameBtnContainer: {
-      flex: 1,
-      justifyContent: "center",
-    },
-    namebtnText: {
-      fontFamily: 'Gilroy',
-      justifyContent: "center",
-      fontSize: 16
-    },
-    subtitle: {
-      fontFamily: 'Gilroy',
-      fontSize: 14,
-      marginBottom: 10,
-      color: "#292929",
-      textAlign: "center",
-      marginBottom: 10,
-      lineHeight: 25
-    },
-    settings: {
-      flex: 0.3,
-      marginTop: 45,
-      alignItems: "flex-end",
-      position: 'absolute',
-      right: 16
-    },
-    catalog: {
-      flex: 1,
-      flexDirection: "row",
-      backgroundColor: "#FAFAFA",
-      alignItems: 'flex-start'
-    },
-    alphabet: {
-      flex: 0.3,
-      color: "#292929",
-      marginTop: 114,
-      position: 'absolute',
-      left: 13,
-    },
-    alphabetLetter: {
-      marginBottom: 10
-    },
-    FlatListCatalog: {
-      paddingLeft: 60,
-      paddingRight: 60,
-      flex: 1
-    }
+  nameBtnContainer: {
+    flex: 1,
+    justifyContent: "center",
+    // marginLeft: -30
+  },
+  namebtnText: {
+    fontFamily: 'Gilroy',
+    justifyContent: "center",
+    fontSize: 16
+  },
+  subtitle: {
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    marginBottom: 10,
+    color: "#292929",
+    textAlign: "center",
+    marginBottom: 10,
+    lineHeight: 25
+  },
+  settings: {
+    flex: 0.3,
+    marginTop: 5,
+    alignItems: "flex-end",
+    position: 'absolute',
+    right: 16
+  },
+  catalog: {
+    // flex: 1,
+    height: '100%',
+    backgroundColor: "#FAFAFA",
+  },
+  alphabet: {
+    // flex: 0.1,
+    color: "#292929",
+    marginTop: 114,
+    left: 13,
+    zIndex: 10
+  },
+  alphaword: {
+    marginBottom: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 30,
+    paddingVertical: 2.5
+  },
+  FlatListCatalog: {
+    marginLeft: 60,
+    paddingRight: 60,
+    flex: 1
+  },
+  FlatListAlphabet: {
+    backgroundColor: '#FAFAFA',
+    paddingHorizontal: 2.5
+  }
 
   });
 

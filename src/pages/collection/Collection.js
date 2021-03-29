@@ -127,8 +127,9 @@ children={({ pressed }) => (
   </Text>)}
 onPress={() => navigation.navigate('ProfileMini', {
   // paramKey: userName,
-  paramKey: item.name,
-  description: item.name_id,
+  // paramKey: item.name,
+  // description: item.name_id,
+  genderId: route.params.genderId
 } )}
 >
 

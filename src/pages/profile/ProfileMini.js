@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; 
 import { NavigationContainer,  useScrollToTop } from '@react-navigation/native';
@@ -23,8 +23,8 @@ export  function ProfileMini({route, navigation}) {
 
 
 
-let name = route.params.paramKey
-let id = route.params.description
+// let name = route.params.paramKey
+// let id = route.params.description
 
 
 const [isLoading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ const [data, setData] = useState([]);
 
 const [isFullLoading, setFullLoading] = useState(true);
 const [fullData, setFullData] = useState([1,2,3,4,5]);
-const [index, setIndex] = useState(0)
+const [index, setIndex] = useState(2)
 
 
 
@@ -48,14 +48,32 @@ const [index, setIndex] = useState(0)
 
 
 
+// Неплохое решение, но хз
+
+// useEffect(() => {
+//   // fetch('http://www.s1928.konversia.net/api/get_names')
+//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${index}`)
+//     .then((response) => response.json())
+//     .then((json) => setData(json.name))
+//     .catch((error) => console.error(error))
+//     .finally(() => setLoading(false));
+// }, [index, route.params.description, route.params.key]);
+
+
+
+
+
+
+
+
 useEffect(() => {
   // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true`)
+  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&gender_id=${route.params.genderId}`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, []);
+}, [route.params.genderId]);
 
 
 
@@ -65,9 +83,21 @@ useEffect(() => {
   };
 
 
+let name = ''
+let id = 0
+
+  const array = () => {
+    data.forEach(elem => {
+      name = elem.name
+      id = elem.name_id
+    })
+  }
 
 
-const Card = (card) => {
+  array()
+
+
+const Card = (data) => {
   return <View style={styles.profile}>
   <View>
 
@@ -75,22 +105,25 @@ const Card = (card) => {
   </View>
 
   <View style={styles.profileHeader}>
-   <Text style={styles.profileName}>
-   {route.params.paramKey}
+   <Text style={styles.profileName} >
+   {data.name}
+   {/* {route.params.paramKey} */}
+   {/* {Alert.alert(data.length)} */}
    </Text>
 
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}
-   {route.params.description}
+   {id}
+   {/* {route.params.description} */}
    </Text>
    <Text style={styles.profileTranscription}>
-     {data.name_translit}
+     {/* {data.name_translit} */}
    </Text>
    <Text style={styles.profileSimilarNames}>
-   {data.variants}
+   {/* {data.variants} */}
    </Text>
    <Text style={styles.profileNameDesc}>
-   {data.description}
+   {/* {data.description} */}
    </Text>
   </View>
   <View>
@@ -138,9 +171,9 @@ if (isLoading == false) {
         renderCard={(card) => <Card card={card}/>}
         onSwiped={onSwiped}
         backgroundColor="#fff"
-        stackSize={data.length}
-        stackScale={10}
-        stackSeparation={14}
+        stackSize={5}
+        stackScale={2}
+        stackSeparation={1}
         >
 
         </Swiper>
@@ -198,7 +231,7 @@ const styles = StyleSheet.create({
     paddingRight: 26,
     marginRight: 25,
     marginLeft: 25,
-    marginTop: 30,
+    marginTop: 0,
     marginBottom: 70,
     borderRadius: 20,
     shadowColor: "#333",

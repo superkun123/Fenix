@@ -197,10 +197,11 @@ if (isLoading == false) {
         renderCard={Card}
         onSwiped={onSwiped}
         backgroundColor="#fff"
-        stackSize={5}
+        stackSize={3}
         stackScale={0}
         stackSeparation={10}
         infinite={true}
+        verticalSwipe={false}
         cardIndex={route.params.indexElem}
         >
 
@@ -248,23 +249,25 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     zIndex: 1,
-    minHeight: 600,
-    backgroundColor: '#fff'
+    minHeight: 620,
+    backgroundColor: '#fff',
+    marginTop: -30
   },
   profile: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    minHeight: 500,
+    // minHeight: 500,
     paddingLeft: 26,
     paddingRight: 26,
-    marginRight: 25,
-    marginLeft: 25,
-    marginTop: 0,
-    marginBottom: 70,
+    // marginRight: 25,
+    // marginLeft: 25,
+    // marginTop: 0,
+    // marginBottom: 70,
+    maxHeight: 500,
     borderRadius: 20,
     shadowColor: "#333",
     overflow: 'hidden',
-    paddingBottom: 50,
+    // paddingBottom: 50,
     zIndex: 1,
     shadowOffset:{
     width: 0,

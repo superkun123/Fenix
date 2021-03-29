@@ -103,8 +103,8 @@ useEffect(() => {
 const Card = (card , data) => {
 
 
-//   let name = card.name
-// let id = card.name_id
+  let name = card.name
+let id = card.name_id
 
  
 

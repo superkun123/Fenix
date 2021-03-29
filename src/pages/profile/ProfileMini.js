@@ -127,7 +127,7 @@ singleId = id
 
   return <View style={styles.profile}>
   <View>
-    <Text>{route.params.description}</Text>
+    
   </View>
 
   <View style={styles.profileHeader}>
@@ -190,7 +190,6 @@ if (isLoading == false) {
 
         
       <View style={styles.profileContainer}>
-      <Text>Роутер</Text>
         
       <Swiper
         cards={data}
@@ -199,9 +198,10 @@ if (isLoading == false) {
         onSwiped={onSwiped}
         backgroundColor="#fff"
         stackSize={5}
-        stackScale={2}
-        stackSeparation={1}
-        cardIndex={route.params.description}
+        stackScale={0}
+        stackSeparation={10}
+        infinite={true}
+        cardIndex={route.params.indexElem}
         >
 
         </Swiper>

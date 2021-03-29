@@ -111,7 +111,7 @@ function CollectionScreen({ navigation, route }) {
 
 
 
-  const Item = ({ item, onPress, style }) => (
+  const Item = ({ item, index, onPress, style }) => (
  
 
 <Pressable
@@ -129,7 +129,8 @@ onPress={() => navigation.navigate('ProfileMini', {
   // paramKey: userName,
   // paramKey: item.name,
   description: item.name_id,
-  genderId: route.params.genderId
+  genderId: route.params.genderId,
+  indexElem: index
 } )}
 >
 
@@ -163,13 +164,14 @@ onPress={() => navigation.navigate('ProfileMini', {
 
   )
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
 
   
 
 
     return (
       <Item
+        index = {index}
         key={item.id}
         item={item}
         onPress={() => setSelectedId(item.id)}

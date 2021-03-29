@@ -37,14 +37,14 @@ const [index, setIndex] = useState(0)
 
 
 
-useEffect(() => {
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
-    .then((response) => response.json())
-    .then((json) => setData(json.name))
-    .catch((error) => console.error(error))
-    .finally(() => setLoading(false));
-}, []);
+// useEffect(() => {
+//   // fetch('http://www.s1928.konversia.net/api/get_names')
+//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
+//     .then((response) => response.json())
+//     .then((json) => setData(json.name))
+//     .catch((error) => console.error(error))
+//     .finally(() => setLoading(false));
+// }, []);
 
 
 
@@ -52,10 +52,18 @@ useEffect(() => {
   // fetch('http://www.s1928.konversia.net/api/get_names')
   fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true`)
     .then((response) => response.json())
-    .then((json) => setFullData(json.name))
+    .then((json) => setData(json.names))
     .catch((error) => console.error(error))
-    .finally(() => setFullLoading(false));
+    .finally(() => setLoading(false));
 }, []);
+
+
+
+  const onSwiped = () => {
+    // transitionRef.current.animateNextTransition();
+    setIndex(index + 1);
+  };
+
 
 
 
@@ -121,58 +129,37 @@ if (isLoading == false) {
 
 
         
-      <View style={styles.profile}>
-        <View>
+      <View style={styles.profileContainer}>
+      {/* <Text>{data.length}</Text> */}
+        
+      <Swiper
+        cards={data}
+        cardIndex={index}
+        renderCard={(card) => <Card card={card}/>}
+        onSwiped={onSwiped}
+        backgroundColor="#fff"
+        stackSize={data.length}
+        stackScale={10}
+        stackSeparation={14}
+        >
 
+        </Swiper>
 
-        </View>
-
-        <View style={styles.profileHeader}>
-         <Text style={styles.profileName}>
-         {route.params.paramKey}
-         </Text>
-
-         
-         <Text style={styles.profileSureName}>
-         {/* Иван Петрович Николаев ИПН, НИП */}
-         {route.params.description}
-         </Text>
-         <Text style={styles.profileTranscription}>
-           {data.name_translit}
-         </Text>
-         <Text style={styles.profileSimilarNames}>
-         {data.variants}
-         </Text>
-         <Text style={styles.profileNameDesc}>
-         {data.description}
-         </Text>
-        </View>
-        <View>
-            <Text style={styles.showmore} onPress={() => {
-                
-                navigation.navigate('Подборка', {
-                  screen: 'ProfileScreen',
-                  params: { 
-                    paramKey: name,
-                    description: id,
-                  },
-        }) 
-      }}
-            >Подробнее</Text>
-        </View>
+        
+        
 
 
       </View>
       
 
 
-        <Swiper
+        {/* <Swiper
         cards={data}
         cardIndex={index}
         renderCard={(card) => <Card card={card}/>}
         >
 
-        </Swiper>
+        </Swiper> */}
 
 
 
@@ -197,6 +184,12 @@ if (isLoading == false) {
 
 
 const styles = StyleSheet.create({ 
+  profileContainer: {
+    flex: 1,
+    zIndex: 1,
+    minHeight: 600,
+    backgroundColor: '#fff'
+  },
   profile: {
     flex: 1,
     backgroundColor: '#FFF7ED',

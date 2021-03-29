@@ -83,21 +83,32 @@ useEffect(() => {
   };
 
 
-let name = ''
-let id = 0
+// let name = ''
+// let id = 0
 
-  const array = () => {
-    data.forEach(elem => {
-      name = elem.name
-      id = elem.name_id
-    })
-  }
-
-
-  array()
+//   const array = () => {
+//     data.forEach(elem => {
+//       name = elem.name
+//       id = elem.name_id
+//     })
+//   }
 
 
-const Card = (data) => {
+//   array()
+
+
+
+
+
+const Card = (card , data) => {
+
+
+//   let name = card.name
+// let id = card.name_id
+
+ 
+
+
   return <View style={styles.profile}>
   <View>
 
@@ -106,14 +117,14 @@ const Card = (data) => {
 
   <View style={styles.profileHeader}>
    <Text style={styles.profileName} >
-   {data.name}
+   {card.name}
    {/* {route.params.paramKey} */}
    {/* {Alert.alert(data.length)} */}
    </Text>
 
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}
-   {id}
+   {card.name_id}
    {/* {route.params.description} */}
    </Text>
    <Text style={styles.profileTranscription}>
@@ -168,7 +179,7 @@ if (isLoading == false) {
       <Swiper
         cards={data}
         cardIndex={index}
-        renderCard={(card) => <Card card={card}/>}
+        renderCard={Card}
         onSwiped={onSwiped}
         backgroundColor="#fff"
         stackSize={5}

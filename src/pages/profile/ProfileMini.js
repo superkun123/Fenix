@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 3,
+    elevation: 1,
   },
   profile2: {
     flex: 1,

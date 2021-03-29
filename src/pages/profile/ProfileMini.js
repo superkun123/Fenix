@@ -61,14 +61,14 @@ let singleId = 1
 // }, [index, route.params.description, route.params.key]);
 
 
-useEffect(() => {
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=18`)
-    .then((response) => response.json())
-    .then((json) => setFullData(json.name))
-    .catch((error) => console.error(error))
-    .finally(() => setFullLoading(false));
-}, []);
+// useEffect(() => {
+//   // fetch('http://www.s1928.konversia.net/api/get_names')
+//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=18`)
+//     .then((response) => response.json())
+//     .then((json) => setFullData(json.name))
+//     .catch((error) => console.error(error))
+//     .finally(() => setFullLoading(false));
+// }, [index]);
 
 
 
@@ -77,7 +77,7 @@ useEffect(() => {
 
 useEffect(() => {
   // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&gender_id=${route.params.genderId}`)
+  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&gender_id=${route.params.genderId}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
@@ -127,8 +127,7 @@ singleId = id
 
   return <View style={styles.profile}>
   <View>
-
-
+    <Text>{route.params.description}</Text>
   </View>
 
   <View style={styles.profileHeader}>
@@ -145,13 +144,13 @@ singleId = id
    </Text>
    <Text style={styles.profileTranscription}>
      {/* {data.name_translit} */}
-     {fullData.name_translit}
+     {card.name_translit}
    </Text>
    <Text style={styles.profileSimilarNames}>
-   {fullData.variants}
+   {card.variants}
    </Text>
    <Text style={styles.profileNameDesc}>
-   {fullData.description}
+   {card.description}
    </Text>
   </View>
   <View>
@@ -191,7 +190,7 @@ if (isLoading == false) {
 
         
       <View style={styles.profileContainer}>
-      {/* <Text>{data.length}</Text> */}
+      <Text>Роутер</Text>
         
       <Swiper
         cards={data}
@@ -202,6 +201,7 @@ if (isLoading == false) {
         stackSize={5}
         stackScale={2}
         stackSeparation={1}
+        cardIndex={route.params.description}
         >
 
         </Swiper>
@@ -263,6 +263,8 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     borderRadius: 20,
     shadowColor: "#333",
+    overflow: 'hidden',
+    paddingBottom: 50,
     zIndex: 1,
     shadowOffset:{
     width: 0,
@@ -375,6 +377,8 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     paddingBottom: 30,
     marginBottom: 20,
+    overflow: 'hidden',
+    maxHeight: 110
   },
   profilePopularPersonTitle: {
     fontFamily: 'Gilroy',

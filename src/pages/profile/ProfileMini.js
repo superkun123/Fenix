@@ -32,7 +32,8 @@ const [data, setData] = useState([]);
 
 const [isFullLoading, setFullLoading] = useState(true);
 const [fullData, setFullData] = useState([1,2,3,4,5]);
-const [index, setIndex] = useState(2)
+const [index, setIndex] = useState(0)
+let singleId = 1
 
 
 
@@ -60,6 +61,14 @@ const [index, setIndex] = useState(2)
 // }, [index, route.params.description, route.params.key]);
 
 
+useEffect(() => {
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=18`)
+    .then((response) => response.json())
+    .then((json) => setFullData(json.name))
+    .catch((error) => console.error(error))
+    .finally(() => setFullLoading(false));
+}, []);
 
 
 
@@ -103,8 +112,15 @@ useEffect(() => {
 const Card = (card , data) => {
 
 
-  let name = card.name
-let id = card.name_id
+  
+const name = card.name
+const id = card.name_id
+singleId = id
+
+
+
+
+
 
  
 
@@ -129,12 +145,13 @@ let id = card.name_id
    </Text>
    <Text style={styles.profileTranscription}>
      {/* {data.name_translit} */}
+     {fullData.name_translit}
    </Text>
    <Text style={styles.profileSimilarNames}>
-   {/* {data.variants} */}
+   {fullData.variants}
    </Text>
    <Text style={styles.profileNameDesc}>
-   {/* {data.description} */}
+   {fullData.description}
    </Text>
   </View>
   <View>

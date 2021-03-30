@@ -13,6 +13,7 @@ import { SvgComponentArrowTop } from '../../../assets/jsxSvg/arrowTopWhite'
 import { SvgComponentFlag } from '../../../assets/jsxSvg/flag'
 import { SvgComponentPlus } from '../../../assets/jsxSvg/plus'
 import Svg from 'react-native-svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -28,7 +29,13 @@ export  function ProfileScreen({route}) {
 let modalText = 'Текст'
 
 
-
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('favorite', value)
+  } catch (e) {
+    // saving error
+  }
+}
 
  
  
@@ -105,7 +112,7 @@ if (isLoading == false) {
         </SvgComponentFlag>
         </View>
 
-        <Pressable>
+        <Pressable onPress={storeData(`${route.params.description}`)}>
           <SvgComponentPlus style={styles.plus}></SvgComponentPlus>
         </Pressable>
 

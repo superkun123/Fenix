@@ -11,25 +11,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('@storage_Key', value)
-  } catch (e) {
-    // saving error
-  }
-}
 
 
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@storage_Key')
-    if(value !== null) {
-      // value previously stored
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
+
 
 
 
@@ -51,12 +35,16 @@ const getData = async () => {
   try {
     const value = await AsyncStorage.getItem('favorite')
     if(value !== null) {
+      setFavorite([value])
       // value previously stored
     }
   } catch(e) {
     // error reading value
   }
 }
+
+
+getData()
 
 
 
@@ -132,6 +120,7 @@ const Item = ({ item, onPress, style }) => (
   
   <View style={styles.header}>
         <Text  style={styles.title}>Избранное</Text>
+        <Text></Text>
   </View>
   
   

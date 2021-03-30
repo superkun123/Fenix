@@ -7,8 +7,14 @@ const initialState = {
 
 export const postReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_POSTS: return {...state, allPosts: action.payload, favorite: action.payload.filter(post => post.favorite)}
-        default: return state
+      case LOAD_POSTS:
+        return {
+          ...state,
+          allPosts: action.payload,
+          bookedPosts: action.payload.filter(post => post.booked)
+        }
+      default:
+        return state
     }
-    return  state
-}
+  }
+  

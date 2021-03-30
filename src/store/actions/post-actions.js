@@ -8,7 +8,7 @@ const [data, setData] = useState([]);
 
 
 useEffect(() => {
-  fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=asc')
+  fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true')
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))

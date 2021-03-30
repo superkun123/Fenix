@@ -7,6 +7,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileMini } from '../profile/ProfileMini'
 import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('@storage_Key', value)
+  } catch (e) {
+    // saving error
+  }
+}
+
+
+const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@storage_Key')
+    if(value !== null) {
+      // value previously stored
+    }
+  } catch(e) {
+    // error reading value
+  }
+}
+
 
 
 
@@ -18,6 +42,22 @@ export function FavoriteScreen({ navigation, route }) {
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
+const [favorite, setFavorite] = useState([2,3])
+
+
+
+
+const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('favorite')
+    if(value !== null) {
+      // value previously stored
+    }
+  } catch(e) {
+    // error reading value
+  }
+}
+
 
 
 
@@ -26,7 +66,7 @@ useEffect(() => {
   setLoading(true);
 
   // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc&gender_id=${route.params.genderId}`)
-  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true`)
+  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=${favorite}`)
     .then(response => response.json())
     .then(response => {
       setData(response.names);
@@ -39,7 +79,7 @@ useEffect(() => {
     .catch(err => {
       setLoading(false);
     });
-}, []);
+}, [favorite]);
 
 
 

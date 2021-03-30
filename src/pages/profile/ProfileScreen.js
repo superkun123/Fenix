@@ -10,6 +10,8 @@ import { useFonts } from 'expo-font';
 import Modal from 'react-native-modal';
 import { useRef } from 'react';
 import { SvgComponentArrowTop } from '../../../assets/jsxSvg/arrowTopWhite'
+import { SvgComponentFlag } from '../../../assets/jsxSvg/flag'
+import { SvgComponentPlus } from '../../../assets/jsxSvg/plus'
 import Svg from 'react-native-svg';
 
 
@@ -97,6 +99,19 @@ if (isLoading == false) {
 
       
       <ScrollView style={styles.profile} ref={scrollRef}>
+
+        <View style={styles.flagContainer}>
+        <SvgComponentFlag style={styles.flag}>
+        </SvgComponentFlag>
+        </View>
+
+        <Pressable>
+          <SvgComponentPlus style={styles.plus}></SvgComponentPlus>
+        </Pressable>
+
+    
+
+
         <View>
 
         <Modal isVisible={isModalVisible} 
@@ -235,14 +250,21 @@ const styles = StyleSheet.create({
   profile: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    paddingLeft: 40,
-    paddingRight: 40
+    // paddingLeft: 40,
+    // paddingRight: 40,
+    zIndex: 1000
   },
   profileEpmty: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
     backgroundColor: '#FFF7ED',
+  },
+  flagContainer: {
+    width: '100%',
+    flex: 1,
+    backgroundColor: '#fff',
+    minHeight: 32,
   },
   profileName: {
     fontFamily: 'Gilroy',
@@ -252,6 +274,18 @@ const styles = StyleSheet.create({
     marginTop: 35,
     marginBottom: 5 ,
     lineHeight: 33
+  },
+  flag: {
+    position: 'absolute',
+    right: 20,
+    transform: [{ translateY: 0 }],
+    zIndex: 105,
+  },
+  plus: {
+    position: 'absolute',
+    right: 33,
+    transform: [{ translateY: 15 }],
+    zIndex: 110,
   },
   profileSureName: {
     fontFamily: 'Gilroy',
@@ -266,7 +300,9 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     textAlign: 'center',
-    fontFamily: 'Gilroy'
+    fontFamily: 'Gilroy',
+    paddingLeft: 30,
+    paddingRight: 30
   },
   profileTranscription: {
     fontFamily: 'Gilroy',
@@ -312,7 +348,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   profileTextBlock: {
-    marginBottom: 40
+    marginBottom: 40,
+    paddingHorizontal: 30
   },
   charTitle: {
     marginBottom: 10,

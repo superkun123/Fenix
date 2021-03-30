@@ -26,32 +26,49 @@ export function FavoriteScreen({ navigation, route }) {
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
-const [favorite, setFavorite] = useState([2,3])
+const [favorite, setFavorite] = useState([])
 
 
 
 
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('favorite')
-    if(value !== null) {
-      setFavorite([value])
-      // value previously stored
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
+// const getData = async () => {
+//   try {
+//     const value = await AsyncStorage.getItem('favorite')
+//     if(value !== null) {
+//       setFavorite(arr => [...arr, value])
+//       // value previously stored
+//     }
+//   } catch(e) {
+//     // error reading value
+//   }
+// }
 
 
-getData()
+// getData()
 
 
 
 
 
 useEffect(() => {
+
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('favorite')
+      if(value !== null) {
+        setFavorite(arr => [...arr, value])
+        // value previously stored
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+
+
+
   setLoading(true);
+  getData()
 
   // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc&gender_id=${route.params.genderId}`)
   fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=${favorite}`)

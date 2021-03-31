@@ -117,12 +117,13 @@ if (isLoading == false) {
         </SvgComponentFlag>
         </View>
 
-        <Pressable onPress={storeData(`${route.params.description}`)}>
-          <SvgComponentPlus style={styles.plus}></SvgComponentPlus>
-        </Pressable>
+        <TouchableOpacity style={styles.plus} onPress={() => storeData(`${route.params.description}`)}>
+          {/* <Text>КЛИК</Text> */}
+          <SvgComponentPlus ></SvgComponentPlus>
+        </TouchableOpacity>
 
     
-
+        
 
         <View>
 

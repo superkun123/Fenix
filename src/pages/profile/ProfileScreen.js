@@ -22,28 +22,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-export  function ProfileScreen({route}) {
+export  function ProfileScreen({route, navigation}) {
 
 
 
 let modalText = 'Текст'
 
-const arrayStore = [2]
 
-
-const storeData = async (value) => {
-  try {
-    arrayStore.push(value)
-    const jsonValue = JSON.stringify(arrayStore)
-    Alert.alert(jsonValue)
-    await AsyncStorage.setItem('favorite', jsonValue)
-  } catch (e) {
-    // saving error
-  }
-}
-
- 
- 
 
 
 
@@ -54,6 +39,85 @@ const [data, setData] = useState([]);
 const [isModalVisible, setModalVisible] = useState(false);
 const [descText, setText] = useState('123');
 const scrollRef = useRef(); 
+// const [favorite, setFavorite] = useState([1])
+
+
+
+
+let arrayStore = []
+
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('favorite')
+    const jsonArray = JSON.parse(jsonValue)
+    arrayStore.push(jsonArray)
+    // Alert.alert(`${jsonArray}`)
+    // arrayStore = JSON.parse(jsonValue)
+    // Alert.alert(arrayStore)
+    // Alert.alert(`${arrayStore}`)
+
+  } catch(e) {
+    Alert.alert('error')
+    // error reading value
+  }
+}
+
+
+const storeData = async (value) => {
+  let result = await getData()
+  try {
+        arrayStore.push(value)
+        // setFavorite(arr => [...arr, value])
+        const jsonValue = JSON.stringify(arrayStore)
+        
+        // Alert.alert(jsonValue)
+        AsyncStorage.setItem('favorite', jsonValue)
+      } catch (e) {
+        // saving error
+      }
+}
+
+
+
+
+// const storeData = async (value) => {
+//   getData()
+//   try {
+//     arrayStore.push(value)
+//     // setFavorite(arr => [...arr, value])
+//     const jsonValue = JSON.stringify(arrayStore)
+    
+//     // Alert.alert(jsonValue)
+//     AsyncStorage.setItem('favorite', jsonValue)
+//   } catch (e) {
+//     // saving error
+//   }
+// }
+
+
+
+// const getData = () => {
+//     arrayStore.push(1)
+//     Alert.alert(`${arrayStore}`)
+// }
+
+
+
+
+// Попробуй избавиться от массива апстор и пушить прям в сторедж
+
+
+
+
+
+// const storeData = (value) => {
+//   getData()
+//   Alert.alert(`${arrayStore}`)
+// }
+
+ 
+ 
 
 
 const onPressTouch = () => {
@@ -83,6 +147,7 @@ const onPressTouch = () => {
 
 
 useEffect(() => {
+  // getData()
   // fetch('http://www.s1928.konversia.net/api/get_names')
   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
     .then((response) => response.json())

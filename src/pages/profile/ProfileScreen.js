@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; 
 import { NavigationContainer,  useScrollToTop } from '@react-navigation/native';
@@ -28,14 +28,14 @@ export  function ProfileScreen({route}) {
 
 let modalText = 'Текст'
 
-
+const arrayStore = [2]
 
 
 const storeData = async (value) => {
   try {
-    const arrayStore = []
     arrayStore.push(value)
     const jsonValue = JSON.stringify(arrayStore)
+    Alert.alert(jsonValue)
     await AsyncStorage.setItem('favorite', jsonValue)
   } catch (e) {
     // saving error

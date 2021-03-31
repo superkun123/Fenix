@@ -66,8 +66,10 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
-    Alert.alert(...jsonArray)
-    setFavorite(...jsonArray)
+    const jsonSpread = [...jsonArray]
+    const jsonFinal = jsonSpread.join(',')
+    Alert.alert(jsonFinal)
+    setFavorite(jsonFinal)
 
   } catch(e) {
     // error reading value

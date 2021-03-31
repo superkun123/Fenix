@@ -79,6 +79,28 @@ const storeData = async (value) => {
 }
 
 
+const deleteData = async (value) => {
+  let result = await getData()
+  // let storeResult = await storeData()
+  try {
+        const deleteIndex = arrayStore.indexOf(value)
+        arrayStore.splice(deleteIndex)
+        const jsonValue = JSON.stringify(arrayStore)
+        AsyncStorage.setItem('favorite', jsonValue)
+      } catch (e) {
+        // saving error
+      }
+}
+
+
+
+// const deleteData = (value) => {
+//   AsyncStorage.clear();
+// }
+
+
+// AsyncStorage.clear();
+
 
 
 // const storeData = async (value) => {
@@ -185,6 +207,12 @@ if (isLoading == false) {
         <TouchableOpacity style={styles.plus} onPress={() => storeData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
           <SvgComponentPlus ></SvgComponentPlus>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity  onPress={() => deleteData(`${route.params.description}`)}>
+          {/* <Text>КЛИК</Text> */}
+          <Text>Удалить</Text>
         </TouchableOpacity>
 
     

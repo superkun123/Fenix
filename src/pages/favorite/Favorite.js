@@ -68,7 +68,7 @@ const getData = async () => {
     const jsonArray = JSON.parse(jsonValue)
     const jsonSpread = [...jsonArray]
     const jsonFinal = jsonSpread.join(',')
-    Alert.alert(jsonFinal)
+    // Alert.alert(jsonFinal)
     setFavorite(jsonFinal)
 
   } catch(e) {

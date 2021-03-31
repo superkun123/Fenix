@@ -30,6 +30,16 @@ const [favorite, setFavorite] = useState([1])
 
 
 
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('favorite', value)
+  } catch (e) {
+    // saving error
+  }
+}
+
+
+
 
 const getData = async () => {
   try {
@@ -45,9 +55,16 @@ const getData = async () => {
 
 
 
+
+
+ 
+
+
+
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('focus', () => {
     getData()
+    storeData(favorite)
   });
 
   // Return the function to unsubscribe from the event so it gets removed on unmount

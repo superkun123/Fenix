@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Pressable, ScrollView, ActivityIndicator, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Pressable, ScrollView, ActivityIndicator, FlatList, SafeAreaView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -30,28 +30,63 @@ const [favorite, setFavorite] = useState([1])
 
 
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('favorite', value)
-  } catch (e) {
-    // saving error
-  }
-}
 
 
+
+
+
+// const getData = async () => {
+//   try {
+//     const value = await AsyncStorage.getItem('favorite')
+//     if(value !== null) {
+//       setFavorite(arr => [...arr, value])
+//       // value previously stored
+//     }
+//   } catch(e) {
+//     // error reading value
+//   }
+// }
+
+
+// const getData = async () => {
+//   try {
+//     const value = await AsyncStorage.getItem('favorite')
+//     if(value !== null) {
+//       Alert.alert(value)
+//       setFavorite(value)
+//       // value previously stored
+//     }
+//   } catch(e) {
+//     // error reading value
+//   }
+// }
 
 
 const getData = async () => {
   try {
-    const value = await AsyncStorage.getItem('favorite')
-    if(value !== null) {
-      setFavorite(arr => [...arr, value])
-      // value previously stored
-    }
+    const jsonValue = await AsyncStorage.getItem('favorite')
+    const jsonArray = JSON.parse(jsonValue)
+    Alert.alert(...jsonArray)
+    setFavorite(...jsonArray)
+
   } catch(e) {
     // error reading value
   }
 }
+
+
+
+
+
+// const getData = async () => {
+//   try {
+//     const jsonValue = await AsyncStorage.getItem('favorite')
+//     return jsonValue != null ? JSON.parse(jsonValue) : null;
+//   } catch(e) {
+//     // error reading value
+//   }
+// }
+
 
 
 
@@ -63,8 +98,7 @@ const getData = async () => {
 
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('focus', () => {
-    getData()
-    storeData(favorite)
+    // getData()
   });
 
   // Return the function to unsubscribe from the event so it gets removed on unmount
@@ -75,6 +109,7 @@ React.useEffect(() => {
 
 
 useEffect(() => {
+  getData()
 
 
   setLoading(true);

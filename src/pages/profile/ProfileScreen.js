@@ -28,11 +28,12 @@ export  function ProfileScreen({route}) {
 
 let modalText = 'Текст'
 
-const arrayStore = []
+
 
 
 const storeData = async (value) => {
   try {
+    const arrayStore = []
     arrayStore.push(value)
     const jsonValue = JSON.stringify(arrayStore)
     await AsyncStorage.setItem('favorite', jsonValue)

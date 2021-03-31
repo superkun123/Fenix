@@ -98,7 +98,7 @@ const getData = async () => {
 
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('focus', () => {
-    // getData()
+    getData()
   });
 
   // Return the function to unsubscribe from the event so it gets removed on unmount
@@ -109,7 +109,7 @@ React.useEffect(() => {
 
 
 useEffect(() => {
-  getData()
+  // getData()
 
 
   setLoading(true);

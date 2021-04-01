@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     zIndex: 1,
-    minHeight: 620,
+    minHeight: 600,
     backgroundColor: '#fff',
     marginTop: -30
   },

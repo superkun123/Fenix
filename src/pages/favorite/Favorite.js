@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileMini } from '../profile/ProfileMini'
 import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
+import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -146,9 +147,13 @@ const Item = ({ item, onPress, style }) => (
       styles.nameBtn,
     ]}
   children={({ pressed }) => (
+    <View>
     <Text style={{ color: pressed ? '#FFF' : '#222'}}>
       {item.name}
-    </Text>)}
+    </Text>
+    <SvgComponentLike style={styles.like}></SvgComponentLike>
+    </View>
+      )}
   onPress={() => navigation.navigate('ProfileScreen', {
     // paramKey: userName,
     paramKey: item.name,
@@ -156,7 +161,7 @@ const Item = ({ item, onPress, style }) => (
   } )}
   >
   
-  
+
   {/* <Text style={styles.namebtnText}>{item.name}</Text> */}
   </Pressable>
   
@@ -251,6 +256,10 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#FAFAFA',
     flexDirection: 'row'
+  },
+  like: {
+    position: 'absolute',
+    right: 0,
   },
   alphabet2: {
     flex: 0.1,

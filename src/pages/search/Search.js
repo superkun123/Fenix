@@ -5,6 +5,7 @@ import { ProfileScreen } from '../profile/ProfileScreen'
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import filter from 'lodash.filter';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const Stack = createStackNavigator();
@@ -170,13 +171,15 @@ const renderItem = ({ item }) => {
         marginBottom: 30
       }}
     >
+
+     <Text style={styles.icon}><Ionicons name="search" size={17} color={'#444444'} /></Text>
       <TextInput
         autoCorrect={false}
         clearButtonMode="always"
         value={query}
         onChangeText={queryText => handleSearch(queryText)}
-        placeholder="Поиск"
-        style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+        placeholder="Начните вводить имя"
+        style={{ backgroundColor: '#fff', paddingHorizontal: 0 }}
       />
     </View>
         }
@@ -228,6 +231,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 50,
     marginBottom: 30
+  },
+  icon: {
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    zIndex: 2
   },
   nameBtn: {
     paddingBottom: 12.5,

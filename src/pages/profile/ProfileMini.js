@@ -10,6 +10,7 @@ import { useFonts } from 'expo-font';
 import Modal from 'react-native-modal';
 import { ProfileScreen } from '../profile/ProfileScreen'
 import Swiper from 'react-native-deck-swiper'
+import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
  
 const Stack = createStackNavigator();
 
@@ -142,10 +143,12 @@ singleId = id
    {card.name_id}
    {/* {route.params.description} */}
    </Text>
-   <Text style={styles.profileTranscription}>
+
+   <View style={styles.profileTranscription}>
      {/* {data.name_translit} */}
-     {card.name_translit}
-   </Text>
+     <Text style={styles.profilteTransText}>{card.name_translit}</Text>
+   </View>
+   
    <Text style={styles.profileSimilarNames}>
    {card.variants}
    </Text>
@@ -153,6 +156,7 @@ singleId = id
    {card.description}
    </Text>
   </View>
+  <SvgComponentArrowRight></SvgComponentArrowRight>
   <View>
       <Text style={styles.showmore} onPress={() => {
           
@@ -165,6 +169,10 @@ singleId = id
   }) 
 }}
       >Подробнее</Text>
+
+
+  
+
   </View>
 
 
@@ -185,7 +193,7 @@ if (isLoading == false) {
 
     return (
 
-      <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
 
 
         
@@ -226,7 +234,7 @@ if (isLoading == false) {
 
 
 
-      </ScrollView>
+      </View>
     );
   } else {
 
@@ -251,7 +259,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     minHeight: 600,
     backgroundColor: '#fff',
-    marginTop: -30
   },
   profile: {
     flex: 1,
@@ -263,7 +270,7 @@ const styles = StyleSheet.create({
     // marginLeft: 25,
     // marginTop: 0,
     // marginBottom: 70,
-    maxHeight: 500,
+    maxHeight: 450,
     borderRadius: 20,
     shadowColor: "#333",
     overflow: 'hidden',
@@ -348,7 +355,8 @@ const styles = StyleSheet.create({
     marginBottom: 28,
     paddingLeft: 32,
     paddingRight: 32,
-    lineHeight: 23
+    lineHeight: 23,
+    marginBottom: '12%'
 
   },
   profileHeader: {
@@ -356,13 +364,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy'
   },
   profileTranscription: {
-    fontFamily: 'Gilroy',
-    textAlign: 'center',
-    fontSize: 24,
     paddingBottom: 15,
     borderBottomColor: '#FFEAD0',
     borderBottomWidth: 1,
     marginBottom: 15
+  },
+  profilteTransText: {
+    fontFamily: 'Gilroy',
+    textAlign: 'center',
+    fontSize: 24,
   },
   profileSimilarNames: {
     fontFamily: 'Gilroy',
@@ -378,7 +388,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     lineHeight: 28,
-    paddingBottom: 30,
+    paddingBottom: 0,
     marginBottom: 20,
     overflow: 'hidden',
     maxHeight: 110

@@ -397,6 +397,11 @@ export function Collection(route) {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,
             elevation: 0,
+
+          },
+          headerStyle: {
+            shadowOpacity: 0,
+            elevation: 0
           },
           } } />
 

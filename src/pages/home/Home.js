@@ -15,6 +15,11 @@ import * as RootNavigation from '../../../RootNavigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useLinkTo } from '@react-navigation/native';
 import { TabActions } from '@react-navigation/native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 
 
@@ -41,6 +46,7 @@ function HomeScreen({ navigation }) {
 
     return (
       <View style={styles.mainScreen}>
+        <View style={styles.mainScreenHeader}>
         <View style={styles.mainContainer}>
         <SvgComponent  style={styles.tinyLogo}></SvgComponent>
         </View>
@@ -59,6 +65,7 @@ function HomeScreen({ navigation }) {
             </Text>
           
         </TextTicker>
+        </View>
         {/* <MarqueeText
             style={styles.marquee}
             duration={4000}
@@ -72,6 +79,7 @@ function HomeScreen({ navigation }) {
   
   
           <View style={styles.mainContainer}>
+          <View style={styles.mainFooter}> 
             <Pressable style={styles.mainBtnContainer}
             onPress={() => navigation.navigate('Gender')}>
             <LinearGradient
@@ -84,6 +92,7 @@ function HomeScreen({ navigation }) {
           <Pressable  onPress={() => navigation.dispatch(jumpToAction)} style={styles.hollowBtn}>
             <Text style={styles.hollowBtnText}>Энциклопедия имен</Text>
           </Pressable>
+          </View>
           </View>
   
       </View>
@@ -129,6 +138,13 @@ function HomeScreen({ navigation }) {
     mainScreen: {
       backgroundColor: '#fff',
       flex: 1,
+      width: '100%'
+    },
+    mainScreenHeader: {
+      flexShrink: 0.35
+    },
+    mainFooter: {
+      flexShrink: 0.65,
       width: '100%'
     },
     mainContainer: {

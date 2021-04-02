@@ -21,6 +21,7 @@ const [isLoading, setLoading] = useState(false);
 const [data, setData] = useState([]);
 const [query, setQuery] = useState('');
 const [fullData, setFullData] = useState([]);
+const [iconColor, setIconColor] = useState('#444444')
 
 
 
@@ -28,6 +29,7 @@ const [fullData, setFullData] = useState([]);
 
 useEffect(() => {
   setLoading(true);
+  setIconColor('#444444')
 
   fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true')
     .then(response => response.json())
@@ -53,6 +55,7 @@ const handleSearch = text => {
   });
   setData(filteredData);
   setQuery(text);
+  setIconColor('#5DADC1')
 };
 
 const contains = ({name}, query) => {
@@ -172,7 +175,7 @@ const renderItem = ({ item }) => {
       }}
     >
 
-     <Text style={styles.icon}><Ionicons name="search" size={17} color={'#444444'} /></Text>
+     <Text style={styles.icon}><Ionicons name="search" size={17} color={iconColor} /></Text>
       <TextInput
         autoCorrect={false}
         clearButtonMode="always"

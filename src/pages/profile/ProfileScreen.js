@@ -197,7 +197,7 @@ if (isLoading == false) {
     return (
 
       
-      <ScrollView style={styles.profile} ref={scrollRef}>
+      <ScrollView style={styles.profile} ref={scrollRef} alwaysBounceHorizontal={false} >
 
         <View style={styles.flagContainer}>
         <SvgComponentFlag style={styles.flag}>

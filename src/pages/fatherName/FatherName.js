@@ -80,7 +80,7 @@ const sendData = (gender, firstname, secondName) => {
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}
           style={styles.buttonName}>
           <Text style={styles.textBtnName}>Далее</Text>
-          <SvgComponentArrowRight style={[styles.box, {
+          <SvgComponentArrowRight color='#fff' style={[styles.box, {
             transform: [{ translateX: 50 }]
           }]}></SvgComponentArrowRight>
         </LinearGradient>

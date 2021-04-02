@@ -124,7 +124,7 @@ function BirthdayScreen({ navigation, route }) {
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}
           style={styles.buttonName}>
           <Text style={styles.textBtnName}>Далее</Text>
-          <SvgComponentArrowRight style={[styles.box, {
+          <SvgComponentArrowRight color="#fff" style={[styles.box, {
             transform: [{ translateX: 50 }]
           }]}></SvgComponentArrowRight>
         </LinearGradient>
@@ -176,11 +176,11 @@ export function Birthday() {
         marginTop: 30,
         flex: 1,
         alignItems: 'center',
-        paddingTop: 30,
+        paddingTop: 0,
         paddingHorizontal: 20,
       },
       cake: {
-        marginBottom: 37
+        marginBottom: 20
       },
       BirthdayText: {
         textAlign: 'center',

@@ -11,6 +11,7 @@ import { SvgComponentBoy } from '../../../assets/jsxSvg/boyIcon'
 import { SvgComponentUnknown } from '../../../assets/jsxSvg/unknownIcon'
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import { Feather } from '@expo/vector-icons'; 
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -39,18 +40,18 @@ const sendGender = (gender) => {
     return (
       <View style={styles.genderScreen}>
         <View style={styles.mainContainer}>
-            <Pressable  onPress={() => sendGender(2)} style={styles.genderBtn}>
+            <TouchableOpacity   onPress={() => sendGender(2)} style={styles.genderBtn}>
             <SvgComponentGirl style={styles.svgGenger}></SvgComponentGirl>
             <Text style={styles.genderLabel}>Девочка</Text>
-            </Pressable>
-            <Pressable  onPress={() => sendGender(1)} style={styles.genderBtn}>
+            </TouchableOpacity>
+            <TouchableOpacity  onPress={() => sendGender(1)} style={styles.genderBtn}>
             <SvgComponentBoy style={styles.svgGenger}></SvgComponentBoy>
             <Text style={styles.genderLabel}>Мальчик</Text>
-            </Pressable>
-            <Pressable  onPress={() => sendGender('')} style={styles.genderBtn}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => sendGender('')} style={styles.genderBtnNoBorder}>
             <SvgComponentUnknown style={styles.svgGenger}></SvgComponentUnknown>
             <Text style={styles.genderLabel}>Не знаю</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
   
       </View>
@@ -113,10 +114,11 @@ export  function Gender() {
       },
       mainContainer: {
           paddingHorizontal: 54,
-          paddingTop: 45,
+          // paddingTop: 45,
           flex: 1,
           width: '100%',
-          alignContent: 'center'
+          alignContent: 'center',
+          justifyContent: 'center'
       },
       svgGenger: {
           marginBottom: 20,
@@ -126,7 +128,12 @@ export  function Gender() {
           marginBottom: 35,
           borderBottomColor: '#EAEAEA',
           borderBottomWidth: 1,
-          width: '100%'
+          width: '100%',
+          flexShrink: 0.33,
+      },
+      genderBtnNoBorder: {
+          width: '100%',
+          flexShrink: 0.33,
       },
       genderLabel: {
           fontSize: 20,

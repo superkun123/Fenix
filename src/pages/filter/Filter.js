@@ -238,6 +238,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     alignContent: 'flex-end',
   },
+  navArrow: {
+    transform: [{rotate: '180deg'}],
+    marginLeft: 10,
+    padding: 10
+
+  },
   labelfield: {
     flexDirection: 'row',
     justifyContent: 'space-between',

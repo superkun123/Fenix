@@ -281,14 +281,13 @@ const styles = StyleSheet.create({
     zIndex: 1,
     minHeight: 600,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // alignContent: 'center',
+    // justifyContent: 'center',
     marginTop: -30
   },
   profile: {
     flex: 1,
-
     backgroundColor: '#FFF7ED',
     // minHeight: 500,
     paddingLeft: 26,
@@ -298,8 +297,6 @@ const styles = StyleSheet.create({
     // marginTop: 0,
     // marginBottom: 70,
     maxHeight: 480,
-    maxWidth: 324,
-
     borderRadius: 20,
     shadowColor: "#333",
     overflow: 'hidden',

@@ -241,7 +241,8 @@ const styles = StyleSheet.create({
   },
   navArrow: {
     transform: [{rotate: '180deg'}],
-    marginLeft: 10
+    marginLeft: 10,
+    padding: 10,
 
   },
   icon: {

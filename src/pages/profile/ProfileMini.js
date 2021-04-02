@@ -156,7 +156,7 @@ singleId = id
    {card.description}
    </Text>
   </View>
-  <SvgComponentArrowRight></SvgComponentArrowRight>
+ 
   <View>
       <Text style={styles.showmore} onPress={() => {
           
@@ -168,7 +168,12 @@ singleId = id
             },
   }) 
 }}
-      >Подробнее</Text>
+      >Подробнее </Text>
+
+
+<TouchableOpacity style={styles.right} onPress={() => onSwiped()}>
+        <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
+        </TouchableOpacity>
 
 
   
@@ -307,6 +312,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 2,
+  },
+  right: {
+    
   },
   profile3: {
     flex: 1,

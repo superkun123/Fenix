@@ -9,6 +9,8 @@ import { FatherName } from '../fatherName/FatherName'
 import { SvgComponentGirl } from '../../../assets/jsxSvg/girlIcon'
 import { SvgComponentBoy } from '../../../assets/jsxSvg/boyIcon'
 import { SvgComponentUnknown } from '../../../assets/jsxSvg/unknownIcon'
+import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
+import { Feather } from '@expo/vector-icons'; 
 
 
 
@@ -70,7 +72,11 @@ export  function Gender() {
   
       return (
         <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen name="GenderScreen" component={GenderScreen} options={{ title: 'Пол ребенка', headerStyle: {
+        <Stack.Screen name="GenderScreen" component={GenderScreen}  screenOptions={{
+    headerBackTitleVisible: false,
+
+  }}
+   options={{ title: 'Пол ребенка', headerStyle: {
             shadowOpacity: 0,
             elevation: 0
           },

@@ -108,6 +108,15 @@ useEffect(() => {
 
 
 
+const swiperRef = React.createRef();
+
+
+const swipeBackAnim = () => {
+  swiperRef.current.swipeLeft()
+  swiperRef.current.swipeBack()
+}
+
+
 
 
 const Card = (card , data) => {
@@ -157,7 +166,7 @@ singleId = id
    </Text>
   </View>
  
-  <View>
+  <View style={styles.center}>
       <Text style={styles.showmore} onPress={() => {
           
           navigation.navigate('Подборка', {
@@ -171,14 +180,19 @@ singleId = id
       >Подробнее </Text>
 
 
-<TouchableOpacity style={styles.right} onPress={() => onSwiped()}>
+<TouchableOpacity style={styles.right} onPress={() => swiperRef.current.swipeRight()}>
         <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
-        </TouchableOpacity>
+  </TouchableOpacity>
 
 
-  
+  <TouchableOpacity style={styles.left} onPress={() => swipeBackAnim()}>
+        <SvgComponentArrowRight color='#5DADC1'></SvgComponentArrowRight>
+  </TouchableOpacity>
 
   </View>
+  
+
+  
 
 
 </View>
@@ -205,6 +219,7 @@ if (isLoading == false) {
       <View style={styles.profileContainer}>
         
       <Swiper
+        ref={swiperRef}
         cards={data}
         cardIndex={index}
         renderCard={Card}
@@ -216,6 +231,8 @@ if (isLoading == false) {
         infinite={true}
         verticalSwipe={false}
         cardIndex={route.params.indexElem}
+        swipeAnimationDuration={1000}
+        animateCardOpacity={true}
         >
 
         </Swiper>
@@ -264,6 +281,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     minHeight: 600,
     backgroundColor: '#fff',
+    marginTop: -30
   },
   profile: {
     flex: 1,
@@ -275,7 +293,7 @@ const styles = StyleSheet.create({
     // marginLeft: 25,
     // marginTop: 0,
     // marginBottom: 70,
-    maxHeight: 450,
+    maxHeight: 480,
     borderRadius: 20,
     shadowColor: "#333",
     overflow: 'hidden',
@@ -314,7 +332,17 @@ const styles = StyleSheet.create({
       elevation: 2,
   },
   right: {
-    
+    position: 'absolute',
+    right: 0,
+    top: 11,
+    padding: 5
+  },
+  left: {
+    position: 'absolute',
+    top: 11,
+    left: 0,
+    padding: 5,
+    transform: [{rotate: '180deg'}]
   },
   profile3: {
     flex: 1,
@@ -397,9 +425,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 28,
     paddingBottom: 0,
-    marginBottom: 20,
+    marginBottom: 30,
     overflow: 'hidden',
     maxHeight: 110
+
   },
   profilePopularPersonTitle: {
     fontFamily: 'Gilroy',
@@ -413,7 +442,12 @@ const styles = StyleSheet.create({
       fontSize: 16,
       color: '#5DADC1',
       fontFamily: 'GilroyMedium',
-      marginBottom: 47
+      marginBottom: 43,
+      maxWidth: 120,
+      padding: 8
+  },
+  center: {
+    alignItems: 'center'
   },
   profilePopularPersonText: {
     fontFamily: 'Gilroy',

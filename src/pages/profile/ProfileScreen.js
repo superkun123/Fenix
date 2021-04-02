@@ -212,7 +212,7 @@ if (isLoading == false) {
 
         <TouchableOpacity  onPress={() => deleteData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
-          <Text>Удалить</Text>
+          {/* <Text>Удалить</Text> */}
         </TouchableOpacity>
 
     

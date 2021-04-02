@@ -105,6 +105,8 @@ function BirthdayScreen({ navigation, route }) {
           style={{width: 320, height: 130}}
           testID="dateTimePicker"
           value={date}
+          locale="ru_RU"
+          textColor="#5DADC1"
           mode={mode}
           is24Hour={true}
           display="spinner"

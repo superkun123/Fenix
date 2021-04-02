@@ -270,15 +270,21 @@ if (isLoading == false) {
          {/* Иван Петрович Николаев ИПН, НИП */}
          {route.params.description}
          </Text>
-         <Text style={styles.profileTranscription}>
-           {data.name_translit}
-         </Text>
-         <Text style={styles.profileSimilarNames}>
+         <View style={styles.profileTranscription}>
+     {/* {data.name_translit} */}
+     <Text style={styles.profilteTransText}>{data.name_translit}</Text>
+   </View>
+         
+   <View style={styles.profileTranscription}>
+   <Text style={styles.profileSimilarNames}>
          {data.variants}
          </Text>
+   
+         
          <Text style={styles.profileNameDesc}>
          {data.description}
          </Text>
+         </View>
         </View>
         <View style={styles.profileTextBlock}>
           <Text style={styles.profilePopularPersonTitle}>Известные люди</Text>
@@ -360,6 +366,11 @@ const styles = StyleSheet.create({
     // paddingRight: 40,
     zIndex: 1000
   },
+  profilteTransText: {
+    fontFamily: 'Gilroy',
+    textAlign: 'center',
+    fontSize: 24,
+  },
   profileEpmty: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -435,10 +446,7 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     paddingLeft: 17,
     paddingRight: 17,
-    paddingBottom: 30,
-    borderBottomColor: '#FFEAD0',
-    marginBottom: 30,
-    borderBottomWidth: 1,
+
   },
   profilePopularPersonTitle: {
     fontFamily: 'Gilroy',

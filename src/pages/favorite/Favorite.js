@@ -9,6 +9,7 @@ import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
 import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 
 
 
@@ -231,6 +232,9 @@ export function Favorite(route) {
             shadowOpacity: 0,
             elevation: 0
           },
+          headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
+          headerBackTitle: () => null,
+          headerBackTitleVisible: false,
           } } />
             
       </Stack.Navigator>
@@ -250,6 +254,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 33,
     fontFamily: 'GilroyMedium'
+  },
+  navArrow: {
+    transform: [{rotate: '180deg'}],
+    marginLeft: 10
+
   },
   content: {
     flex: 1,

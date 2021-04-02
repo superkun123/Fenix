@@ -10,6 +10,7 @@ import { ProfileScreen } from '../profile/ProfileScreen'
 import { useFonts } from 'expo-font';
 import { Filter } from '../filter/Filter'
 import filter from 'lodash.filter';
+import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 
 
@@ -419,10 +420,16 @@ export function Catalog({route}) {
         <Stack.Screen name="ProfileScreen" component={ProfileScreen}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
           },
+          headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
+          headerBackTitle: () => null,
+          headerBackTitleVisible: false,
           } } />
            <Stack.Screen name="Filter" component={Filter}  options={{ title: 'Фильтр', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
           },
+          headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
+          headerBackTitle: () => null,
+          headerBackTitleVisible: false,
           } } />
       </Stack.Navigator>
   );
@@ -449,6 +456,11 @@ const styles = StyleSheet.create({
       fontSize: 24,
       lineHeight: 33,
       fontFamily: 'GilroyMedium'
+    },
+    navArrow: {
+      transform: [{rotate: '180deg'}],
+      marginLeft: 10
+
     },
     content: {
       flex: 1,

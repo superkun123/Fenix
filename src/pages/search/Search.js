@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import filter from 'lodash.filter';
 import { Ionicons } from '@expo/vector-icons';
+import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 
 
 const Stack = createStackNavigator();
@@ -218,6 +219,9 @@ export function Search() {
             shadowOpacity: 0,
             elevation: 0
           },
+          headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
+          headerBackTitle: () => null,
+          headerBackTitleVisible: false,
           } } />
             
 
@@ -234,6 +238,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 50,
     marginBottom: 30
+  },
+  navArrow: {
+    transform: [{rotate: '180deg'}],
+    marginLeft: 10
+
   },
   icon: {
     position: 'absolute',

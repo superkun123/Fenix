@@ -115,6 +115,13 @@ export function FatherName() {
             shadowOpacity: 0,
             elevation: 0
           },
+          headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
+          headerBackTitle: () => null,
+          headerBackTitleVisible: false,
+          headerTitleStyle: {
+            fontFamily: 'GilroyMedium',
+            color: '#444444'
+          },
           headerTitleStyle: {
             fontFamily: 'GilroyMedium',
           },
@@ -123,8 +130,12 @@ export function FatherName() {
             shadowOpacity: 0,
             elevation: 0
           },
+          headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
+          headerBackTitle: () => null,
+          headerBackTitleVisible: false,
           headerTitleStyle: {
             fontFamily: 'GilroyMedium',
+            color: '#444444'
           },
           } } />
       </Stack.Navigator>
@@ -141,6 +152,10 @@ export function FatherName() {
       genderScreen: {
           backgroundColor: '#fff',
           flex: 1
+      },
+      navArrow: {
+        transform: [{rotate: '180deg'}],
+        marginLeft: 10
       },
       mainContainer: {
         marginHorizontal: 16,

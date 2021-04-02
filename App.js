@@ -115,7 +115,7 @@ screenOptions={({ route }) => ({
           />
         <Tab.Screen name="Каталог" component={Catalog} initialParams={{ genderId: '', }} />
         <Tab.Screen name="Подборка" component={Collection}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
-        <Tab.Screen name="Избранное" component={Favorite}   />
+        <Tab.Screen name="Избранное" component={Favorite} options={{ tabBarBadge: 1,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
         <Tab.Screen name="Поиск" component={Search} />
 
       </Tab.Navigator>

@@ -183,7 +183,7 @@ const renderItem = ({ item }) => {
         value={query}
         onChangeText={queryText => handleSearch(queryText)}
         placeholder="Начните вводить имя"
-        style={{ backgroundColor: '#fff', paddingHorizontal: 0 }}
+        style={{ backgroundColor: '#fff', paddingHorizontal: 0}}
       />
     </View>
         }
@@ -243,12 +243,11 @@ const styles = StyleSheet.create({
     transform: [{rotate: '180deg'}],
     marginLeft: 10,
     padding: 12,
-
   },
   icon: {
     position: 'absolute',
     right: 20,
-    top: '100%',
+    top: '75%',
     zIndex: 2
   },
   nameBtn: {

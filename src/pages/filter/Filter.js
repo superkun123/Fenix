@@ -233,10 +233,10 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontFamily:'Gilroy',
     fontSize: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    alignContent: 'flex-end',
+    // flexDirection: 'row',
+    // justifyContent: 'flex-end',
+    // alignItems: 'flex-end',
+    // alignContent: 'flex-end',
   },
   navArrow: {
     transform: [{rotate: '180deg'}],
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     color: '#979797'
   },
   switch: {
-    width: 50
+    // width: 50
   },
   textBtnName: {
     color: '#fff',

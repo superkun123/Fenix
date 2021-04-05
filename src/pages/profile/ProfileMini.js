@@ -297,17 +297,17 @@ const styles = StyleSheet.create({
     // marginBottom: 70,
     maxHeight: 500,
     borderRadius: 20,
-    shadowColor: "#333",
-    overflow: 'hidden',
+    // overflow: 'hidden',
     // paddingBottom: 50,
-    zIndex: 1,
+    // zIndex: 1,
     shadowOffset:{
     width: 0,
     height: 0,
     },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 3,
+    elevation: 2,
+    shadowColor: "#333"
   },
   profile2: {
     flex: 1,

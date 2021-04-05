@@ -34,6 +34,10 @@ const [data, setData] = useState([]);
 const [isFullLoading, setFullLoading] = useState(true);
 const [fullData, setFullData] = useState([1,2,3,4,5]);
 const [index, setIndex] = useState(0)
+const [colorExist, setColorExist] = useState(0)
+const [colorLoad, setColorLoad] = useState(false)
+const [colorDesc, setColorDesc] = useState('')
+const [loadColor, setLoadColor] = useState(false)
 let singleId = 1
 
 
@@ -71,8 +75,26 @@ let singleId = 1
 //     .finally(() => setFullLoading(false));
 // }, [index]);
 
+useEffect(() => {
+  // getData()
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=5`)
+    .then((response) => response.json())
+    .then((json) => setColorDesc(json.value))
+    .catch((error) => console.error(error))
+    .finally(() =>  setLoadColor(true));
+}, []);
 
 
+useEffect(() => {
+  // getData()
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=2`)
+    .then((response) => response.json())
+    .then((json) => setColorExist(json.value))
+    .catch((error) => console.error(error))
+    .finally(() => setColorLoad(true));
+}, []);
 
 
 
@@ -118,6 +140,43 @@ const swipeBackAnim = () => {
 
 
 
+const Colors = () => {
+  if(colorExist == 0) {
+    return( 
+      <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
+         
+      {data.colors.map((prop, key) => {
+    return (
+      <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
+      </View>
+    );
+  })}
+         <View style={{
+               flexDirection: 'row',
+               justifyContent: 'flex-start',
+               position: 'relative',
+             }}>
+             {/* <Text style={styles.charTitle}></Text> */}
+             <TouchableOpacity style={styles.colorInfo}  onPress={() => {
+                setModalVisible(!isModalVisible);
+                setText(colorDesc)
+             }}>
+             <Feather name="info" size={18} color="#58A7BB" />
+             </TouchableOpacity>
+           
+             </View>
+    </View>
+    )
+
+  } else {
+    return null
+  }
+}
+
+
+
+
+
 
 const Card = (card , data) => {
 
@@ -146,6 +205,8 @@ singleId = id
    {/* {route.params.paramKey} */}
    {/* {Alert.alert(data.length)} */}
    </Text>
+
+   {/* <Colors> </Colors> */}
 
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}

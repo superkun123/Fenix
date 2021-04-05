@@ -311,7 +311,6 @@ onPress={() => navigation.navigate('ProfileScreen', {
   return (
   
 <View style={styles.catalog}>
-  <Text>{query}</Text>
 
 <View style={styles.header}>
       <Text  style={styles.title}>Каталог имен</Text>
@@ -449,7 +448,7 @@ export function Catalog({route}) {
 const styles = StyleSheet.create({
 
     title: {
-      marginTop: 0,
+      marginTop: 20,
       color: "#292929",
       marginBottom: 10,
       textAlign: "center",
@@ -460,7 +459,8 @@ const styles = StyleSheet.create({
     navArrow: {
       transform: [{rotate: '180deg'}],
       marginLeft: 10,
-      padding: 10
+      padding: 12,
+      // backgroundColor: '#000'
 
     },
     content: {
@@ -528,7 +528,7 @@ elevation: 5,
     },
     settings: {
       flex: 0.3,
-      marginTop: 5,
+      marginTop: 24,
       alignItems: "flex-end",
       position: 'absolute',
       right: 16

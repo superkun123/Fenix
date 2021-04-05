@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   navArrow: {
     transform: [{rotate: '180deg'}],
     marginLeft: 10,
-    padding: 10,
+    padding: 12,
 
   },
   icon: {

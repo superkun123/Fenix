@@ -156,7 +156,7 @@ export function FatherName() {
       navArrow: {
         transform: [{rotate: '180deg'}],
         marginLeft: 10,
-        padding: 10
+        padding: 12
       },
       mainContainer: {
         marginHorizontal: 16,

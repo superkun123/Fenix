@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // alignContent: 'center',
     // justifyContent: 'center',
-    marginTop: -50
+    marginTop: -30
   },
   profile: {
     flex: 1,

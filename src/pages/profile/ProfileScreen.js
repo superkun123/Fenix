@@ -39,6 +39,10 @@ const [data, setData] = useState([]);
 const [isModalVisible, setModalVisible] = useState(false);
 const [descText, setText] = useState('123');
 const scrollRef = useRef(); 
+const [colorExist, setColorExist] = useState(0)
+const [colorLoad, setColorLoad] = useState(false)
+const [charTitleLoad, setcharTitleLoad] = useState(false)
+const [charTitle, setCharTitle] = useState('Хар')
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -171,6 +175,29 @@ const onPressTouch = () => {
 useEffect(() => {
   // getData()
   // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=6`)
+    .then((response) => response.json())
+    .then((json) => setCharTitle(json.value))
+    .catch((error) => console.error(error))
+    .finally(() =>  setcharTitleLoad(true));
+}, []);
+
+
+useEffect(() => {
+  // getData()
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=2`)
+    .then((response) => response.json())
+    .then((json) => setColorExist(json.value))
+    .catch((error) => console.error(error))
+    .finally(() => setColorLoad(true));
+}, []);
+
+
+
+useEffect(() => {
+  // getData()
+  // fetch('http://www.s1928.konversia.net/api/get_names')
   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
@@ -180,9 +207,30 @@ useEffect(() => {
 
 
 
-
-
 const inputEl = useRef(null);
+
+
+
+const Colors = () => {
+  if(colorExist == 0) {
+    return( 
+      <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
+      {data.colors.map((prop, key) => {
+    return (
+      <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
+      </View>
+    );
+  })}
+     
+    </View>
+    )
+
+  } else {
+    return null
+  }
+}
+
+
 
 // ${route.params.paramKey}
 
@@ -257,6 +305,8 @@ if (isLoading == false) {
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
+         <Colors>
+         </Colors>
          {/* <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
            {data.colors.map((prop, key) => {
          return (
@@ -292,7 +342,7 @@ if (isLoading == false) {
         </View>
 
         <View style={styles.profileTextBlock}>
-          <Text style={styles.profilePopularPersonTitle}>Характеристики</Text>
+          <Text style={styles.profilePopularPersonTitle}>{charTitle}</Text>
 
 
          

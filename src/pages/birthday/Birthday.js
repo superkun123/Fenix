@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, TextInput, Text, View, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,9 +25,23 @@ const Stack = createStackNavigator();
 
 function BirthdayScreen({ navigation, route }) {
 
+
+
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState( Platform.OS === 'ios' ? true : false);
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+
+    useEffect(() => {
+      fetch('http://www.s1928.konversia.net/api/get_block?block_id=7')
+        .then((response) => response.json())
+        .then((json) => setData(json.value))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+    }, []);
+  
   
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate || date;
@@ -116,7 +130,8 @@ function BirthdayScreen({ navigation, route }) {
         </View>
       <View>
         <Text style={styles.BirthdayText}>
-        Укажите день рождения малыша, это позволит определить знак зодиака, значение по китайскому календарю, дни рождения известных людей, исторические события.
+          {data}
+        {/* Укажите день рождения малыша, это позволит определить знак зодиака, значение по китайскому календарю, дни рождения известных людей, исторические события. */}
         </Text>
       </View>
       <Pressable style={styles.mainBtnContainer}

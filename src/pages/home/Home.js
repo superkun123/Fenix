@@ -39,7 +39,7 @@ const Tab = createBottomTabNavigator();
 
 function HomeScreen({ navigation }) {
   const linkTo = useLinkTo();
-  const jumpToAction = TabActions.jumpTo('Каталог', { user: 'Satya' });
+  const jumpToAction = TabActions.jumpTo('Энциклопедия', { user: 'Satya' });
 
 
  

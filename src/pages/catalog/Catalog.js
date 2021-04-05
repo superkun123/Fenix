@@ -338,6 +338,7 @@ onPress={() => navigation.navigate('ProfileScreen', {
 
 <View style={styles.namesContainer}>
 <FlatList
+        contentContainerStyle={{ paddingBottom: 20 }}
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
@@ -480,7 +481,7 @@ const styles = StyleSheet.create({
 
     namesContainer: {
       flex: 1,
-      marginLeft: -30
+      marginLeft: -30,
     },
     header: {
       backgroundColor: '#FAFAFA',
@@ -555,7 +556,8 @@ elevation: 5,
     FlatListCatalog: {
       marginLeft: 60,
       paddingRight: 60,
-      flex: 1
+      flex: 1,
+      paddingTop: 10,
     },
     FlatListAlphabet: {
       backgroundColor: '#FAFAFA',

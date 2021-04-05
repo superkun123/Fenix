@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     right: 20,
-    top: 20,
+    top: '100%',
     zIndex: 2
   },
   nameBtn: {

@@ -14,6 +14,7 @@ import { SvgComponentFlag } from '../../../assets/jsxSvg/flag'
 import { SvgComponentPlus } from '../../../assets/jsxSvg/plus'
 import Svg from 'react-native-svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { abs } from 'react-native-reanimated';
 
 
 
@@ -43,6 +44,8 @@ const [colorExist, setColorExist] = useState(0)
 const [colorLoad, setColorLoad] = useState(false)
 const [charTitleLoad, setcharTitleLoad] = useState(false)
 const [charTitle, setCharTitle] = useState('Хар')
+const [colorDesc, setColorDesc] = useState('')
+const [loadColor, setLoadColor] = useState(false)
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -168,6 +171,15 @@ const onPressTouch = () => {
 
 
 
+useEffect(() => {
+  // getData()
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=5`)
+    .then((response) => response.json())
+    .then((json) => setColorDesc(json.value))
+    .catch((error) => console.error(error))
+    .finally(() =>  setLoadColor(true));
+}, []);
 
 
 
@@ -212,16 +224,30 @@ const inputEl = useRef(null);
 
 
 const Colors = () => {
-  if(colorExist == 0) {
+  if(colorExist == 1) {
     return( 
-      <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30}}>
+      <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
+         
       {data.colors.map((prop, key) => {
     return (
       <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
       </View>
     );
   })}
-     
+         <View style={{
+               flexDirection: 'row',
+               justifyContent: 'flex-start',
+               position: 'relative',
+             }}>
+             {/* <Text style={styles.charTitle}></Text> */}
+             <TouchableOpacity style={styles.colorInfo}  onPress={() => {
+                setModalVisible(!isModalVisible);
+                setText(colorDesc)
+             }}>
+             <Feather name="info" size={18} color="#58A7BB" />
+             </TouchableOpacity>
+           
+             </View>
     </View>
     )
 
@@ -276,7 +302,7 @@ if (isLoading == false) {
             animationInTiming={500}
             hideModalContentWhileAnimating={true}>
             <View style={styles.modalBody}>
-              <Text style={styles.modalTitle}>Характер</Text>
+              {/* <Text style={styles.modalTitle}>Характер</Text> */}
 
               
             
@@ -352,7 +378,7 @@ if (isLoading == false) {
            <View>
              <View style={{
                flexDirection: 'row',
-               justifyContent: 'space-between'
+               justifyContent: 'space-between',
              }}>
              <Text style={styles.charTitle} key={key}>{prop.title}</Text>
              <TouchableOpacity  onPress={() => {
@@ -530,6 +556,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginBottom: 7,
     textAlign: 'center'  
+  },
+  colorInfo: {
+    zIndex: 10,
+    position: 'absolute',
+    left: 20,
   },
   modalDesc: {
     fontFamily: 'Gilroy',

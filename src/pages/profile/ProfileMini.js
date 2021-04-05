@@ -232,7 +232,6 @@ if (isLoading == false) {
         verticalSwipe={false}
         cardIndex={route.params.indexElem}
         swipeAnimationDuration={1000}
-        animateCardOpacity={true}
         >
 
         </Swiper>
@@ -284,7 +283,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // alignContent: 'center',
     // justifyContent: 'center',
-    marginTop: -30
+    marginTop: -50
   },
   profile: {
     flex: 1,
@@ -296,7 +295,7 @@ const styles = StyleSheet.create({
     // marginLeft: 25,
     // marginTop: 0,
     // marginBottom: 70,
-    maxHeight: 480,
+    maxHeight: 500,
     borderRadius: 20,
     shadowColor: "#333",
     overflow: 'hidden',
@@ -306,14 +305,14 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.5,
     shadowRadius: 8,
-    elevation: 1,
+    elevation: 3,
   },
   profile2: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    minHeight: 500,
+    minHeight: 520,
     paddingLeft: 26,
     paddingRight: 26,
     marginRight: 25,

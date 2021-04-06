@@ -216,6 +216,8 @@ export function Search() {
 
 <Stack.Screen name="ProfileScreen" component={ProfileScreen}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
+          },
+          headerStyle: {
             shadowOpacity: 0,
             elevation: 0
           },

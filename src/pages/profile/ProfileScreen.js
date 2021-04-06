@@ -440,7 +440,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF7ED',
     // paddingLeft: 40,
     // paddingRight: 40,
-    zIndex: 1000
+    zIndex: 0
   },
   profilteTransText: {
     fontFamily: 'Gilroy',

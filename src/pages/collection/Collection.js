@@ -412,8 +412,10 @@ export function Collection(route) {
 
 <Stack.Screen name="ProfileScreen" component={ProfileScreen}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
-            shadowOpacity: 0,
-            elevation: 0
+          },
+          headerStyle: {
+              shadowOpacity: 0,
+              elevation: 0
           },
           headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
           headerBackTitle: () => null,

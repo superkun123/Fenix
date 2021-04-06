@@ -232,6 +232,10 @@ export function Favorite(route) {
             shadowOpacity: 0,
             elevation: 0
           },
+          headerStyle: {
+            shadowOpacity: 0,
+            elevation: 0
+          },
           headerBackImage: () =>  (<SvgComponentArrowRight style={styles.navArrow} color='#000'></SvgComponentArrowRight>),
           headerBackTitle: () => null,
           headerBackTitleVisible: false,

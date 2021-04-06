@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Pressable} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -31,8 +31,7 @@ import {
   useSafeAreaInsets,
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
-
-
+import { CustomSplashScreen  } from './src/pages/splash/SplashScreen'
 
 
 

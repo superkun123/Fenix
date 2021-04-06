@@ -99,7 +99,7 @@ function CatalogScreen({ navigation, route}) {
 <Pressable
    style={({pressed}) => [
     {
-      backgroundColor: pressed ? '#5DADC1' : '#fff',
+      backgroundColor: pressed ? '#5DADC1' : '#FFF7ED',
     },
     styles.nameBtn,
   ]}
@@ -493,19 +493,12 @@ const styles = StyleSheet.create({
       paddingTop: 19,
       paddingBottom: 18,
       alignItems: "center",
-      borderRadius: 6,
-      shadowColor: "#333",
-shadowOffset:{
-width: 0,
-height: 0,
-},
-shadowOpacity: 0.1,
-shadowRadius: 8,
-elevation: 5,
-      marginBottom: 6,
+      borderBottomWidth: 1,
+      borderBottomColor: '#F5EDE4',
+      // marginBottom: 6,
       marginRight: 10,
       marginLeft: 10,
-      marginTop: 6
+      // marginTop: 6
     },
 
     nameBtnContainer: {

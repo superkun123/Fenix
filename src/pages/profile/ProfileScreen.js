@@ -48,6 +48,7 @@ const [charTitleLoad, setcharTitleLoad] = useState(false)
 const [charTitle, setCharTitle] = useState('Хар')
 const [colorDesc, setColorDesc] = useState('')
 const [loadColor, setLoadColor] = useState(false)
+const [likeColor, setLikeColor] = useState('#fff')
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -80,7 +81,7 @@ const storeData = async (value) => {
         // setFavorite(arr => [...arr, value])
         const jsonValue = JSON.stringify(arrayStore)
         
-        // Alert.alert(jsonValue)
+        Alert.alert(jsonValue)
         AsyncStorage.setItem('favorite', jsonValue)
       } catch (e) {
         // saving error
@@ -306,7 +307,7 @@ if (isLoading == false) {
 
         <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
-          <SvgComponentLike color='#fff' ></SvgComponentLike>
+          <SvgComponentLike color={likeColor} ></SvgComponentLike>
         </TouchableOpacity>
 
 

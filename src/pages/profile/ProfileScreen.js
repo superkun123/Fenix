@@ -392,13 +392,14 @@ if (isLoading == false) {
          </Text>
          </View>
         </View>
+        <View style={styles.profileBody}>
         <View style={styles.profileTextBlock}>
           <Text style={styles.profilePopularPersonTitle}>Известные люди</Text>
           <Text style={styles.profilePopularPersonText}>{data.peoples}</Text>
         </View>
 
-        <View style={styles.profileTextBlock}>
-          <Text style={styles.profilePopularPersonTitle}>{charTitle}</Text>
+        <View style={styles.charTextBlock}>
+          <Text style={styles.profilePopularPersonTitle}>Характеристики</Text>
 
 
          
@@ -433,6 +434,7 @@ if (isLoading == false) {
         <TouchableOpacity style={styles.upBtn} onPress={onPressTouch}>
           <SvgComponentArrowTop></SvgComponentArrowTop>
         </TouchableOpacity>
+        </View>
         </View>
 
 
@@ -512,7 +514,9 @@ const styles = StyleSheet.create({
   },
   share: {
     marginTop: 30,
-    marginBottom: -40
+    marginBottom: -40,
+    maxWidth: 26,
+    padding: 5
   },
   profileSureName: {
     fontFamily: 'Gilroy',
@@ -569,11 +573,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy',
     fontSize: 14,
     lineHeight: 24,
-    marginBottom: 20
+    // marginBottom: 20
   },
   profileTextBlock: {
     marginBottom: 40,
-    paddingHorizontal: 30
+  },
+  profileBody: {
+    paddingHorizontal: 30,
+  },
+  charTextBlock: {
+    marginBottom: 40,
+    paddingTop: 30,
+    paddingBottom: 30,
+    borderBottomColor: '#FFEAD0',
+    borderBottomWidth: 1,
+    borderTopColor: '#FFEAD0',
+    borderTopWidth: 1
   },
   charTitle: {
     marginBottom: 10,

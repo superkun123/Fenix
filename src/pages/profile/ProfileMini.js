@@ -230,12 +230,9 @@ singleId = id
   <View style={styles.center}>
       <Text style={styles.showmore} onPress={() => {
           
-          navigation.navigate('Подборка', {
-            screen: 'ProfileScreen',
-            params: { 
+          navigation.navigate('ProfileScreen', {
               paramKey: name,
               description: id,
-            },
   }) 
 }}
       >Подробнее </Text>

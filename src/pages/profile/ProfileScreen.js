@@ -421,7 +421,7 @@ if (isLoading == false) {
              </TouchableOpacity>
            
              </View>
-            <Text style={styles.profilePopularPersonText} key={key}>{prop.text}</Text>
+            <Text style={styles.charTextContent} key={key}>{prop.text}</Text>
 
            </View>
          );
@@ -575,6 +575,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 24,
     // marginBottom: 20
+  },
+  charTextContent: {
+    marginBottom: 20,
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    lineHeight: 24
   },
   profileTextBlock: {
     marginBottom: 40,

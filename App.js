@@ -38,13 +38,21 @@ import { CustomSplashScreen  } from './src/pages/splash/SplashScreen'
 
 
 
-
-
+// SplashScreen.preventAutoHideAsync()
+SplashScreen.hideAsync()
 
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+
+  useEffect(() => {
+    SplashScreen.hideAsync()
+  }, []);
+  
+
+
   const [loaded] = useFonts({
     Gilroy: require('./assets/fonts/Gilroy-Regular.ttf'),
     GilroyMedium: require('./assets/fonts/gilroy-medium.ttf'),

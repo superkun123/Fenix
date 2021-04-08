@@ -11,7 +11,7 @@ import { StyleSheet, Text, View, Pressable} from 'react-native';
 
 export function CustomSplashScreen () {
     return (
-        <View>
+        <View style={{backgroundColor: '#000', flex: 1}}>
             <Text>Hello world!</Text>
         </View>
     )

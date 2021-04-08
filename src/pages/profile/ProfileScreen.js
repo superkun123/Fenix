@@ -12,9 +12,11 @@ import { useRef } from 'react';
 import { SvgComponentArrowTop } from '../../../assets/jsxSvg/arrowTopWhite'
 import { SvgComponentFlag } from '../../../assets/jsxSvg/flag'
 import { SvgComponentPlus } from '../../../assets/jsxSvg/plus'
+import { SvgComponentShare } from '../../../assets/jsxSvg/share'
 import Svg from 'react-native-svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { abs } from 'react-native-reanimated';
+import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 
 
 
@@ -278,15 +280,16 @@ if (isLoading == false) {
         </SvgComponentFlag>
         </View>
 
-        <TouchableOpacity style={styles.plus} onPress={() => storeData(`${route.params.description}`)}>
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
-          <SvgComponentPlus ></SvgComponentPlus>
+          <SvgComponentLike color='#fff' ></SvgComponentLike>
         </TouchableOpacity>
 
 
         <TouchableOpacity  onPress={() => deleteData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
           {/* <Text>Удалить</Text> */}
+          <SvgComponentPlus style={styles.plus}></SvgComponentPlus>
         </TouchableOpacity>
 
     
@@ -328,6 +331,7 @@ if (isLoading == false) {
         </View>
 
         <View style={styles.profileHeader}>
+          <SvgComponentShare></SvgComponentShare>
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
@@ -477,7 +481,7 @@ const styles = StyleSheet.create({
   plus: {
     position: 'absolute',
     right: 33,
-    transform: [{ translateY: 15 }],
+    transform: [{ translateY: 20 }, {rotate: '45deg'}],
     zIndex: 110,
   },
   profileSureName: {
@@ -587,6 +591,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     paddingBottom: 15
+  },
+  like: {
+    position: 'absolute',
+    right: 35,
+    transform: [{ translateY: 15 }],
+    zIndex: 110,
   },
   upBtn: {
     alignItems: 'center',

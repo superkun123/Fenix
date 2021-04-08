@@ -152,7 +152,7 @@ const Item = ({ item, onPress, style }) => (
     <Text style={{ color: pressed ? '#FFF' : '#222'}}>
       {item.name}
     </Text>
-    <SvgComponentLike style={styles.like}></SvgComponentLike>
+    <SvgComponentLike color={'#5DADC1'} style={styles.like}></SvgComponentLike>
     </View>
       )}
   onPress={() => navigation.navigate('ProfileScreen', {

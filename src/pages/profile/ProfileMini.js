@@ -115,6 +115,8 @@ useEffect(() => {
   };
 
 
+ 
+
 // let name = ''
 // let id = 0
 
@@ -134,7 +136,7 @@ const swiperRef = React.createRef();
 
 
 const swipeBackAnim = () => {
-  swiperRef.current.swipeLeft()
+  // swiperRef.current.swipeLeft()
   swiperRef.current.swipeBack()
 }
 
@@ -282,6 +284,9 @@ if (isLoading == false) {
         cardIndex={index}
         renderCard={Card}
         onSwiped={onSwiped}
+        swipeBackCard={true}
+        // disableLeftSwipe={true}
+        onSwipedLeft={() => swipeBackAnim()}
         backgroundColor="#fff"
         stackSize={3}
         stackScale={0}

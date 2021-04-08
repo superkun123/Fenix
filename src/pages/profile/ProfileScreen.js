@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, Button, Pressable, Alert, Share } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; 
 import { NavigationContainer,  useScrollToTop } from '@react-navigation/native';
@@ -260,6 +260,30 @@ const Colors = () => {
 
 
 
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'http://www.s1928.konversia.net/',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+
+
+
 // ${route.params.paramKey}
 
 
@@ -331,7 +355,9 @@ if (isLoading == false) {
         </View>
 
         <View style={styles.profileHeader}>
+          <TouchableOpacity style={styles.share} onPress={onShare}>
           <SvgComponentShare></SvgComponentShare>
+          </TouchableOpacity>
          <Text style={styles.profileName}>
          {route.params.paramKey}
          </Text>
@@ -483,6 +509,10 @@ const styles = StyleSheet.create({
     right: 33,
     transform: [{ translateY: 20 }, {rotate: '45deg'}],
     zIndex: 110,
+  },
+  share: {
+    marginTop: 30,
+    marginBottom: -40
   },
   profileSureName: {
     fontFamily: 'Gilroy',

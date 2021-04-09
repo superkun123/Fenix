@@ -11,8 +11,11 @@ import Modal from 'react-native-modal';
 import { ProfileScreen } from '../profile/ProfileScreen'
 import Swiper from 'react-native-deck-swiper'
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
+import AsyncStorage from '@react-native-async-storage/async-storage';
  
 const Stack = createStackNavigator();
+
+
 
 
 
@@ -38,7 +41,25 @@ const [colorExist, setColorExist] = useState(0)
 const [colorLoad, setColorLoad] = useState(false)
 const [colorDesc, setColorDesc] = useState('')
 const [loadColor, setLoadColor] = useState(false)
+const [fatherFirstNameHook, setFirstNameHook] = useState('')
+const [fatherSecondNameHook, setSecondNameHook] = useState('')
 let singleId = 1
+
+
+
+const getData = async () => {
+  try {
+    const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
+    const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+    if(fatherFirstNameStore !== null) {
+      setFirstNameHook(fatherFirstNameStore)
+      setSecondNameHook(fatherSecondNameStore)
+    }
+  } catch(e) {
+    // error reading value
+  }
+}
+
 
 
 
@@ -98,14 +119,19 @@ useEffect(() => {
 
 
 
+
+
+
+
 useEffect(() => {
+  getData()
   // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&gender_id=${route.params.genderId}&is_full=1`)
+  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId]);
+}, [route.params.genderId, fatherFirstNameHook, fatherSecondNameHook]);
 
 
 
@@ -115,7 +141,6 @@ useEffect(() => {
   };
 
 
- 
 
 // let name = ''
 // let id = 0
@@ -138,6 +163,21 @@ const swiperRef = React.createRef();
 const swipeBackAnim = () => {
   // swiperRef.current.swipeLeft()
   swiperRef.current.swipeBack()
+}
+
+
+const Initials = () => {
+  const fatherSecondLetter =  fatherSecondNameHook.charAt(0);
+  const fatherFirstLetter = fatherFirstNameHook.charAt(0)
+
+}
+
+const fatherFirstLetter = () => {
+  return fatherFirstNameHook.charAt(0)
+}
+
+const fatherSecondName = () => {
+
 }
 
 
@@ -222,9 +262,14 @@ singleId = id
 
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}
-   {card.name_id}
+   {card.name + ' '}
+   {card.middle_name + ' '} 
+   {card.surname}
+
+   {/* {card.name_id} */}
    {/* {route.params.description} */}
    </Text>
+  
 
    <View style={styles.profileTranscription}>
      {/* {data.name_translit} */}

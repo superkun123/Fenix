@@ -13,6 +13,7 @@ import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import { Feather } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -24,6 +25,15 @@ function GenderScreen({ navigation }) {
 
 
 
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('gender', value)
+    } catch (e) {
+      // saving error
+    }
+  }
+  
+
 
 const sendGender = (gender) => {
   navigation.navigate('FatherName', {
@@ -32,7 +42,11 @@ const sendGender = (gender) => {
       paramKey: gender,
     },
 }) 
+storeData(`${gender}`)
 }
+
+
+
 
 
 

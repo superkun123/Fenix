@@ -10,6 +10,7 @@ import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg from 'react-native-svg';
 import { Birthday } from '../birthday/Birthday';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -51,8 +52,20 @@ const sendData = (gender, firstname, secondName) => {
       fatherFirstName: firstname,
       fatherSecondName: secondName
     },
-}) 
+})
+storeData(firstname, secondName) 
 }
+
+
+const storeData = async (value1, value2) => {
+  try {
+    await AsyncStorage.setItem('fatherFirstName', value1)
+    await AsyncStorage.setItem('fatherSecondName', value2)
+  } catch (e) {
+    // saving error
+  }
+}
+
 
  
 

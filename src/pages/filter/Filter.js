@@ -111,7 +111,7 @@ const category = categoryType()
 <Picker
   selectedValue={selectedmale}
   style={styles.picker}
-  itemStyle={{height: 30}}
+  itemStyle={{height: 50}}
   onValueChange={(itemValue, itemIndex) =>
     setSelectedmale(itemValue)
   }>
@@ -142,7 +142,7 @@ flex: 0.67,
 <Picker
 selectedValue={selectedCategory}
 style={styles.picker}
-itemStyle={{height: 30}}
+itemStyle={{height: 50}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedCategory(itemValue)
 }>
@@ -174,7 +174,7 @@ flex: 0.67,
 <Picker
 selectedValue={selectedSort}
 style={styles.picker}
-itemStyle={{height: 30}}
+itemStyle={{height: 50}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedSort(itemValue)
 }>
@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontFamily:'Gilroy',
     fontSize: 10,
+    height: 50
     // flexDirection: 'row',
     // justifyContent: 'flex-end',
     // alignItems: 'flex-end',

@@ -196,7 +196,8 @@ singleId = id
  
 
 
-  return <View style={styles.profile}>
+  return ( 
+  <View style={styles.profile}>
   <View>
     
   </View>
@@ -256,6 +257,7 @@ singleId = id
 
 
 </View>
+)
 }
 
 
@@ -285,8 +287,9 @@ if (isLoading == false) {
         renderCard={Card}
         onSwiped={onSwiped}
         swipeBackCard={true}
+        goBackToPreviousCardOnSwipeLeft={true}
         // disableLeftSwipe={true}
-        onSwipedLeft={() => swipeBackAnim()}
+        // onSwipedLeft={() => swipeBackAnim()}
         backgroundColor="#fff"
         stackSize={3}
         stackScale={0}

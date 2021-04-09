@@ -233,13 +233,14 @@ useEffect(() => {
 
 useEffect(()  => {
   getDataNames()
+  getData()
   // fetch('http://www.s1928.konversia.net/api/get_names')
   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, getDataNames]);
+}, [route.params.description, getDataNames, getData()]);
 
 
 

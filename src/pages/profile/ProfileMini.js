@@ -142,12 +142,12 @@ const swipeBackAnim = () => {
 
 
 
-const Colors = () => {
+const Colors = (props) => {
   if(colorExist == 0) {
     return( 
       <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
          
-      {data.colors.map((prop, key) => {
+      {data[props.id + 1].colors.map((prop, key) => {
     return (
       <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
       </View>
@@ -159,12 +159,7 @@ const Colors = () => {
                position: 'relative',
              }}>
              {/* <Text style={styles.charTitle}></Text> */}
-             <TouchableOpacity style={styles.colorInfo}  onPress={() => {
-                setModalVisible(!isModalVisible);
-                setText(colorDesc)
-             }}>
-             <Feather name="info" size={18} color="#58A7BB" />
-             </TouchableOpacity>
+
            
              </View>
     </View>
@@ -209,7 +204,7 @@ singleId = id
    {/* {Alert.alert(data.length)} */}
    </Text>
 
-   {/* <Colors> </Colors> */}
+   <Colors id={id} > </Colors>
 
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}
@@ -398,6 +393,11 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 2,
+  },
+  colorInfo: {
+    zIndex: 10,
+    position: 'absolute',
+    left: 20,
   },
   right: {
     position: 'absolute',

@@ -227,7 +227,7 @@ const inputEl = useRef(null);
 
 
 const Colors = () => {
-  if(colorExist == 1) {
+  if(colorExist == 0) {
     return( 
       <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
          

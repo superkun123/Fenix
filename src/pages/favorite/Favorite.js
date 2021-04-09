@@ -100,20 +100,20 @@ const getData = async () => {
 
 
 
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('focus', () => {
-    getData()
-  });
+// React.useEffect(() => {
+//   const unsubscribe = navigation.addListener('focus', () => {
+//     getData()
+//   });
 
-  // Return the function to unsubscribe from the event so it gets removed on unmount
-  return unsubscribe;
-}, [navigation]);
+//   // Return the function to unsubscribe from the event so it gets removed on unmount
+//   return unsubscribe;
+// }, [navigation]);
 
 
 
 
 useEffect(() => {
-  // getData()
+  getData()
 
 
   setLoading(true);
@@ -133,7 +133,7 @@ useEffect(() => {
     .catch(err => {
       setLoading(false);
     });
-}, [favorite]);
+}, [favorite, getData]);
 
 
 

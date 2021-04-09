@@ -145,6 +145,8 @@ useEffect(() => {
 
 
 
+
+
 // let name = ''
 // let id = 0
 
@@ -199,7 +201,7 @@ const Colors = (props) => {
 
 
 
-  if(colorExist == 0) {
+  if(colorExist == 1) {
     return( 
       <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
 
@@ -235,6 +237,19 @@ const Colors = (props) => {
 const Card = (card , data) => {
 
 
+  const RenderFatherName = () => {
+    if (card.middle_name == undefined || card.surname == undefined) {
+      return    <View style={styles.profileEpmty} >
+      <ActivityIndicator size="small" color="#5DADC1"/>
+    </View>
+    } else {
+      return card.name + ' ' + card.middle_name + ' ' + card.surname
+    }
+  }
+
+
+
+
   
 const name = card.name
 const id = card.name_id
@@ -265,10 +280,11 @@ singleId = id
 
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}
-   {card.name + ' '}
+   <RenderFatherName></RenderFatherName>
+   {/* {card.name + ' '}
    {fatherFirstNameHook + ' '}
    {fatherSecondNameHook}
-   {}
+    */}
    {/* {card.middle_name + ' '} 
    {card.surname} */}
 

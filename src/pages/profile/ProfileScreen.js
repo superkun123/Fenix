@@ -113,10 +113,12 @@ const deleteData = async (value) => {
         arrayStore.splice(deleteIndex)
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)
+        Alert.alert(`${deleteIndex}`)
       } catch (e) {
         // saving error
       }
 }
+
 
 
 
@@ -125,7 +127,7 @@ const deleteData = async (value) => {
 // }
 
 
-// AsyncStorage.clear();
+
 
 
 
@@ -240,11 +242,32 @@ useEffect(()  => {
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, getDataNames, getData()]);
+}, [route.params.description, getDataNames]);
 
 
 
 const inputEl = useRef(null);
+
+
+
+// const RenderSurname = () => {
+//   if (data.surname == undefined) {
+//     return ''
+//   } else {
+//     return data.surname
+//   }
+//  }
+ 
+ const RenderFatherName = () => {
+   if (data.middle_name == undefined || data.surname == undefined) {
+     return    <View style={styles.profileEpmty} >
+     <ActivityIndicator size="small" color="#5DADC1"/>
+   </View>
+   } else {
+     return data.name + ' ' + data.middle_name + ' ' + data.surname
+   }
+ }
+ 
 
 
 
@@ -331,7 +354,7 @@ if (isLoading == false) {
           {/* <Text>КЛИК</Text> */}
           <SvgComponentLike color={likeColor} ></SvgComponentLike>
         </TouchableOpacity>
-
+        
 
         <TouchableOpacity  onPress={() => deleteData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
@@ -396,9 +419,11 @@ if (isLoading == false) {
           
          </View> */}
          <Text style={styles.profileSureName}>
-         {data.name + ' '}
-         {data.middle_name + ' '} 
-         {data.surname}
+         {/* {data.name + ' '}
+         <RenderSurname></RenderSurname> */}
+         <RenderFatherName></RenderFatherName>
+         {/* {data.middle_name + ' '} 
+         {data.surname + ''} */}
 
          {/* Иван Петрович Николаев ИПН, НИП */}
          </Text>
@@ -533,6 +558,7 @@ const styles = StyleSheet.create({
     zIndex: 105,
   },
   plus: {
+    zIndex: 100,
     position: 'absolute',
     right: 33,
     transform: [{ translateY: 20 }, {rotate: '45deg'}],

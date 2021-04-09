@@ -142,12 +142,26 @@ const swipeBackAnim = () => {
 
 
 
+
+
+
+
 const Colors = (props) => {
+
+  const index = data.map(e => e.name_id).indexOf(props.id);
+
+
+
+
+
+
+
   if(colorExist == 0) {
     return( 
       <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
-         
-      {data[props.id + 1].colors.map((prop, key) => {
+
+
+      {data[index].colors.map((prop, key) => {
     return (
       <View style={{height: 21, width: 14, backgroundColor: `#${prop.color}`, flexDirection: 'row'}} key={key}>
       </View>

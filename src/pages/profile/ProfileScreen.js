@@ -49,6 +49,8 @@ const [charTitle, setCharTitle] = useState('Хар')
 const [colorDesc, setColorDesc] = useState('')
 const [loadColor, setLoadColor] = useState(false)
 const [likeColor, setLikeColor] = useState('#fff')
+const [fatherFirstNameHook, setFirstNameHook] = useState('')
+const [fatherSecondNameHook, setSecondNameHook] = useState('')
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -69,6 +71,20 @@ const getData = async () => {
 
   } catch(e) {
     Alert.alert('error')
+    // error reading value
+  }
+}
+
+
+const getDataNames = async () => {
+  try {
+    const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
+    const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+    if(fatherFirstNameStore !== null) {
+      setFirstNameHook(fatherFirstNameStore)
+      setSecondNameHook(fatherSecondNameStore)
+    }
+  } catch(e) {
     // error reading value
   }
 }
@@ -157,6 +173,12 @@ const onPressTouch = () => {
       y: 0,
       animated: true,
   });
+
+
+
+
+  
+  
 }
 
 
@@ -209,16 +231,15 @@ useEffect(() => {
 }, []);
 
 
-
-useEffect(() => {
-  // getData()
+useEffect(()  => {
+  getDataNames()
   // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
+  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description]);
+}, [route.params.description, getDataNames]);
 
 
 
@@ -227,7 +248,7 @@ const inputEl = useRef(null);
 
 
 const Colors = () => {
-  if(colorExist == 0) {
+  if(colorExist == 1) {
     return( 
       <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: 30, position: 'relative'}}>
          
@@ -374,8 +395,11 @@ if (isLoading == false) {
           
          </View> */}
          <Text style={styles.profileSureName}>
+         {data.name + ' '}
+         {data.middle_name + ' '} 
+         {data.surname}
+
          {/* Иван Петрович Николаев ИПН, НИП */}
-         {route.params.description}
          </Text>
          <View style={styles.profileTranscription}>
      {/* {data.name_translit} */}

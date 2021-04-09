@@ -61,6 +61,9 @@ const getData = async () => {
 }
 
 
+getData()
+
+
 
 
 
@@ -108,7 +111,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  // getData()
+  getData()
   // fetch('http://www.s1928.konversia.net/api/get_names')
   fetch(`http://www.s1928.konversia.net/api/get_block?block_id=2`)
     .then((response) => response.json())
@@ -131,7 +134,7 @@ useEffect(() => {
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId, fatherFirstNameHook, fatherSecondNameHook]);
+}, [route.params.genderId, getData]);
 
 
 
@@ -263,8 +266,11 @@ singleId = id
    <Text style={styles.profileSureName}>
    {/* Иван Петрович Николаев ИПН, НИП */}
    {card.name + ' '}
-   {card.middle_name + ' '} 
-   {card.surname}
+   {fatherFirstNameHook + ' '}
+   {fatherSecondNameHook}
+   {}
+   {/* {card.middle_name + ' '} 
+   {card.surname} */}
 
    {/* {card.name_id} */}
    {/* {route.params.description} */}

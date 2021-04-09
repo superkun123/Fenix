@@ -93,7 +93,7 @@ const category = categoryType()
 
 
     return (
-      <View style={styles.filter}> 
+      <ScrollView style={styles.filter}> 
           <View style={styles.labelfield}>
 
           <View style={{
@@ -111,6 +111,7 @@ const category = categoryType()
 <Picker
   selectedValue={selectedmale}
   style={styles.picker}
+  itemStyle={{height: 30}}
   onValueChange={(itemValue, itemIndex) =>
     setSelectedmale(itemValue)
   }>
@@ -141,6 +142,7 @@ flex: 0.67,
 <Picker
 selectedValue={selectedCategory}
 style={styles.picker}
+itemStyle={{height: 30}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedCategory(itemValue)
 }>
@@ -172,6 +174,7 @@ flex: 0.67,
 <Picker
 selectedValue={selectedSort}
 style={styles.picker}
+itemStyle={{height: 30}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedSort(itemValue)
 }>
@@ -208,7 +211,7 @@ setSelectedSort(itemValue)
           <Text style={styles.textBtnName}>Показать {route.params.namesValue} имен</Text>
         </LinearGradient>
             </Pressable>
-      </View>
+      </ScrollView>
     );
   }
 

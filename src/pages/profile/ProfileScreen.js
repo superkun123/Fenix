@@ -265,7 +265,7 @@ const inputEl = useRef(null);
  const RenderFatherName = () => {
    if (data.middle_name == undefined || data.surname == undefined) {
      return    <View style={styles.profileEpmty} >
-     <ActivityIndicator size="small" color="#5DADC1"/>
+     {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
    </View>
    } else {
      return data.name + ' ' + data.middle_name + ' ' + data.surname
@@ -441,7 +441,7 @@ if (isLoading == false) {
 
          {/* Иван Петрович Николаев ИПН, НИП */}
          </Text>
-         <Text> Дата: {birthDataHook}</Text>
+         {/* <Text> Дата: {birthDataHook}</Text> */}
          <View style={styles.profileTranscription}>
      {/* {data.name_translit} */}
      <Text style={styles.profilteTransText}>{data.name_translit}</Text>

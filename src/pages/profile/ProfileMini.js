@@ -240,7 +240,7 @@ const Card = (card , data) => {
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
       return    <View style={styles.profileEpmty} >
-      <ActivityIndicator size="small" color="#5DADC1"/>
+      {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
     </View>
     } else {
       return card.name + ' ' + card.middle_name + ' ' + card.surname

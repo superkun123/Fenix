@@ -28,13 +28,13 @@ export function FavoriteScreen({ navigation, route }) {
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
-const [favorite, setFavorite] = useState([1])
+const [favorite, setFavorite] = useState([3])
 
 
 
 
 
-
+// 0 будут все, 1 будет никто
 
 
 // const getData = async () => {
@@ -65,15 +65,17 @@ const [favorite, setFavorite] = useState([1])
 
 
 const getData = async () => {
+  Alert.alert(`Открыл избранное гет дата пошла`)
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
     const jsonSpread = [...jsonArray]
     const jsonFinal = jsonSpread.join(',')
-    // Alert.alert(jsonFinal)
+    Alert.alert(jsonFinal)
     setFavorite(jsonFinal)
 
   } catch(e) {
+    Alert.alert(`Ошибка даты`)
     // error reading value
   }
 }
@@ -100,20 +102,20 @@ const getData = async () => {
 
 
 
-// React.useEffect(() => {
-//   const unsubscribe = navigation.addListener('focus', () => {
-//     getData()
-//   });
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('focus', () => {
+    getData()
+  });
 
-//   // Return the function to unsubscribe from the event so it gets removed on unmount
-//   return unsubscribe;
-// }, [navigation]);
+  // Return the function to unsubscribe from the event so it gets removed on unmount
+  return unsubscribe;
+}, [navigation]);
 
 
 
 
 useEffect(() => {
-  getData()
+  // getData()
 
 
   setLoading(true);
@@ -133,7 +135,7 @@ useEffect(() => {
     .catch(err => {
       setLoading(false);
     });
-}, [favorite, getData]);
+}, [favorite]);
 
 
 

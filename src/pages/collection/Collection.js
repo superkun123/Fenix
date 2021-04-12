@@ -65,7 +65,7 @@ function CollectionScreen({ navigation, route }) {
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&sort=${route.params.sort}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);

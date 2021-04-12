@@ -120,7 +120,7 @@ useEffect(() => {
 
 
   // fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc&gender_id=${route.params.genderId}`)
-  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=${favorite}`)
+  fetch(`https://narekaet.com/api/get_names?name_ids=${favorite}`)
     .then(response => response.json())
     .then(response => {
       setData(response.names);

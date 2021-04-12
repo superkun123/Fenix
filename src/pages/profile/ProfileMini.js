@@ -68,8 +68,8 @@ getData()
 
 
 // useEffect(() => {
-//   // fetch('http://www.s1928.konversia.net/api/get_names')
-//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}`)
+//   // fetch('https://narekaet.com/api/get_names')
+//   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}`)
 //     .then((response) => response.json())
 //     .then((json) => setData(json.name))
 //     .catch((error) => console.error(error))
@@ -81,8 +81,8 @@ getData()
 // Неплохое решение, но хз
 
 // useEffect(() => {
-//   // fetch('http://www.s1928.konversia.net/api/get_names')
-//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${index}`)
+//   // fetch('https://narekaet.com/api/get_names')
+//   fetch(`https://narekaet.com/api/get_name?name_id=${index}`)
 //     .then((response) => response.json())
 //     .then((json) => setData(json.name))
 //     .catch((error) => console.error(error))
@@ -91,8 +91,8 @@ getData()
 
 
 // useEffect(() => {
-//   // fetch('http://www.s1928.konversia.net/api/get_names')
-//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=18`)
+//   // fetch('https://narekaet.com/api/get_names')
+//   fetch(`https://narekaet.com/api/get_name?name_id=18`)
 //     .then((response) => response.json())
 //     .then((json) => setFullData(json.name))
 //     .catch((error) => console.error(error))
@@ -101,8 +101,8 @@ getData()
 
 useEffect(() => {
   // getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=5`)
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=5`)
     .then((response) => response.json())
     .then((json) => setColorDesc(json.value))
     .catch((error) => console.error(error))
@@ -112,8 +112,8 @@ useEffect(() => {
 
 useEffect(() => {
   getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=2`)
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=2`)
     .then((response) => response.json())
     .then((json) => setColorExist(json.value))
     .catch((error) => console.error(error))
@@ -128,8 +128,8 @@ useEffect(() => {
 
 useEffect(() => {
   getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))

@@ -32,7 +32,7 @@ useEffect(() => {
   setLoading(true);
   setIconColor('#444444')
 
-  fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true')
+  fetch('https://narekaet.com/api/get_names?name_ids=true')
     .then(response => response.json())
     .then(response => {
       setData(response.names);

@@ -49,7 +49,7 @@ function BirthdayScreen({ navigation, route }) {
 
 
     useEffect(() => {
-      fetch('http://www.s1928.konversia.net/api/get_block?block_id=7')
+      fetch('https://narekaet.com/api/get_block?block_id=7')
         .then((response) => response.json())
         .then((json) => setData(json.value))
         .catch((error) => console.error(error))
@@ -90,9 +90,7 @@ function BirthdayScreen({ navigation, route }) {
     let surName = route.params.fatherSecondName
 
 
-    const jumpToAction = 
-
-    TabActions.jumpTo('Подборка', {
+    const jumpToAction = TabActions.jumpTo('Подборка', {
       screen: 'CollectionScreen',
       params: { 
         genderId: route.params.genderId,

@@ -204,8 +204,8 @@ const onPressTouch = () => {
 
 useEffect(() => {
   // getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=5`)
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=5`)
     .then((response) => response.json())
     .then((json) => setColorDesc(json.value))
     .catch((error) => console.error(error))
@@ -217,8 +217,8 @@ useEffect(() => {
 
 useEffect(() => {
   // getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=6`)
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=6`)
     .then((response) => response.json())
     .then((json) => setCharTitle(json.value))
     .catch((error) => console.error(error))
@@ -228,8 +228,8 @@ useEffect(() => {
 
 useEffect(() => {
   // getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_block?block_id=2`)
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=2`)
     .then((response) => response.json())
     .then((json) => setColorExist(json.value))
     .catch((error) => console.error(error))
@@ -240,7 +240,7 @@ useEffect(() => {
 useEffect(()  => {
   getDataNames()
   getData()
-  // fetch('http://www.s1928.konversia.net/api/get_names')
+  // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))

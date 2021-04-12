@@ -24,6 +24,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { navigationRef } from './RootNavigation';
 import  { Provider } from 'react-redux'
 import store from './src/store'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   SafeAreaView,
   SafeAreaProvider,

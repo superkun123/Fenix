@@ -26,6 +26,20 @@ const Stack = createStackNavigator();
 function BirthdayScreen({ navigation, route }) {
 
 
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('BirthData', value)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+
+  storeData(`Дата строкой от Егора`)
+  
+
+
+
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
@@ -76,7 +90,9 @@ function BirthdayScreen({ navigation, route }) {
     let surName = route.params.fatherSecondName
 
 
-    const jumpToAction = TabActions.jumpTo('Подборка', {
+    const jumpToAction = 
+
+    TabActions.jumpTo('Подборка', {
       screen: 'CollectionScreen',
       params: { 
         genderId: route.params.genderId,
@@ -86,11 +102,24 @@ function BirthdayScreen({ navigation, route }) {
         monthData: `${date.getMonth() + 1}`,
         dayData: `${date.getDate()}`
       },
-    });
+    },
+    )
+
+
+
+
+    
+   
+
+
+
 
     const sendData = () => {
       navigation.dispatch(jumpToAction) 
     }
+
+
+    
 
 
 
@@ -135,7 +164,7 @@ function BirthdayScreen({ navigation, route }) {
         </Text>
       </View>
       <Pressable style={styles.mainBtnContainer}
-            onPress={() => navigation.dispatch(jumpToAction)}>
+            onPress={() => sendData()}>
             <LinearGradient
           // Button Linear Gradient
           colors={['#5DADC1', '#4E9DB1', '#5DADC1']}

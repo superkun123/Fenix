@@ -51,6 +51,7 @@ const [loadColor, setLoadColor] = useState(false)
 const [likeColor, setLikeColor] = useState('#fff')
 const [fatherFirstNameHook, setFirstNameHook] = useState('')
 const [fatherSecondNameHook, setSecondNameHook] = useState('')
+const [birthDataHook, setBirthData] = useState('Дефолт')
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -80,11 +81,14 @@ const getDataNames = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+    const birthDate = await AsyncStorage.getItem('BirthData')
     if(fatherFirstNameStore !== null) {
       setFirstNameHook(fatherFirstNameStore)
       setSecondNameHook(fatherSecondNameStore)
+      // setBirthData(birthDate)
     }
   } catch(e) {
+    Alert.alert('Ошибка соединения с сервером')
     // error reading value
   }
 }
@@ -237,7 +241,7 @@ useEffect(()  => {
   getDataNames()
   getData()
   // fetch('http://www.s1928.konversia.net/api/get_names')
-  fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
+  fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
@@ -265,6 +269,16 @@ const inputEl = useRef(null);
    </View>
    } else {
      return data.name + ' ' + data.middle_name + ' ' + data.surname
+   }
+ }
+
+
+
+ const shareLink = () => {
+   if (fatherFirstNameHook !== '' && fatherSecondNameHook !== '') {
+    return data.share_link_full
+   } else {
+    return data.share_link
    }
  }
  
@@ -311,7 +325,7 @@ const Colors = () => {
     try {
       const result = await Share.share({
         message:
-          'http://www.s1928.konversia.net/',
+          `${shareLink()}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -427,6 +441,7 @@ if (isLoading == false) {
 
          {/* Иван Петрович Николаев ИПН, НИП */}
          </Text>
+         <Text> Дата: {birthDataHook}</Text>
          <View style={styles.profileTranscription}>
      {/* {data.name_translit} */}
      <Text style={styles.profilteTransText}>{data.name_translit}</Text>

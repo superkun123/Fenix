@@ -13,6 +13,8 @@ import Swiper from 'react-native-deck-swiper'
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
+import { SvgComponentAdviceBg } from '../../../assets/jsxSvg/adviceBg'
+import { SvgComponentAdvice} from '../../../assets/jsxSvg/advice'
  
 const Stack = createStackNavigator();
 
@@ -267,14 +269,19 @@ const CardAdvice = (card , data) => {
     
       <LinearGradient
       // Button Linear Gradient
-      colors={['#8ED8EA', '#68BFD4']}
+      colors={['#7BCCDF', '#7FCFE2', '#6BC1D6']}
       style={styles.profileAdvice}>
-    <View>
-      
-    </View>
+
+      {/* <SvgComponentAdviceBg style={styles.adviceBg}></SvgComponentAdviceBg> */}
   
-    <View style={styles.profileHeader}>
-    <Text>123</Text>
+    <View style={styles.profileHeaderAdvice}>
+    <SvgComponentAdvice style={styles.adviceIcon}></SvgComponentAdvice>
+    <Text style={styles.adviceTitle}>Не выбирайте имена, следуя моде</Text>
+    <Text style={styles.adviceText}>Мода на имя пройдет, и со временем само имя будет звучать уже не так красиво, 
+а иногда даже нелепо</Text>
+
+
+
     </View>
    
   
@@ -596,6 +603,9 @@ const styles = StyleSheet.create({
     elevation: 2,
     shadowColor: "#333"
   },
+  adviceBg: {
+    position: 'absolute'
+  },
   profileAdvice: {
     flex: 1,
     backgroundColor: '#FFF7ED',
@@ -618,7 +628,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 2,
-    shadowColor: "#333"
+    shadowColor: "#333",
+    position: 'relative'
   },
   profile2: {
     flex: 1,
@@ -715,6 +726,32 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     textAlign: 'center',
+    fontFamily: 'Gilroy'
+  },
+  profileHeaderAdvice: {
+    textAlign: 'center',
+    fontFamily: 'Gilroy',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center'
+  },
+  adviceIcon: {
+    marginBottom: 35
+  },
+  adviceTitle: {
+    fontSize: 24,
+    lineHeight: 33,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#fff',
+    fontFamily: 'Gilroy'
+  },
+  adviceText: {
+    fontSize: 14,
+    lineHeight: 23,
+    textAlign: 'center',
+    color: '#fff',
     fontFamily: 'Gilroy'
   },
   profileTranscription: {

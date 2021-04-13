@@ -12,6 +12,7 @@ import { ProfileScreen } from '../profile/ProfileScreen'
 import Swiper from 'react-native-deck-swiper'
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
  
 const Stack = createStackNavigator();
 
@@ -230,7 +231,50 @@ const Colors = (props) => {
 }
 
 
+const CardAdvice = (card , data) => {
 
+
+ 
+
+
+
+  
+  // const name = card.name
+  // const id = card.name_id
+  // singleId = id
+  
+  
+  
+  
+  
+  
+   
+  
+  
+    return ( 
+    
+      <LinearGradient
+      // Button Linear Gradient
+      colors={['#8ED8EA', '#68BFD4']}
+      style={styles.profileAdvice}>
+    <View>
+      
+    </View>
+  
+    <View style={styles.profileHeader}>
+    <Text>123</Text>
+    </View>
+   
+  
+    
+  
+    
+  
+  
+  
+  </LinearGradient>
+  )
+  }
 
 
 
@@ -260,81 +304,162 @@ singleId = id
 
 
 
- 
 
 
+
+ if (index !== 5) {
   return ( 
-  <View style={styles.profile}>
-  <View>
+    <View style={styles.profile}>
+    <View>
+    </View>
+  
+    <View style={styles.profileHeader}>
+     <Text style={styles.profileName} >
+     {card.name}
+     {/* {route.params.paramKey} */}
+     {/* {Alert.alert(data.length)} */}
+     </Text>
+  
+     <Colors id={id} > </Colors>
+  
+     <Text style={styles.profileSureName}>
+     {/* Иван Петрович Николаев ИПН, НИП */}
+     <RenderFatherName></RenderFatherName>
+     {/* {card.name + ' '}
+     {fatherFirstNameHook + ' '}
+     {fatherSecondNameHook}
+      */}
+     {/* {card.middle_name + ' '} 
+     {card.surname} */}
+  
+     {/* {card.name_id} */}
+     {/* {route.params.description} */}
+     </Text>
     
-  </View>
-
-  <View style={styles.profileHeader}>
-   <Text style={styles.profileName} >
-   {card.name}
-   {/* {route.params.paramKey} */}
-   {/* {Alert.alert(data.length)} */}
-   </Text>
-
-   <Colors id={id} > </Colors>
-
-   <Text style={styles.profileSureName}>
-   {/* Иван Петрович Николаев ИПН, НИП */}
-   <RenderFatherName></RenderFatherName>
-   {/* {card.name + ' '}
-   {fatherFirstNameHook + ' '}
-   {fatherSecondNameHook}
-    */}
-   {/* {card.middle_name + ' '} 
-   {card.surname} */}
-
-   {/* {card.name_id} */}
-   {/* {route.params.description} */}
-   </Text>
   
-
-   <View style={styles.profileTranscription}>
-     {/* {data.name_translit} */}
-     <Text style={styles.profilteTransText}>{card.name_translit}</Text>
-   </View>
+     <View style={styles.profileTranscription}>
+       {/* {data.name_translit} */}
+       <Text style={styles.profilteTransText}>{card.name_translit}</Text>
+     </View>
+     
+     <Text style={styles.profileSimilarNames}>
+     {card.variants}
+     </Text>
+     <Text style={styles.profileNameDesc}>
+     {card.description}
+     </Text>
+    </View>
    
-   <Text style={styles.profileSimilarNames}>
-   {card.variants}
-   </Text>
-   <Text style={styles.profileNameDesc}>
-   {card.description}
-   </Text>
+    <View style={styles.center}>
+        <Text style={styles.showmore} onPress={() => {
+            
+            navigation.navigate('ProfileScreen', {
+                paramKey: name,
+                description: id,
+    }) 
+  }}
+        >Подробнее </Text>
+  
+  
+  <TouchableOpacity style={styles.right} onPress={() => swiperRef.current.swipeRight()}>
+          <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
+    </TouchableOpacity>
+  
+  
+    <TouchableOpacity style={styles.left} onPress={() => swipeBackAnim()}>
+          <SvgComponentArrowRight color='#5DADC1'></SvgComponentArrowRight>
+    </TouchableOpacity>
+  
+    </View>
+    
+  
+    
+  
   </View>
+  )
+
+ } else if (index == 5) {
+   return (
+    <View style={styles.profile}>
+    <View>
+      <CardAdvice></CardAdvice>
+    </View>
+  
+    <View style={styles.profileHeader}>
+     <Text style={styles.profileName} >
+     {card.name}
+     {/* {route.params.paramKey} */}
+     {/* {Alert.alert(data.length)} */}
+     </Text>
+  
+     <Colors id={id} > </Colors>
+  
+     <Text style={styles.profileSureName}>
+     {/* Иван Петрович Николаев ИПН, НИП */}
+     <RenderFatherName></RenderFatherName>
+     {/* {card.name + ' '}
+     {fatherFirstNameHook + ' '}
+     {fatherSecondNameHook}
+      */}
+     {/* {card.middle_name + ' '} 
+     {card.surname} */}
+  
+     {/* {card.name_id} */}
+     {/* {route.params.description} */}
+     </Text>
+    
+  
+     <View style={styles.profileTranscription}>
+       {/* {data.name_translit} */}
+       <Text style={styles.profilteTransText}>{card.name_translit}</Text>
+     </View>
+     
+     <Text style={styles.profileSimilarNames}>
+     {card.variants}
+     </Text>
+     <Text style={styles.profileNameDesc}>
+     {card.description}
+     </Text>
+    </View>
+   
+    <View style={styles.center}>
+        <Text style={styles.showmore} onPress={() => {
+            
+            navigation.navigate('ProfileScreen', {
+                paramKey: name,
+                description: id,
+    }) 
+  }}
+        >Подробнее </Text>
+  
+  
+  <TouchableOpacity style={styles.right} onPress={() => swiperRef.current.swipeRight()}>
+          <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
+    </TouchableOpacity>
+  
+  
+    <TouchableOpacity style={styles.left} onPress={() => swipeBackAnim()}>
+          <SvgComponentArrowRight color='#5DADC1'></SvgComponentArrowRight>
+    </TouchableOpacity>
+  
+    </View>
+    
+  
+    
+  
+  </View>
+   )
+ }
+
  
-  <View style={styles.center}>
-      <Text style={styles.showmore} onPress={() => {
-          
-          navigation.navigate('ProfileScreen', {
-              paramKey: name,
-              description: id,
-  }) 
-}}
-      >Подробнее </Text>
 
-
-<TouchableOpacity style={styles.right} onPress={() => swiperRef.current.swipeRight()}>
-        <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
-  </TouchableOpacity>
-
-
-  <TouchableOpacity style={styles.left} onPress={() => swipeBackAnim()}>
-        <SvgComponentArrowRight color='#5DADC1'></SvgComponentArrowRight>
-  </TouchableOpacity>
-
-  </View>
-  
 
   
-
-
-</View>
-)
 }
+
+
+
+
 
 
 
@@ -355,6 +480,7 @@ if (isLoading == false) {
 
         
       <View style={styles.profileContainer}>
+
         
       <Swiper
         ref={swiperRef}
@@ -376,7 +502,10 @@ if (isLoading == false) {
         swipeAnimationDuration={1000}
         >
 
+
         </Swiper>
+
+
 
         
         
@@ -428,6 +557,30 @@ const styles = StyleSheet.create({
     marginTop: -30
   },
   profile: {
+    flex: 1,
+    backgroundColor: '#FFF7ED',
+    // minHeight: 500,
+    paddingLeft: 26,
+    paddingRight: 26,
+    // marginRight: 25,
+    // marginLeft: 25,
+    // marginTop: 0,
+    // marginBottom: 70,
+    maxHeight: 500,
+    borderRadius: 20,
+    // overflow: 'hidden',
+    // paddingBottom: 50,
+    // zIndex: 1,
+    shadowOffset:{
+    width: 0,
+    height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+    shadowColor: "#333"
+  },
+  profileAdvice: {
     flex: 1,
     backgroundColor: '#FFF7ED',
     // minHeight: 500,

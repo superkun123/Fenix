@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 
 
 
-
+const swiperRef = React.createRef();
 
 
 
@@ -145,6 +145,10 @@ useEffect(() => {
   };
 
 
+  const onSwipredAdvice = () => {
+    setIndex(index - 1)
+  }
+
 
 
 
@@ -163,7 +167,7 @@ useEffect(() => {
 
 
 
-const swiperRef = React.createRef();
+
 
 
 const swipeBackAnim = () => {
@@ -231,10 +235,18 @@ const Colors = (props) => {
 }
 
 
+
+const cardStack = () => {
+  if (index == 5) {
+    return 1
+  } else {
+    return 3
+  }
+}
+
+
 const CardAdvice = (card , data) => {
 
-
- 
 
 
 
@@ -380,9 +392,13 @@ singleId = id
 
  } else if (index == 5) {
    return (
+    <CardAdvice></CardAdvice>
+   )
+ } else if (index == 5+1) {
+  swipeBackAnim()
+  return (
     <View style={styles.profile}>
     <View>
-      <CardAdvice></CardAdvice>
     </View>
   
     <View style={styles.profileHeader}>
@@ -448,7 +464,7 @@ singleId = id
     
   
   </View>
-   )
+  )
  }
 
  
@@ -493,7 +509,7 @@ if (isLoading == false) {
         // disableLeftSwipe={true}
         // onSwipedLeft={() => swipeBackAnim()}
         backgroundColor="#fff"
-        stackSize={3}
+        stackSize={cardStack()}
         stackScale={0}
         stackSeparation={10}
         infinite={true}

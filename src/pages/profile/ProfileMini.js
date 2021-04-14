@@ -47,6 +47,8 @@ const [fatherFirstNameHook, setFirstNameHook] = useState('')
 const [fatherSecondNameHook, setSecondNameHook] = useState('')
 const [adviceApi, setAdviceApi] = useState('адвайсапи')
 const [loadAdvice, setLoadAdvice] = useState(false)
+const [indexOfAdvice, setIndexOfAdvice] = useState(1)
+const [advicePer, setAdvicePred] = useState(2)
 let singleId = 1
 
 
@@ -89,7 +91,7 @@ useEffect(() => {
     .then((json) => setAdviceApi(json.advices))
     .catch((error) => console.error(error))
     .finally(() =>  setLoadAdvice(true));
-}, []);
+}, [indexOfAdvice]);
 
 
 useEffect(() => {
@@ -122,6 +124,9 @@ useEffect(() => {
 
   const onSwiped = () => {
     setIndex(index + 1);
+    if (index == advicePer + 1) {
+      setIndexOfAdvice(indexOfAdvice + 1)
+    }
   };
 
 
@@ -214,7 +219,9 @@ const cardStack = () => {
 const CardAdvice = (card , data) => {
 
 
-  const Item = ({ item, index, onPress, style }) => (
+
+
+  const Item = () => (
  
 
 
@@ -223,13 +230,22 @@ const CardAdvice = (card , data) => {
   //   <Text style={styles.adviceTitle}>Не выбирайте имена, следуя моде</Text>
   //   <Text style={styles.adviceText}>{item.description}</Text>
   // </View>
- 
 
+  <LinearGradient
+  // Button Linear Gradient
+  colors={['#7BCCDF', '#7FCFE2', '#6BC1D6']}
+  style={styles.profileAdvice}>
   <View style={styles.profileHeaderAdvice}>
+    <View style={{width: '100%', alignItems: 'center'}}>
     <SvgComponentAdvice style={styles.adviceIcon}></SvgComponentAdvice>
-    <Text style={styles.adviceTitle}>Не выбирайте имена, следуя моде</Text>
-    <Text style={styles.adviceText}>{item.description}</Text>
+    </View>
+
+    <ScrollView style={{height: 100}}>
+    <Text style={styles.adviceText}>{adviceApi[indexOfAdvice].description}</Text>
+    </ScrollView>
   </View>
+  </LinearGradient>
+
  
 
     
@@ -239,33 +255,13 @@ const CardAdvice = (card , data) => {
 );
 
 
-  const renderItem = ({ item, index }) => {
 
-  
-
-
-    return (
-      <Item
-        index = {index}
-        key={item.advice_id}
-        item={item}
-        onPress={() => setSelectedId(item.advice_id)}
-      />
-    );
-  };
 
 
 
     return ( 
 
-      <FlatList
-        contentContainerStyle={{ paddingBottom: 20 }}
-        data={adviceApi}
-        renderItem={renderItem}
-        key={renderItem.item}
-        keyExtractor={(item) => item.id}
-        style={styles.profileAdvice}
-      />
+      <Item></Item>
     
   //     <LinearGradient
   //     // Button Linear Gradient
@@ -328,7 +324,7 @@ singleId = id
 
 
 
- if (index !== 5) {
+ if (index !== advicePer * indexOfAdvice || indexOfAdvice >= adviceApi.length) {
   return ( 
     <View style={styles.profile}>
     <View>
@@ -387,11 +383,11 @@ singleId = id
   </View>
   )
 
- } else if (index == 5) {
+ } else if (index == advicePer * indexOfAdvice && indexOfAdvice <= adviceApi.length) {
    return (
     <CardAdvice></CardAdvice>
    )
- } else if (index == 5+1) {
+ } else if (index == advicePer+1) {
   swipeBackAnim()
   return (
     <View style={styles.profile}>
@@ -566,14 +562,14 @@ const styles = StyleSheet.create({
   },
   profileAdvice: {
     flex: 1,
-    paddingLeft: 26,
-    paddingRight: 26,
     maxHeight: 500,
     backgroundColor: '#5DADC1',
     borderRadius: 20,
     shadowOffset:{
     width: 0,
     height: 0,
+    paddingBottom: 26,
+    paddingTop: 26
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -682,9 +678,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Gilroy',
     flex: 1,
+    paddingLeft: 26,
+    paddingRight: 26,
+    paddingTop: 26,
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
   },
   adviceIcon: {
     marginBottom: 35

@@ -208,7 +208,7 @@ const Colors = (props) => {
 
 
 const cardStack = () => {
-  if (index == 5) {
+  if (index == advicePer* indexOfAdvice) {
     return 1
   } else {
     return 3

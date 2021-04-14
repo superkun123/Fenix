@@ -45,6 +45,8 @@ const [colorDesc, setColorDesc] = useState('')
 const [loadColor, setLoadColor] = useState(false)
 const [fatherFirstNameHook, setFirstNameHook] = useState('')
 const [fatherSecondNameHook, setSecondNameHook] = useState('')
+const [adviceApi, setAdviceApi] = useState('адвайсапи')
+const [loadAdvice, setLoadAdvice] = useState(false)
 let singleId = 1
 
 
@@ -76,6 +78,17 @@ useEffect(() => {
     .then((json) => setColorDesc(json.value))
     .catch((error) => console.error(error))
     .finally(() =>  setLoadColor(true));
+}, []);
+
+
+useEffect(() => {
+  // getData()
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_advices`)
+    .then((response) => response.json())
+    .then((json) => setAdviceApi(json.advices))
+    .catch((error) => console.error(error))
+    .finally(() =>  setLoadAdvice(true));
 }, []);
 
 
@@ -201,35 +214,74 @@ const cardStack = () => {
 const CardAdvice = (card , data) => {
 
 
-
-
+  const Item = ({ item, index, onPress, style }) => (
  
-  
-  
-  
-  
-  
-   
-  
-  
-    return ( 
-    
-      <LinearGradient
-      // Button Linear Gradient
-      colors={['#7BCCDF', '#7FCFE2', '#6BC1D6']}
-      style={styles.profileAdvice}>
 
-      {/* <SvgComponentAdviceBg style={styles.adviceBg}></SvgComponentAdviceBg> */}
-  
-    <View style={styles.profileHeaderAdvice}>
+
+  //   <View style={{backgroundColor: '#000'}}>
+  //   <SvgComponentAdvice style={styles.adviceIcon}></SvgComponentAdvice>
+  //   <Text style={styles.adviceTitle}>Не выбирайте имена, следуя моде</Text>
+  //   <Text style={styles.adviceText}>{item.description}</Text>
+  // </View>
+ 
+
+  <View style={styles.profileHeaderAdvice}>
     <SvgComponentAdvice style={styles.adviceIcon}></SvgComponentAdvice>
     <Text style={styles.adviceTitle}>Не выбирайте имена, следуя моде</Text>
-    <Text style={styles.adviceText}>Мода на имя пройдет, и со временем само имя будет звучать уже не так красиво, 
-а иногда даже нелепо</Text>
+    <Text style={styles.adviceText}>{item.description}</Text>
+  </View>
+ 
+
+    
+    
+    
+    
+);
+
+
+  const renderItem = ({ item, index }) => {
+
+  
+
+
+    return (
+      <Item
+        index = {index}
+        key={item.advice_id}
+        item={item}
+        onPress={() => setSelectedId(item.advice_id)}
+      />
+    );
+  };
 
 
 
-    </View>
+    return ( 
+
+      <FlatList
+        contentContainerStyle={{ paddingBottom: 20 }}
+        data={adviceApi}
+        renderItem={renderItem}
+        key={renderItem.item}
+        keyExtractor={(item) => item.id}
+        style={styles.profileAdvice}
+      />
+    
+  //     <LinearGradient
+  //     // Button Linear Gradient
+  //     colors={['#7BCCDF', '#7FCFE2', '#6BC1D6']}
+  //     style={styles.profileAdvice}>
+
+  //     {/* <SvgComponentAdviceBg style={styles.adviceBg}></SvgComponentAdviceBg> */}
+  
+  //   <View style={styles.profileHeaderAdvice}>
+  //   <SvgComponentAdvice style={styles.adviceIcon}></SvgComponentAdvice>
+  //   <Text style={styles.adviceTitle}>Не выбирайте имена, следуя моде</Text>
+  //   <Text style={styles.adviceText}>{adviceApi}</Text>
+
+
+
+  //   </View>
    
   
     
@@ -238,7 +290,7 @@ const CardAdvice = (card , data) => {
   
   
   
-  </LinearGradient>
+  // </LinearGradient>
   )
   }
 
@@ -249,8 +301,6 @@ const Card = (card , data) => {
 
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
-    //   return    <View style={styles.profileEpmty} >
-    // </View>
     <Text style={styles.profileSureName}>
         {' '}
       </Text> 
@@ -287,7 +337,6 @@ singleId = id
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >
      {card.name}
-
      </Text>
   
      <Colors id={id} > </Colors>
@@ -517,10 +566,10 @@ const styles = StyleSheet.create({
   },
   profileAdvice: {
     flex: 1,
-    backgroundColor: '#FFF7ED',
     paddingLeft: 26,
     paddingRight: 26,
     maxHeight: 500,
+    backgroundColor: '#5DADC1',
     borderRadius: 20,
     shadowOffset:{
     width: 0,

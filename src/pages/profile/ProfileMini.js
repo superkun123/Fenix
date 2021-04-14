@@ -30,8 +30,7 @@ export  function ProfileMini({route, navigation}) {
 
 
 
-// let name = route.params.paramKey
-// let id = route.params.description
+
 
 
 const [isLoading, setLoading] = useState(true);
@@ -68,39 +67,6 @@ getData()
 
 
 
-
-
-// useEffect(() => {
-//   // fetch('https://narekaet.com/api/get_names')
-//   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}`)
-//     .then((response) => response.json())
-//     .then((json) => setData(json.name))
-//     .catch((error) => console.error(error))
-//     .finally(() => setLoading(false));
-// }, []);
-
-
-
-// Неплохое решение, но хз
-
-// useEffect(() => {
-//   // fetch('https://narekaet.com/api/get_names')
-//   fetch(`https://narekaet.com/api/get_name?name_id=${index}`)
-//     .then((response) => response.json())
-//     .then((json) => setData(json.name))
-//     .catch((error) => console.error(error))
-//     .finally(() => setLoading(false));
-// }, [index, route.params.description, route.params.key]);
-
-
-// useEffect(() => {
-//   // fetch('https://narekaet.com/api/get_names')
-//   fetch(`https://narekaet.com/api/get_name?name_id=18`)
-//     .then((response) => response.json())
-//     .then((json) => setFullData(json.name))
-//     .catch((error) => console.error(error))
-//     .finally(() => setFullLoading(false));
-// }, [index]);
 
 useEffect(() => {
   // getData()
@@ -142,7 +108,6 @@ useEffect(() => {
 
 
   const onSwiped = () => {
-    // transitionRef.current.animateNextTransition();
     setIndex(index + 1);
   };
 
@@ -154,26 +119,12 @@ useEffect(() => {
 
 
 
-// let name = ''
-// let id = 0
-
-//   const array = () => {
-//     data.forEach(elem => {
-//       name = elem.name
-//       id = elem.name_id
-//     })
-//   }
-
-
-//   array()
-
 
 
 
 
 
 const swipeBackAnim = () => {
-  // swiperRef.current.swipeLeft()
   swiperRef.current.swipeBack()
 }
 
@@ -224,7 +175,7 @@ const Colors = (props) => {
                justifyContent: 'flex-start',
                position: 'relative',
              }}>
-             {/* <Text style={styles.charTitle}></Text> */}
+
 
            
              </View>
@@ -252,11 +203,7 @@ const CardAdvice = (card , data) => {
 
 
 
-  
-  // const name = card.name
-  // const id = card.name_id
-  // singleId = id
-  
+ 
   
   
   
@@ -302,11 +249,16 @@ const Card = (card , data) => {
 
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
-      return    <View style={styles.profileEpmty} >
-      {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
-    </View>
+    //   return    <View style={styles.profileEpmty} >
+    // </View>
+    <Text style={styles.profileSureName}>
+        {' '}
+      </Text> 
+    return ''
     } else {
-      return card.name + ' ' + card.middle_name + ' ' + card.surname
+      return  <Text style={styles.profileSureName}>
+        {card.name + ' ' + card.middle_name + ' ' + card.surname}
+      </Text> 
     }
   }
 
@@ -335,8 +287,7 @@ singleId = id
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >
      {card.name}
-     {/* {route.params.paramKey} */}
-     {/* {Alert.alert(data.length)} */}
+
      </Text>
   
      <Colors id={id} > </Colors>
@@ -344,20 +295,10 @@ singleId = id
      <Text style={styles.profileSureName}>
      {/* Иван Петрович Николаев ИПН, НИП */}
      <RenderFatherName></RenderFatherName>
-     {/* {card.name + ' '}
-     {fatherFirstNameHook + ' '}
-     {fatherSecondNameHook}
-      */}
-     {/* {card.middle_name + ' '} 
-     {card.surname} */}
-  
-     {/* {card.name_id} */}
-     {/* {route.params.description} */}
      </Text>
     
   
      <View style={styles.profileTranscription}>
-       {/* {data.name_translit} */}
        <Text style={styles.profilteTransText}>{card.name_translit}</Text>
      </View>
      
@@ -411,8 +352,6 @@ singleId = id
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >
      {card.name}
-     {/* {route.params.paramKey} */}
-     {/* {Alert.alert(data.length)} */}
      </Text>
   
      <Colors id={id} > </Colors>
@@ -420,20 +359,10 @@ singleId = id
      <Text style={styles.profileSureName}>
      {/* Иван Петрович Николаев ИПН, НИП */}
      <RenderFatherName></RenderFatherName>
-     {/* {card.name + ' '}
-     {fatherFirstNameHook + ' '}
-     {fatherSecondNameHook}
-      */}
-     {/* {card.middle_name + ' '} 
-     {card.surname} */}
-  
-     {/* {card.name_id} */}
-     {/* {route.params.description} */}
      </Text>
     
   
      <View style={styles.profileTranscription}>
-       {/* {data.name_translit} */}
        <Text style={styles.profilteTransText}>{card.name_translit}</Text>
      </View>
      
@@ -513,8 +442,6 @@ if (isLoading == false) {
         onSwiped={onSwiped}
         swipeBackCard={true}
         goBackToPreviousCardOnSwipeLeft={true}
-        // disableLeftSwipe={true}
-        // onSwipedLeft={() => swipeBackAnim()}
         backgroundColor="#fff"
         stackSize={cardStack()}
         stackScale={0}
@@ -538,13 +465,6 @@ if (isLoading == false) {
       
 
 
-        {/* <Swiper
-        cards={data}
-        cardIndex={index}
-        renderCard={(card) => <Card card={card}/>}
-        >
-
-        </Swiper> */}
 
 
 
@@ -574,26 +494,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
     minHeight: 600,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // alignContent: 'center',
-    // justifyContent: 'center',
     marginTop: -30
   },
   profile: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    // minHeight: 500,
     paddingLeft: 26,
     paddingRight: 26,
-    // marginRight: 25,
-    // marginLeft: 25,
-    // marginTop: 0,
-    // marginBottom: 70,
     maxHeight: 500,
     borderRadius: 20,
-    // overflow: 'hidden',
-    // paddingBottom: 50,
-    // zIndex: 1,
     shadowOffset:{
     width: 0,
     height: 0,
@@ -609,18 +518,10 @@ const styles = StyleSheet.create({
   profileAdvice: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    // minHeight: 500,
     paddingLeft: 26,
     paddingRight: 26,
-    // marginRight: 25,
-    // marginLeft: 25,
-    // marginTop: 0,
-    // marginBottom: 70,
     maxHeight: 500,
     borderRadius: 20,
-    // overflow: 'hidden',
-    // paddingBottom: 50,
-    // zIndex: 1,
     shadowOffset:{
     width: 0,
     height: 0,

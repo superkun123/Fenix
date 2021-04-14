@@ -65,13 +65,13 @@ const [favorite, setFavorite] = useState([3])
 
 
 const getData = async () => {
-  Alert.alert(`Открыл избранное гет дата пошла`)
+  // Alert.alert(`Открыл избранное гет дата пошла`)
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
     const jsonSpread = [...jsonArray]
     const jsonFinal = jsonSpread.join(',')
-    Alert.alert(jsonFinal)
+    // Alert.alert(jsonFinal)
     setFavorite(jsonFinal)
 
   } catch(e) {

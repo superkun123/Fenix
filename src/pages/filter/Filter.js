@@ -4,6 +4,8 @@ import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, Switch, View, Pressable, TouchableOpacity, ScrollView, Button } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import { FatherName } from '../fatherName/FatherName';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -19,6 +21,8 @@ export  function Filter({route, navigation}) {
   const [selectedmale, setSelectedmale] = useState();
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedSort, setSelectedSort] = useState();
+  const [fatherFirstNameHook, setFirstNameHook] = useState('')
+  const [fatherSecondNameHook, setSecondNameHook] = useState('')
 
 
  
@@ -60,6 +64,54 @@ const categoryType = () => {
   }
 }
 
+
+const getData = async () => {
+  try {
+    const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
+    const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+    if(fatherFirstNameStore !== null) {
+      setFirstNameHook(fatherFirstNameStore)
+      setSecondNameHook(fatherSecondNameStore)
+    }
+  } catch(e) {
+    // error reading value
+  }
+}
+
+
+getData()
+
+
+const FatherNameField = () => {
+  if (fatherFirstNameHook !== '' && fatherSecondNameHook !== '' ) {
+    return  (
+      <View style={styles.labelfieldStatic}>
+
+<View style={{
+flex: 1,
+}}>
+<Text  style={styles.label}>Имя отца</Text>
+</View>
+
+
+
+<View style={{
+flex: 0.6,
+}}>
+
+<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{fatherFirstNameHook} {fatherSecondNameHook}</Text>
+
+</View>
+
+</View>
+
+    )
+  } else {
+   return (
+    <View></View>
+   ) 
+  }
+}
 
 
 const parentPage = route.params.parentPage
@@ -156,6 +208,9 @@ setSelectedCategory(itemValue)
 </View>
 
 
+<FatherNameField ></FatherNameField>
+
+
 
 <View style={styles.labelfield}>
 
@@ -227,7 +282,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     paddingLeft: 16,
     paddingRight: 16,
-    paddingTop: 50
+    paddingTop: 0
   },
   picker: {
     fontFamily: 'Gilroy',
@@ -256,14 +311,23 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingTop: 0
   },
+  labelfieldStatic: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderColor: '#F0F0F3',
+    borderBottomWidth: 1,
+    paddingBottom: 20,
+    paddingTop: 20
+  },
   labelfieldAdvice: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: '#F0F0F3',
     borderBottomWidth: 1,
-    paddingTop: 10,
-    paddingBottom: 10
+    paddingTop: 20,
+    paddingBottom: 20
   },
   label: {
     fontSize: 15,
@@ -296,7 +360,7 @@ const styles = StyleSheet.create({
     width: 214,
     marginBottom: 20,
     alignSelf: 'center',
-    marginTop: '70%'
+    marginTop: '30%'
   }
 
 

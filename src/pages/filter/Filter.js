@@ -19,7 +19,7 @@ export  function Filter({route, navigation}) {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const [selectedmale, setSelectedmale] = useState();
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSort, setSelectedSort] = useState();
   const [fatherFirstNameHook, setFirstNameHook] = useState('')
   const [fatherSecondNameHook, setSecondNameHook] = useState('')
@@ -53,7 +53,12 @@ const maleType = () => {
 
 
 const categoryType = () => {
-  let id = data.find((elem) => elem.name === selectedCategory).name_type_id
+  let id 
+  if (selectedCategory !== '') {
+    id = data.find((elem) => elem.name == selectedCategory).name_type_id
+  } else {
+    id == 1
+  }
   Alert.alert(`${id}`)
   return id
 }

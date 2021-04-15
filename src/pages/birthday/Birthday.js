@@ -117,7 +117,7 @@ function BirthdayScreen({ navigation, route }) {
     // storeData(`${date.getDate()} ${date.getMonth() + 1} ${date.getFullYear()}` )
 
     const sendData = () => {
-      storeData(`${date.getDate()} ${'0' + date.getMonth() + +1} ${date.getFullYear()}`)
+      storeData(`${date.getDate()} ${date.getMonth() + +1} ${date.getFullYear()}`)
       navigation.dispatch(jumpToAction) 
     }
 

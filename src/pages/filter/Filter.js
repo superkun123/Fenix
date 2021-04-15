@@ -53,16 +53,9 @@ const maleType = () => {
 
 
 const categoryType = () => {
-
-  if (selectedCategory == 'Русское') {
-    return 3
-
-  } else if (selectedCategory == 'Европейское') {
-    return 1
-
-  } else if (selectedCategory == 'Азиатское') {
-    return 2
-  }
+  let id = data.find((elem) => elem.name === selectedCategory).name_type_id
+  Alert.alert(`${id}`)
+  return id
 }
 
 
@@ -154,9 +147,7 @@ const parentPage = route.params.parentPage
 
 
 
-const male = maleType()
-const sort = sortType()
-const category = categoryType()
+
 
 
 const [isLoading, setLoading] = useState(true);
@@ -173,7 +164,9 @@ useEffect(() => {
 }, []);
 
 
-
+const male = maleType()
+const sort = sortType()
+// const category = categoryType()
 
 
 const AllCategory = () => {
@@ -209,10 +202,6 @@ setSelectedCategory(itemValue)
 
     return (
       <ScrollView style={styles.filter}> 
-
-      <Text>
-        {data[0].name_type_id}
-      </Text>
           <View style={styles.labelfield}>
 
           <View style={{
@@ -318,7 +307,7 @@ setSelectedSort(itemValue)
           <Pressable style={styles.mainBtnContainer}
           onPress={() => {
             // Pass params back to home screen
-            navigation.navigate(parentPage, { sort: sort, genderId: male, category: category });
+            navigation.navigate(parentPage, { sort: sort, genderId: male, category: categoryType() });
           }}>
           <LinearGradient
           // Button Linear Gradient

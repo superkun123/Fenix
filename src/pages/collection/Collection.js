@@ -12,6 +12,7 @@ import { useFonts } from 'expo-font';
 import { Filter } from '../filter/Filter'
 import filter from 'lodash.filter';
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
+import { Birthday } from '../birthday/Birthday';
 
 
 
@@ -36,11 +37,82 @@ function CollectionScreen({ navigation, route }) {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
   const [fullData, setFullData] = useState([]);
+  const [fatherFirstNameHook, setFirstNameHook] = useState('')
+  const [fatherSecondNameHook, setSecondNameHook] = useState('')
+  const [birthDayHook, setBirthDayHook] = useState('')
+  const [birthMonthHook, setBirthMonthyHook] = useState('')
+  const [birthYearHook, setBirthYearHook] = useState('')
+
+
+
+  const getData = async () => {
+    try {
+      const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
+      const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+      const birthDay = await AsyncStorage.getItem('day')
+      const birthMonth = await AsyncStorage.getItem('month')
+      const birthYear = await AsyncStorage.getItem('year')
+      if(fatherFirstNameStore !== null) {
+        setFirstNameHook(fatherFirstNameStore)
+        setSecondNameHook(fatherSecondNameStore)
+      }
+      if (birthDay !== null) {
+        setBirthDayHook(birthDay)
+        setBirthMonthyHook(birthMonth)
+        setBirthYearHook(birthYear)
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+  
+  
+  getData()
  
 
 
+const firstname = () => {
+  if (fatherFirstNameHook !== '') {
+    return fatherFirstNameHook
+  } else {
+    route.params.fatherFirstName
+  }
+}
 
- 
+
+const secondname = () => {
+  if (fatherSecondNameHook !== '') {
+    return fatherSecondNameHook
+  } else {
+    route.params.fatherSecondName
+  }
+}
+
+const day = () => {
+  if (birthDayHook !== '') {
+    return birthDayHook
+  } else {
+    route.params.dayData
+  }
+}
+
+
+const month = () => {
+  if (birthMonthHook !== '') {
+    return birthMonthHook
+  } else {
+    route.params.dayMonth
+  }
+}
+
+
+const year = () => {
+  if (birthYearHook !== '') {
+    return birthYearHook
+  } else {
+    route.params.dayYear
+  }
+}
 
 
   // useEffect(() => {
@@ -62,10 +134,12 @@ function CollectionScreen({ navigation, route }) {
   
 
   useEffect(() => {
+    getData()
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
     fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+    // fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${birthDayHook}&month=${birthMonthHook}&year=2021=${birthYearHook}&dfather_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);

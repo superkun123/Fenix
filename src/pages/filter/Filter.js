@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, Switch, View, Pressable, TouchableOpacity, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, Switch, View, Pressable, TouchableOpacity, ScrollView, Button, Alert } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { FatherName } from '../fatherName/FatherName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -159,22 +159,49 @@ const sort = sortType()
 const category = categoryType()
 
 
-// const [isLoading, setLoading] = useState(true);
-// const [data, setData] = useState([]);
+const [isLoading, setLoading] = useState(true);
+const [data, setData] = useState('123');
 
 
-// useEffect(() => {
-//   // fetch('http://www.s1928.konversia.net/api/get_names')
-//   fetch(`http://www.s1928.konversia.net/api/get_name?name_id=${route.params.paramKey}`)
-//     .then((response) => response.json())
-//     .then((json) => setData(json.names))
-//     .catch((error) => console.error(error))
-//     .finally(() => setLoading(false));
-// }, []);
+useEffect(() => {
+  // fetch('http://www.s1928.konversia.net/api/get_names')
+  fetch(`https://narekaet.com/api/get_names_types`)
+    .then((response) => response.json())
+    .then((json) => setData(json.names_types))
+    .catch((error) => console.error(error))
+    .finally(() => setLoading(false));
+}, []);
 
 
 
 
+
+const AllCategory = () => {
+  if(isLoading == false) {
+    return (
+      <Picker
+selectedValue={selectedCategory}
+style={styles.picker}
+itemStyle={{height: 70}}
+onValueChange={(itemValue, itemIndex) =>
+setSelectedCategory(itemValue)
+}>
+
+{data.map((elem) => {
+        return <Picker.Item label={elem.name} value={elem.name}></Picker.Item>
+      })
+}
+</Picker>
+
+     
+    )
+     
+  } else {
+    return ( 
+      <Text></Text>
+    )
+  }
+}
 
 
 
@@ -182,6 +209,10 @@ const category = categoryType()
 
     return (
       <ScrollView style={styles.filter}> 
+
+      <Text>
+        {data[0].name_type_id}
+      </Text>
           <View style={styles.labelfield}>
 
           <View style={{
@@ -227,17 +258,9 @@ flex: 1,
 flex: 0.67,
 }}>
 
-<Picker
-selectedValue={selectedCategory}
-style={styles.picker}
-itemStyle={{height: 70}}
-onValueChange={(itemValue, itemIndex) =>
-setSelectedCategory(itemValue)
-}>
-<Picker.Item label="Русское" value="Русское" />
-<Picker.Item style={{fontFamily:'Gilroy', fontSize: 15}} label="Европейское" value="Европейское" />
-<Picker.Item style={{fontFamily:'Gilroy', fontSize: 15}} label="Азиатское" value="Азиатское" />
-</Picker>
+
+<AllCategory></AllCategory>
+
 
 </View>
 

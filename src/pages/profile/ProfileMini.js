@@ -211,7 +211,7 @@ const cardStack = () => {
   if (index == advicePer* indexOfAdvice) {
     return 1
   } else {
-    return 3
+    return 2
   }
 }
 
@@ -490,7 +490,8 @@ if (isLoading == false) {
         backgroundColor="#fff"
         stackSize={cardStack()}
         stackScale={0}
-        stackSeparation={10}
+        containerStyle={{zIndex: 10, elevation: 10,}}
+        stackSeparation={0}
         infinite={true}
         verticalSwipe={false}
         cardIndex={route.params.indexElem}
@@ -498,17 +499,19 @@ if (isLoading == false) {
         >
 
 
+<View style={styles.profile2}></View>
+      <View style={styles.profile3}></View>   
+
+
         </Swiper>
 
 
-
-        
+      
         
 
 
       </View>
       
-
 
 
 
@@ -589,10 +592,10 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     borderRadius: 20,
     shadowColor: "#333",
-    zIndex: 0,
+    zIndex: 2,
     width: 320,
     position: 'absolute',
-    transform: [{ rotate: "2deg" }, {translateY: 10}],
+    transform: [{ rotate: "2deg" }, {translateY: 25}],
     shadowOffset:{
       width: 0,
       height: 0,
@@ -631,10 +634,10 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     borderRadius: 20,
     shadowColor: "#333",
-    zIndex: -1,
+    zIndex: 1,
     width: 320,
     position: 'absolute',
-    transform: [{ rotate: "-3deg" }, {translateY: 10}],
+    transform: [{ rotate: "-3deg" }, {translateY: 25}],
     shadowOffset:{
       width: 0,
       height: 0,

@@ -39,8 +39,10 @@ import { CustomSplashScreen  } from './src/pages/splash/SplashScreen'
 
 
 
+// // SplashScreen.preventAutoHideAsync()
 // SplashScreen.preventAutoHideAsync()
-SplashScreen.hideAsync()
+//   .then(result => console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`))
+//   .catch(console.warn); // it's good to explicitly catch and inspect any error
 
 
 const Tab = createBottomTabNavigator();
@@ -48,9 +50,14 @@ const Tab = createBottomTabNavigator();
 export default function App() {
 
 
-  useEffect(() => {
-    SplashScreen.hideAsync()
-  }, []);
+  // setTimeout(async () => {
+  //   await SplashScreen.hideAsync();
+  // }, 0);
+
+
+  // useEffect(() => {
+  //   SplashScreen.hideAsync()
+  // }, []);
   
 
 

@@ -65,7 +65,7 @@ function CollectionScreen({ navigation, route }) {
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);
@@ -394,7 +394,7 @@ export function Collection(route) {
  
   return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen options={{headerShown: false}} name="CollectionScreen" component={CollectionScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '', category: ''   }} />
+        <Stack.Screen options={{headerShown: false}} name="CollectionScreen" component={CollectionScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '', category: '', dayData: '', monthData: '', yearData: ''   }} />
         <Stack.Screen name="ProfileMini" component={ProfileMini}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,

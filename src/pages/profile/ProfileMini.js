@@ -236,7 +236,7 @@ const CardAdvice = (card , data) => {
   colors={['#7BCCDF', '#7FCFE2', '#6BC1D6']}
   style={styles.profileAdvice}>
   <View style={styles.profileHeaderAdvice}>
-    <View style={{width: '100%', alignItems: 'center'}}>
+    <View style={{width: '100%', alignItems: 'center', marginTop: '30%'}}>
     <SvgComponentAdvice style={styles.adviceIcon}></SvgComponentAdvice>
     </View>
 
@@ -495,7 +495,7 @@ if (isLoading == false) {
         infinite={true}
         verticalSwipe={false}
         cardIndex={route.params.indexElem}
-        swipeAnimationDuration={1000}
+        swipeAnimationDuration={500}
         >
 
 
@@ -572,7 +572,11 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0,
     paddingBottom: 26,
-    paddingTop: 26
+    paddingTop: 26,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center'
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -687,6 +691,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
+    alignContent: 'center',
+    alignSelf: 'center'
   },
   adviceIcon: {
     marginBottom: 35

@@ -23,6 +23,7 @@ export  function Filter({route, navigation}) {
   const [selectedSort, setSelectedSort] = useState();
   const [fatherFirstNameHook, setFirstNameHook] = useState('')
   const [fatherSecondNameHook, setSecondNameHook] = useState('')
+  const [birthDataHook, setBirthDataHook] = useState('')
 
 
  
@@ -69,9 +70,13 @@ const getData = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+    const birthData = await AsyncStorage.getItem('BirthData')
     if(fatherFirstNameStore !== null) {
       setFirstNameHook(fatherFirstNameStore)
       setSecondNameHook(fatherSecondNameStore)
+    }
+    if (birthData !== null) {
+      setBirthDataHook(birthData)
     }
   } catch(e) {
     // error reading value
@@ -100,6 +105,37 @@ flex: 0.6,
 }}>
 
 <Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{fatherFirstNameHook} {fatherSecondNameHook}</Text>
+
+</View>
+
+</View>
+
+    )
+  } else {
+   return (
+    <View></View>
+   ) 
+  }
+}
+
+const BirdthField = () => {
+  if (birthDataHook !== '') {
+    return  (
+      <View style={styles.labelfieldStatic}>
+
+<View style={{
+flex: 1,
+}}>
+<Text  style={styles.label}>Дата рождения ребёнка:</Text>
+</View>
+
+
+
+<View style={{
+flex: 0.6,
+}}>
+
+<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{birthDataHook}</Text>
 
 </View>
 
@@ -209,6 +245,8 @@ setSelectedCategory(itemValue)
 
 
 <FatherNameField ></FatherNameField>
+<BirdthField ></BirdthField>
+
 
 
 

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TextInput, Text, View, TouchableOpacity, ScrollView, Button, Pressable } from 'react-native';
+import { StyleSheet, TextInput, Text, View, TouchableOpacity, ScrollView, Button, Pressable, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,6 +13,7 @@ import Svg from 'react-native-svg';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import { TabActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -26,16 +27,8 @@ const Stack = createStackNavigator();
 function BirthdayScreen({ navigation, route }) {
 
 
-  const storeData = async (value) => {
-    try {
-      await AsyncStorage.setItem('BirthData', value)
-    } catch (e) {
-      // saving error
-    }
-  }
 
-
-  storeData(`Дата строкой от Егора`)
+  
   
 
 
@@ -104,15 +97,27 @@ function BirthdayScreen({ navigation, route }) {
     )
 
 
+   
+
+    const storeData = async (value) => {
+      try {
+        await AsyncStorage.setItem('BirthData', value)
+      } catch (e) {
+        // saving error
+      }
+    }
+  
+  
 
 
-    
+  
    
 
 
-
+    // storeData(`${date.getDate()} ${date.getMonth() + 1} ${date.getFullYear()}` )
 
     const sendData = () => {
+      storeData(`${date.getDate()} ${'0' + date.getMonth() + +1} ${date.getFullYear()}`)
       navigation.dispatch(jumpToAction) 
     }
 

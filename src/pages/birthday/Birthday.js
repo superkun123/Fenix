@@ -99,9 +99,11 @@ function BirthdayScreen({ navigation, route }) {
 
    
 
-    const storeData = async (value) => {
+    const storeData = async (day, month, year) => {
       try {
-        await AsyncStorage.setItem('BirthData', value)
+        await AsyncStorage.setItem('day', day)
+        await AsyncStorage.setItem('month', month)
+        await AsyncStorage.setItem('year', year)
       } catch (e) {
         // saving error
       }
@@ -117,7 +119,7 @@ function BirthdayScreen({ navigation, route }) {
     // storeData(`${date.getDate()} ${date.getMonth() + 1} ${date.getFullYear()}` )
 
     const sendData = () => {
-      storeData(`${date.getDate()} ${date.getMonth() + +1} ${date.getFullYear()}`)
+      storeData(`${date.getDate()}`, `${date.getMonth() + +1}`, `${date.getFullYear()}`)
       navigation.dispatch(jumpToAction) 
     }
 

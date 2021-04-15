@@ -620,7 +620,7 @@ function CatalogScreen({ navigation, route }) {
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&father_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {
         setData(response.names);
@@ -633,7 +633,7 @@ function CatalogScreen({ navigation, route }) {
       .catch(err => {
         setLoading(false);
       });
-  }, [route.params.genderId, route.params.sort, route.params.genderId, 
+  }, [route.params.genderId, route.params.sort, route.params.genderId, route.params.category,
     route.params.fatherFirstName, 
     route.params.fatherSecondName, 
     route.params.dayData, 
@@ -949,7 +949,7 @@ export function Catalog(route) {
  
   return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
+        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '',  category: ''  }} />
         <Stack.Screen name="ProfileMini" component={ProfileMini}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,

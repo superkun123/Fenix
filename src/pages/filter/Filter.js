@@ -23,10 +23,18 @@ export  function Filter({route, navigation}) {
   const [selectedSort, setSelectedSort] = useState();
   const [fatherFirstNameHook, setFirstNameHook] = useState('')
   const [fatherSecondNameHook, setSecondNameHook] = useState('')
-  const [birthDataHook, setBirthDataHook] = useState('')
+  const [birthDayHook, setBirthDayHook] = useState('')
+  const [birthMonthHook, setBirthMonthyHook] = useState('')
+  const [birthYearHook, setBirthYearHook] = useState('')
 
 
- 
+ const monthValidator = () => {
+   if (birthMonthHook.lenght < 1) {
+     return 0
+   } else {
+     return ''
+   }
+ }
 
 const sortType = () => {
   if (selectedSort == 'По алфавиту') {
@@ -57,7 +65,7 @@ const categoryType = () => {
   if (selectedCategory !== '') {
     id = data.find((elem) => elem.name == selectedCategory).name_type_id
   } else {
-    id == 1
+    id == ''
   }
   Alert.alert(`${id}`)
   return id
@@ -68,13 +76,17 @@ const getData = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
-    const birthData = await AsyncStorage.getItem('BirthData')
+    const birthDay = await AsyncStorage.getItem('day')
+    const birthMonth = await AsyncStorage.getItem('month')
+    const birthYear = await AsyncStorage.getItem('year')
     if(fatherFirstNameStore !== null) {
       setFirstNameHook(fatherFirstNameStore)
       setSecondNameHook(fatherSecondNameStore)
     }
-    if (birthData !== null) {
-      setBirthDataHook(birthData)
+    if (birthDay !== null) {
+      setBirthDayHook(birthDay)
+      setBirthMonthyHook(birthMonth)
+      setBirthYearHook(birthYear)
     }
   } catch(e) {
     // error reading value
@@ -117,7 +129,7 @@ flex: 0.6,
 }
 
 const BirdthField = () => {
-  if (birthDataHook !== '') {
+  if (birthDayHook !== '') {
     return  (
       <View style={styles.labelfieldStatic}>
 
@@ -133,7 +145,7 @@ flex: 1,
 flex: 0.6,
 }}>
 
-<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{birthDataHook}</Text>
+<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{birthDayHook} {monthValidator()} {birthMonthHook} {birthYearHook}</Text>
 
 </View>
 

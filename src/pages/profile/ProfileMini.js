@@ -712,7 +712,8 @@ const styles = StyleSheet.create({
   },
   like: {
     position: 'absolute',
-    right: 40,
+    right: 35,
+    padding: 5,
     transform: [{ translateY: -10 }],
     zIndex: 110,
   },

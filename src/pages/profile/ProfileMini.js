@@ -52,7 +52,7 @@ const [adviceApi, setAdviceApi] = useState('адвайсапи')
 const [loadAdvice, setLoadAdvice] = useState(false)
 const [indexOfAdvice, setIndexOfAdvice] = useState(1)
 const [advicePer, setAdvicePred] = useState(2)
-const [likeColor, setLikeColor] = useState('#fff')
+const [likeColor, setLikeColor] = useState('#5DADC1')
 let singleId = 1
 
 
@@ -79,6 +79,9 @@ const getData = async () => {
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1) {
       arrayStore.push(jsonArray)
+      setLikeColor('#FFF')
+    } else {
+      setLikeColor('#5DADC1')
     }
     // Alert.alert(`${arrayStore}`)
  

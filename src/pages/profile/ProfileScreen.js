@@ -48,7 +48,7 @@ const [charTitleLoad, setcharTitleLoad] = useState(false)
 const [charTitle, setCharTitle] = useState('Хар')
 const [colorDesc, setColorDesc] = useState('')
 const [loadColor, setLoadColor] = useState(false)
-const [likeColor, setLikeColor] = useState('#fff')
+const [likeColor, setLikeColor] = useState('#5DADC1')
 const [fatherFirstNameHook, setFirstNameHook] = useState('')
 const [fatherSecondNameHook, setSecondNameHook] = useState('')
 const [birthDataHook, setBirthData] = useState('Дефолт')
@@ -66,6 +66,10 @@ const getData = async () => {
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1) {
       arrayStore.push(jsonArray)
+      setLikeColor('#FFF')
+    }
+    else {
+      setLikeColor('#5DADC1')
     }
     // Alert.alert(`${arrayStore}`)
  
@@ -247,7 +251,7 @@ useEffect(()  => {
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, getDataNames]);
+}, [route.params.description, getDataNames, likeColor]);
 
 
 

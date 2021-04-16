@@ -398,13 +398,13 @@ singleId = id
         </View>
 
 
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${id}`)}>
           {/* <Text>КЛИК</Text> */}
           <SvgComponentLike color={likeColor} ></SvgComponentLike>
         </TouchableOpacity>
 
               
-<TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${route.params.description}`)}>
+<TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${id}`)}>
 
 <SvgComponentPlus></SvgComponentPlus>
 </TouchableOpacity>
@@ -480,7 +480,7 @@ singleId = id
         </View>
 
 
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${id}`)}>
           {/* <Text>КЛИК</Text> */}
           <SvgComponentLike color={likeColor} ></SvgComponentLike>
         </TouchableOpacity>

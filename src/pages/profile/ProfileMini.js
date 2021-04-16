@@ -80,6 +80,7 @@ const getData = async () => {
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       arrayStore.push(jsonArray)
       setLikeColor('#FFF')
+      Alert.alert('Функция отработала')
     } else {
       setLikeColor('#5DADC1')
     }
@@ -472,8 +473,17 @@ singleId = id
   swipeBackAnim()
   return (
     <View style={styles.profile}>
-    <View>
-    </View>
+    
+    <View style={styles.flagContainer}>
+        <SvgComponentFlag style={styles.flag}>
+        </SvgComponentFlag>
+        </View>
+
+
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
+          {/* <Text>КЛИК</Text> */}
+          <SvgComponentLike color={likeColor} ></SvgComponentLike>
+        </TouchableOpacity>
   
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >

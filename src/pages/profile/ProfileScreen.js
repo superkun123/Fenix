@@ -66,12 +66,8 @@ const getData = async () => {
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       arrayStore.push(jsonArray)
-      setLikeColor('#FFF')
-      Alert.alert('Функция отработала')
     }
-    else {
-      setLikeColor('#5DADC1')
-    }
+
     // Alert.alert(`${arrayStore}`)
  
     arrayStore = JSON.parse(jsonValue)
@@ -106,6 +102,7 @@ const storeData = async (value) => {
   let result = await getData()
   try {
         arrayStore.push(value)
+        setLikeColor('#FFF')
         // setFavorite(arr => [...arr, value])
         const jsonValue = JSON.stringify(arrayStore)
         
@@ -124,6 +121,7 @@ const deleteData = async (value) => {
         // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
         arrayStore.splice(deleteIndex)
+        setLikeColor('#5DADC1')
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)
       } catch (e) {

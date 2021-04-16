@@ -15,6 +15,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SvgComponentAdviceBg } from '../../../assets/jsxSvg/adviceBg'
 import { SvgComponentAdvice} from '../../../assets/jsxSvg/advice'
+import { SvgComponentFlag } from '../../../assets/jsxSvg/flag'
+import { SvgComponentPlus } from '../../../assets/jsxSvg/plus'
+import { SvgComponentLike } from '../../../assets/jsxSvg/like'
  
 const Stack = createStackNavigator();
 
@@ -49,11 +52,12 @@ const [adviceApi, setAdviceApi] = useState('адвайсапи')
 const [loadAdvice, setLoadAdvice] = useState(false)
 const [indexOfAdvice, setIndexOfAdvice] = useState(1)
 const [advicePer, setAdvicePred] = useState(2)
+const [likeColor, setLikeColor] = useState('#fff')
 let singleId = 1
 
 
 
-const getData = async () => {
+const getNameData = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
@@ -66,14 +70,67 @@ const getData = async () => {
   }
 }
 
+let arrayStore = []
 
-getData()
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('favorite')
+    const jsonArray = JSON.parse(jsonValue)
+    if (arrayStore.indexOf(jsonArray) !== -1) {
+      arrayStore.push(jsonArray)
+    }
+    // Alert.alert(`${arrayStore}`)
+ 
+    arrayStore = JSON.parse(jsonValue)
+    // Alert.alert(` вывожу Дату: ${uniq}`)
+    // Alert.alert(`${arrayStore}`)
+
+  } catch(e) {
+    Alert.alert('error')
+    // error reading value
+  }
+}
+
+
+const storeData = async (value) => {
+  let result = await getData()
+  try {
+        arrayStore.push(value)
+        // setFavorite(arr => [...arr, value])
+        const jsonValue = JSON.stringify(arrayStore)
+        
+        // Alert.alert(jsonValue)
+        AsyncStorage.setItem('favorite', jsonValue)
+      } catch (e) {
+        // saving error
+      }
+}
+
+
+const deleteData = async (value) => {
+  let result = await getData()
+  // let storeResult = await storeData()
+  try {
+        // Alert.alert(`${arrayStore}`)
+        const deleteIndex = arrayStore.indexOf(value)
+        arrayStore.splice(deleteIndex)
+        const jsonValue = JSON.stringify(arrayStore)
+        AsyncStorage.setItem('favorite', jsonValue)
+      } catch (e) {
+        // saving error
+      }
+}
+
+
+
+getNameData()
 
 
 
 
 useEffect(() => {
-  // getData()
+  // getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_block?block_id=5`)
     .then((response) => response.json())
@@ -84,7 +141,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  // getData()
+  // getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_advices`)
     .then((response) => response.json())
@@ -95,7 +152,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  getData()
+  getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_block?block_id=2`)
     .then((response) => response.json())
@@ -111,14 +168,14 @@ useEffect(() => {
 
 
 useEffect(() => {
-  getData()
+  getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId, getData]);
+}, [route.params.genderId, getNameData]);
 
 
 
@@ -327,8 +384,29 @@ singleId = id
  if (index !== advicePer * indexOfAdvice || indexOfAdvice >= adviceApi.length) {
   return ( 
     <View style={styles.profile}>
-    <View>
-    </View>
+
+
+
+
+     <View style={styles.flagContainer}>
+        <SvgComponentFlag style={styles.flag}>
+        </SvgComponentFlag>
+        </View>
+
+
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
+          {/* <Text>КЛИК</Text> */}
+          <SvgComponentLike color={likeColor} ></SvgComponentLike>
+        </TouchableOpacity>
+
+              
+<TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${route.params.description}`)}>
+
+<SvgComponentPlus></SvgComponentPlus>
+</TouchableOpacity>
+        
+
+
   
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >
@@ -618,6 +696,24 @@ const styles = StyleSheet.create({
     right: 0,
     top: 11,
     padding: 5
+  },
+  like: {
+    position: 'absolute',
+    right: 41,
+    transform: [{ translateY: -10 }],
+    zIndex: 110,
+  },
+  flag: {
+    position: 'absolute',
+    right: 0,
+    transform: [{ translateY: -30 }],
+    zIndex: 105,
+  },
+  plus: {
+    zIndex: 110,
+    position: 'absolute',
+    right: 40,
+    transform: [{ translateY: 30 }, {rotate: '45deg'}],
   },
   left: {
     position: 'absolute',

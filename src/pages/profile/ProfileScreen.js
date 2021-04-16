@@ -64,7 +64,6 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
-    const uniq = 1
     if (arrayStore.indexOf(jsonArray) !== -1) {
       arrayStore.push(jsonArray)
     }
@@ -75,7 +74,7 @@ const getData = async () => {
     // Alert.alert(`${arrayStore}`)
 
   } catch(e) {
-    Alert.alert('error')
+    Alert.alert('Ошибка соединения с сервером')
     // error reading value
   }
 }
@@ -119,7 +118,6 @@ const deleteData = async (value) => {
   try {
         // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
-        Alert.alert(`${deleteIndex}`)
         arrayStore.splice(deleteIndex)
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)

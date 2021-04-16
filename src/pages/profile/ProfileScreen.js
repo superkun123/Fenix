@@ -577,8 +577,8 @@ const styles = StyleSheet.create({
     zIndex: 110,
     position: 'absolute',
     position: 'absolute',
-    right: 33,
-    transform: [{ translateY: 50 }, {rotate: '45deg'}],
+    right: 34,
+    transform: [{ translateY: 60 }, {rotate: '45deg'}],
   },
   share: {
     marginTop: 30,
@@ -713,8 +713,8 @@ const styles = StyleSheet.create({
   },
   like: {
     position: 'absolute',
-    right: 35,
-    transform: [{ translateY: 15 }],
+    right: 36,
+    transform: [{ translateY: 20 }],
     zIndex: 110,
   },
   upBtn: {

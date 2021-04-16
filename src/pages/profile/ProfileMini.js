@@ -699,7 +699,7 @@ const styles = StyleSheet.create({
   },
   like: {
     position: 'absolute',
-    right: 41,
+    right: 40,
     transform: [{ translateY: -10 }],
     zIndex: 110,
   },

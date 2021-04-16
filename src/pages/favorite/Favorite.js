@@ -70,7 +70,6 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
-    Alert.alert(`${jsonArray}`)
     const newArray = jsonArray.filter(function(elem, pos) {
       return jsonArray.indexOf(elem) == pos;
   });
@@ -78,11 +77,10 @@ const getData = async () => {
     const jsonSpread = [...newArray]
     const jsonFinal = jsonSpread.join(',')
 
-    Alert.alert(jsonFinal)
     setFavorite(jsonFinal)
 
   } catch(e) {
-    Alert.alert(`Ошибка даты`)
+    Alert.alert(`Ошибка сети`)
     // error reading value
   }
 }

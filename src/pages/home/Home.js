@@ -47,7 +47,6 @@ function HomeScreen({ navigation }) {
   const storeData = async (value) => {
     try {
       AsyncStorage.setItem('favorite', '[0, 1]')
-      Alert.alert('стор дата')
     } catch (e) {
       // saving error
     }

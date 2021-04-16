@@ -77,7 +77,7 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
-    if (arrayStore.indexOf(jsonArray) !== -1) {
+    if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       arrayStore.push(jsonArray)
       setLikeColor('#FFF')
     } else {

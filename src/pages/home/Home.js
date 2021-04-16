@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import { StyleSheet, Text, View, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Pressable, Alert} from 'react-native';
 import { SvgComponent} from '../../../assets/jsxSvg/MainPageLogo'
 import MarqueeText from 'react-native-marquee';
 import { useFonts } from 'expo-font';
@@ -15,6 +15,7 @@ import * as RootNavigation from '../../../RootNavigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useLinkTo } from '@react-navigation/native';
 import { TabActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -40,6 +41,31 @@ const Tab = createBottomTabNavigator();
 function HomeScreen({ navigation }) {
   const linkTo = useLinkTo();
   const jumpToAction = TabActions.jumpTo('Энциклопедия', { user: 'Satya' });
+
+
+
+  const storeData = async (value) => {
+    try {
+      AsyncStorage.setItem('favorite', '[0, 1]')
+      Alert.alert('стор дата')
+    } catch (e) {
+      // saving error
+    }
+  }
+
+
+
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      
+  storeData()
+    });
+  
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+  
 
 
  
@@ -110,6 +136,8 @@ function HomeScreen({ navigation }) {
 
  
 
+
+  
   
 
     const navigation = useNavigation()

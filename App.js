@@ -58,6 +58,33 @@ export default function App() {
   // useEffect(() => {
   //   SplashScreen.hideAsync()
   // }, []);
+
+
+  const [badge, setBadge] = useState(0)
+
+
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('badge')
+      if(value !== null) {
+        setBadge(value)
+        // value previously stored
+      }
+    } catch(e) {
+      setBadge(0)
+      // error reading value
+    }
+  }
+
+
+ 
+
+  getData()
+  
+
+
+
   
 
 
@@ -130,7 +157,7 @@ screenOptions={({ route }) => ({
           />
         <Tab.Screen name="Энциклопедия" component={Catalog} initialParams={{ genderId: '', }} />
         <Tab.Screen name="Подборка" component={Collection}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
-        <Tab.Screen name="Избранное" component={Favorite} options={{ tabBarBadge: 1,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
+        <Tab.Screen name="Избранное" component={Favorite} options={{ tabBarBadge: badge,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
         <Tab.Screen name="Поиск" component={Search} />
 
       </Tab.Navigator>

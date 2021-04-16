@@ -29,7 +29,7 @@ export function FavoriteScreen({ navigation, route }) {
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
 const [favorite, setFavorite] = useState([1])
-const [badge, setBadge] = useState(0)
+const [label, setLabel] = useState(0)
 
 
 
@@ -70,15 +70,10 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
-    Alert.alert(`${jsonArray}`)
-    const newArray = jsonArray.filter(function(elem, pos) {
-      return jsonArray.indexOf(elem) == pos;
-  });
-  setBadge(newArray.length - 1)
-    const jsonSpread = [...newArray]
+    setLabel(jsonValue.length)
+    const jsonSpread = [...jsonArray]
     const jsonFinal = jsonSpread.join(',')
-
-    Alert.alert(jsonFinal)
+    // Alert.alert(jsonFinal)
     setFavorite(jsonFinal)
 
   } catch(e) {
@@ -89,13 +84,7 @@ const getData = async () => {
 
 
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('badge', badge)
-  } catch (e) {
-    // saving error
-  }
-}
+
 
 
 
@@ -111,7 +100,7 @@ const storeData = async (value) => {
 
 
 
-
+Alert.alert(`1`)
 
  
 
@@ -124,7 +113,7 @@ React.useEffect(() => {
 
   // Return the function to unsubscribe from the event so it gets removed on unmount
   return unsubscribe;
-}, [navigation, badge]);
+}, [navigation]);
 
 
 

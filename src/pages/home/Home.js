@@ -45,11 +45,15 @@ function HomeScreen({ navigation }) {
 
 
   const storeData = async (value) => {
-    try {
-      AsyncStorage.setItem('favorite', '[0, 1]')
-    } catch (e) {
-      // saving error
+    const jsonValue = await AsyncStorage.getItem('favorite')
+    if(jsonValue == null) {
+      try {
+        AsyncStorage.setItem('favorite', '[0, 1]')
+      } catch (e) {
+        // saving error
+      }
     }
+
   }
 
 

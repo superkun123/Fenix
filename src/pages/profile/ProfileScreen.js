@@ -371,10 +371,10 @@ if (isLoading == false) {
         </TouchableOpacity>
         
 
-        <TouchableOpacity  onPress={() => deleteData(`${route.params.description}`)}>
+        <TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${route.params.description}`)}>
           {/* <Text>КЛИК</Text> */}
           {/* <Text>Удалить</Text> */}
-          <SvgComponentPlus style={styles.plus}></SvgComponentPlus>
+          <SvgComponentPlus></SvgComponentPlus>
         </TouchableOpacity>
 
     
@@ -574,12 +574,11 @@ const styles = StyleSheet.create({
     zIndex: 105,
   },
   plus: {
-    zIndex: 100,
-    backgroundColor: '#000',
-    // position: 'absolute',
-    // right: 33,
-    // transform: [{ translateY: 20 }, {rotate: '45deg'}],
     zIndex: 110,
+    position: 'absolute',
+    position: 'absolute',
+    right: 33,
+    transform: [{ translateY: 50 }, {rotate: '45deg'}],
   },
   share: {
     marginTop: 30,

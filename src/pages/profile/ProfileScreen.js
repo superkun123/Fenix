@@ -64,10 +64,14 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
-    arrayStore.push(jsonArray)
-    // Alert.alert(`${jsonArray}`)
-    // arrayStore = JSON.parse(jsonValue)
-    // Alert.alert(arrayStore)
+    const uniq = 1
+    if (arrayStore.indexOf(jsonArray) !== -1) {
+      arrayStore.push(jsonArray)
+    }
+    // Alert.alert(`${arrayStore}`)
+ 
+    arrayStore = JSON.parse(jsonValue)
+    // Alert.alert(` вывожу Дату: ${uniq}`)
     // Alert.alert(`${arrayStore}`)
 
   } catch(e) {
@@ -101,7 +105,7 @@ const storeData = async (value) => {
         // setFavorite(arr => [...arr, value])
         const jsonValue = JSON.stringify(arrayStore)
         
-        Alert.alert(jsonValue)
+        // Alert.alert(jsonValue)
         AsyncStorage.setItem('favorite', jsonValue)
       } catch (e) {
         // saving error
@@ -113,16 +117,16 @@ const deleteData = async (value) => {
   let result = await getData()
   // let storeResult = await storeData()
   try {
+        // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
+        Alert.alert(`${deleteIndex}`)
         arrayStore.splice(deleteIndex)
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)
-        Alert.alert(`${deleteIndex}`)
       } catch (e) {
         // saving error
       }
 }
-
 
 
 
@@ -239,7 +243,6 @@ useEffect(() => {
 
 useEffect(()  => {
   getDataNames()
-  getData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     .then((response) => response.json())
@@ -574,9 +577,10 @@ const styles = StyleSheet.create({
   },
   plus: {
     zIndex: 100,
-    position: 'absolute',
-    right: 33,
-    transform: [{ translateY: 20 }, {rotate: '45deg'}],
+    backgroundColor: '#000',
+    // position: 'absolute',
+    // right: 33,
+    // transform: [{ translateY: 20 }, {rotate: '45deg'}],
     zIndex: 110,
   },
   share: {

@@ -468,7 +468,7 @@ singleId = id
   
   
     <TouchableOpacity style={styles.left} onPress={() => swipeBackAnim()}>
-          <SvgComponentArrowRight color='#5DADC1'></SvgComponentArrowRight>
+          <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
     </TouchableOpacity>
   
     </View>

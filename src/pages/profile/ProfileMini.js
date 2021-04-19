@@ -184,6 +184,9 @@ useEffect(() => {
 
 
 
+
+
+
   const onSwiped = () => {
     setIndex(index + 1);
     if (index == advicePer + 1) {
@@ -549,7 +552,11 @@ singleId = id
 
 
 
-
+const findStartCard = () => {
+  let searchTerm = route.params.description
+  let currentElem  =   data.findIndex(elem => elem.name_id == searchTerm)
+  return currentElem
+}
 
 
 
@@ -574,7 +581,6 @@ if (isLoading == false) {
       <Swiper
         ref={swiperRef}
         cards={data}
-        cardIndex={index}
         renderCard={Card}
         onSwiped={onSwiped}
         swipeBackCard={true}
@@ -586,7 +592,7 @@ if (isLoading == false) {
         stackSeparation={0}
         infinite={true}
         verticalSwipe={false}
-        cardIndex={route.params.indexElem}
+        cardIndex={findStartCard()}
         swipeAnimationDuration={500}
         >
 

@@ -409,7 +409,6 @@ onPress={() => navigation.navigate('ProfileMini', {
   return (
   
     <View style={styles.catalog}>
-  <Text>{query}</Text>
 
 <View style={styles.header}>
       <Text  style={styles.title}>Подборка</Text>

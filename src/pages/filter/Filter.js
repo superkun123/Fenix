@@ -77,7 +77,6 @@ const categoryType = () => {
   } else {
     id = ''
   }
-  Alert.alert(`${id}`)
   return id
 }
 

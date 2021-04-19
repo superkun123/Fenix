@@ -52,6 +52,7 @@ const [adviceApi, setAdviceApi] = useState('адвайсапи')
 const [loadAdvice, setLoadAdvice] = useState(false)
 const [indexOfAdvice, setIndexOfAdvice] = useState(1)
 const [advicePer, setAdvicePred] = useState(2)
+const [adviceLoad, setAdviceLoad] = useState(false)
 const [likeColor, setLikeColor] = useState('#5DADC1')
 let singleId = 1
 
@@ -164,6 +165,17 @@ useEffect(() => {
     .then((json) => setColorExist(json.value))
     .catch((error) => console.error(error))
     .finally(() => setColorLoad(true));
+}, []);
+
+
+
+useEffect(() => {
+  // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=4`)
+    .then((response) => response.json())
+    .then((json) => setAdvicePred(json.value))
+    .catch((error) => console.error(error))
+    .finally(() => setAdviceLoad(true));
 }, []);
 
 
@@ -394,8 +406,6 @@ singleId = id
     <View style={styles.profile}>
 
 
-
-
      <View style={styles.flagContainer}>
         <SvgComponentFlag style={styles.flag}>
         </SvgComponentFlag>
@@ -469,11 +479,11 @@ singleId = id
   </View>
   )
 
- } else if (index == advicePer * indexOfAdvice && indexOfAdvice <= adviceApi.length) {
+ } else if (index == advicePer * indexOfAdvice && indexOfAdvice <= adviceApi.length && route.params.advice == 1) {
    return (
     <CardAdvice></CardAdvice>
    )
- } else if (index == advicePer+1) {
+ } else if (index == advicePer+1 && route.params.advice == 1) {
   swipeBackAnim()
   return (
     <View style={styles.profile}>
@@ -488,6 +498,84 @@ singleId = id
           {/* <Text>КЛИК</Text> */}
           <SvgComponentLike color={likeColor} ></SvgComponentLike>
         </TouchableOpacity>
+  
+    <View style={styles.profileHeader}>
+     <Text style={styles.profileName} >
+     {card.name}
+     </Text>
+  
+     <Colors id={id} > </Colors>
+  
+     <Text style={styles.profileSureName}>
+     {/* Иван Петрович Николаев ИПН, НИП */}
+     <RenderFatherName></RenderFatherName>
+     </Text>
+    
+  
+     <View style={styles.profileTranscription}>
+       <Text style={styles.profilteTransText}>{card.name_translit}</Text>
+     </View>
+     
+     <Text style={styles.profileSimilarNames}>
+     {card.variants}
+     </Text>
+     <Text style={styles.profileNameDesc}>
+     {card.description}
+     </Text>
+    </View>
+   
+    <View style={styles.center}>
+        <Text style={styles.showmore} onPress={() => {
+            
+            navigation.navigate('ProfileScreen', {
+                paramKey: name,
+                description: id,
+    }) 
+  }}
+        >Подробнее </Text>
+  
+  
+  <TouchableOpacity style={styles.right} onPress={() => swiperRef.current.swipeRight()}>
+          <SvgComponentArrowRight color='#444444'></SvgComponentArrowRight>
+    </TouchableOpacity>
+  
+  
+    <TouchableOpacity style={styles.left} onPress={() => swipeBackAnim()}>
+          <SvgComponentArrowRight color='#5DADC1'></SvgComponentArrowRight>
+    </TouchableOpacity>
+  
+    </View>
+    
+  
+    
+  
+  </View>
+  )
+ } else {
+  return ( 
+    <View style={styles.profile}>
+      <Text>{route.params.advice}</Text>
+
+
+     <View style={styles.flagContainer}>
+        <SvgComponentFlag style={styles.flag}>
+        </SvgComponentFlag>
+        </View>
+
+
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${id}`)}>
+          {/* <Text>КЛИК</Text> */}
+          <SvgComponentLike color={likeColor} ></SvgComponentLike>
+        </TouchableOpacity>
+
+              
+<TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${id}`)}>
+
+<SvgComponentPlus></SvgComponentPlus>
+</TouchableOpacity>
+        
+
+
   
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >
@@ -655,8 +743,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 2,
-    shadowColor: "#333"
+    elevation: 8,
+    shadowColor: "#E9E1D6"
   },
   adviceBg: {
     position: 'absolute'

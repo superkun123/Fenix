@@ -26,6 +26,14 @@ export  function Filter({route, navigation}) {
   const [birthDayHook, setBirthDayHook] = useState('')
   const [birthMonthHook, setBirthMonthyHook] = useState('')
   const [birthYearHook, setBirthYearHook] = useState('')
+  const [advice, setAdvice] = useState(0)
+
+
+
+const adviceSwitcher = () => {
+  toggleSwitch()
+  setAdvice(1)
+}
 
 
  const monthValidator = () => {
@@ -64,8 +72,10 @@ const categoryType = () => {
   let id 
   if (selectedCategory !== '') {
     id = data.find((elem) => elem.name == selectedCategory).name_type_id
+  } else if (id == undefined){
+    id = 8
   } else {
-    id == ''
+    id = ''
   }
   Alert.alert(`${id}`)
   return id
@@ -317,14 +327,14 @@ setSelectedSort(itemValue)
         trackColor={{ false: '#767577', true: '#5DADC1' }}
         thumbColor={isEnabled ? '#fff' : '#fff'}
         ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
+        onValueChange={adviceSwitcher}
         value={isEnabled}
       />
           </View>
           <Pressable style={styles.mainBtnContainer}
           onPress={() => {
             // Pass params back to home screen
-            navigation.navigate(parentPage, { sort: sort, genderId: male, category: categoryType() });
+            navigation.navigate(parentPage, { sort: sort, genderId: male, category: categoryType(), advice: advice });
           }}>
           <LinearGradient
           // Button Linear Gradient

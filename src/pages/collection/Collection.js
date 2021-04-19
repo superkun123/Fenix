@@ -166,22 +166,25 @@ const year = () => {
     const filteredData = filter(fullData, user => {
       return contains(user, formattedQuery);
     });
-    setData(filteredData);
-    setQuery(text);
+    if (filteredData !== false) {
+      setData(filteredData);
+      setQuery(text);
+    } else {
+      Alert.alert('Все')
+      setData(data)
+    }
   };
   
   const contains = ({name}, query) => {
-
-    
-      if (name.startsWith(query)) {
-        return true;
-      }
-      return false;
-        
-  
+    if( query == 'Все') {
+      return true
+    } else if (name.startsWith(query)) {
+      return true;
+    } else {
+      false
+    }  
    
   };
-
   
 
 
@@ -270,6 +273,10 @@ onPress={() => navigation.navigate('ProfileMini', {
 
 
   let alphabet = [
+    {
+      id: -1,
+      title: 'Все'
+    },
     {
       id: 0,
       title: 'А'

@@ -162,10 +162,6 @@ function HomeScreen({ navigation }) {
 
 
   const styles = StyleSheet.create({
-    tinyLogo: {
-      marginTop: 80,
-      marginBottom: 40
-    },
     mainScreen: {
       backgroundColor: '#fff',
       flex: 1,
@@ -180,11 +176,12 @@ function HomeScreen({ navigation }) {
     },
     mainContainer: {
       marginHorizontal: 28,
-      alignItems: 'center'
+      alignItems: 'center',
+      marginTop: 80
     },
     marquee: {
-      marginBottom: 60,
-      fontSize: 36
+      fontSize: 36,
+      marginTop: 30
     },
     nameBtn: {
       width: '100%',

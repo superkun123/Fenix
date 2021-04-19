@@ -108,18 +108,7 @@ function CatalogScreen({ navigation, route }) {
       return true;
     } else {
       false
-    }
-
-
-
-    
-      // if (name.startsWith(query) && query != 'Все') {
-      //   return true;
-      // } else  {
-      //   return false
-      // }
-        
-  
+    }  
    
   };
 
@@ -503,7 +492,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#FAFAFA',
-    marginTop: 20
+    marginTop: 40
   },
   nameBtn: {
     fontFamily: 'Gilroy',

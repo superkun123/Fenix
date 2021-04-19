@@ -565,7 +565,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#FAFAFA',
-    marginTop: 20
+    marginTop: 40
   },
   nameBtn: {
     fontFamily: 'Gilroy',

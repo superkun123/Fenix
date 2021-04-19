@@ -765,7 +765,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#FFF7ED',
+    backgroundColor: '#FFF',
   },
   profileName: {
     fontFamily: 'Gilroy',

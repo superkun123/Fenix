@@ -52,6 +52,8 @@ const [likeColor, setLikeColor] = useState('#5DADC1')
 const [fatherFirstNameHook, setFirstNameHook] = useState('')
 const [fatherSecondNameHook, setSecondNameHook] = useState('')
 const [birthDataHook, setBirthData] = useState('Дефолт')
+const [closeBtn, setCloseBtn] = useState('')
+const [closeLoading, setCloseLoading] = useState(true)
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -234,6 +236,17 @@ useEffect(() => {
 useEffect(() => {
   // getData()
   // fetch('https://narekaet.com/api/get_names')
+  fetch(`https://narekaet.com/api/get_block?block_id=8`)
+    .then((response) => response.json())
+    .then((json) => setCloseBtn(json.value))
+    .catch((error) => console.error(error))
+    .finally(() => setCloseLoading(true))
+}, []);
+
+
+useEffect(() => {
+  // getData()
+  // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_block?block_id=2`)
     .then((response) => response.json())
     .then((json) => setColorExist(json.value))
@@ -250,7 +263,7 @@ useEffect(()  => {
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, getDataNames, likeColor]);
+}, [route.params.description, likeColor]);
 
 
 
@@ -386,14 +399,14 @@ if (isLoading == false) {
         <View>
 
         <Modal isVisible={isModalVisible} 
-          animationOutTiming={500}
+          animationOutTiming={0}
           onBackdropPress={() => setModalVisible(false)}
-          backdropTransitionInTiming={500}
+          backdropTransitionInTiming={0}
             backdropTransitionOutTiming={0}
-            animationInTiming={500}
+            animationInTiming={0}
             hideModalContentWhileAnimating={true}>
             <View style={styles.modalBody}>
-              {/* <Text style={styles.modalTitle}>Характер</Text> */}
+              <Text style={styles.modalTitle}>Характер</Text>
 
               
             
@@ -405,7 +418,7 @@ if (isLoading == false) {
             <View style={styles.modalFooter}>
             <TouchableOpacity style={styles.closeModal} color="#5AA9BD" title="Закрыть" onPress={() => {
                 setModalVisible(!isModalVisible);}}>
-              <Text style={styles.closeModalText}>Понял</Text>
+              <Text style={styles.closeModalText}>{closeBtn}</Text>
             </TouchableOpacity>
             </View>
             
@@ -692,6 +705,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy',
     fontSize: 13,
     marginBottom: 19,
+    lineHeight: 22,
     textAlign: 'center'  
   },
   modalFooter: {

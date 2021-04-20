@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Pressable, Alert} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Catalog } from './src/pages/catalog/Catalog'
@@ -47,7 +47,7 @@ import { CustomSplashScreen  } from './src/pages/splash/SplashScreen'
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+export default function App({navigation}) {
 
 
   // setTimeout(async () => {
@@ -67,8 +67,9 @@ export default function App() {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('badge')
+      Alert.alert(`${value}`)
       if(value !== null) {
-        setBadge(value)
+        setBadge(value - 2 + 4)
         // value previously stored
       }
     } catch(e) {
@@ -78,9 +79,12 @@ export default function App() {
   }
 
 
- 
 
-  getData()
+  
+React.useEffect(() => {
+    getData()
+}, [getData]);
+ 
   
 
 

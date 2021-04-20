@@ -119,10 +119,15 @@ const deleteData = async (value) => {
   try {
         // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
-        arrayStore.splice(deleteIndex)
-        setLikeColor('#5DADC1')
-        const jsonValue = JSON.stringify(arrayStore)
-        AsyncStorage.setItem('favorite', jsonValue)
+        if (deleteIndex != -1) {
+          arrayStore.splice(deleteIndex)
+          setLikeColor('#5DADC1')
+          const jsonValue = JSON.stringify(arrayStore)
+          AsyncStorage.setItem('favorite', jsonValue)
+        } else {
+          
+        }
+    
       } catch (e) {
         // saving error
       }

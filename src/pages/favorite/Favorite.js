@@ -73,6 +73,7 @@ const getData = async () => {
     const newArray = jsonArray.filter(function(elem, pos) {
       return jsonArray.indexOf(elem) == pos;
   });
+  storeData(newArray.length - 1)
   setBadge(newArray.length - 1)
     const jsonSpread = [...newArray]
     const jsonFinal = jsonSpread.join(',')
@@ -89,7 +90,7 @@ const getData = async () => {
 
 const storeData = async (value) => {
   try {
-    await AsyncStorage.setItem('badge', badge)
+    await AsyncStorage.setItem('badge', value)
   } catch (e) {
     // saving error
   }

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import { StyleSheet, Text, View, Pressable, Alert} from 'react-native';
+import { StyleSheet, Text, View, Pressable, Alert, Easing} from 'react-native';
 import { SvgComponent} from '../../../assets/jsxSvg/MainPageLogo'
 import MarqueeText from 'react-native-marquee';
 import { useFonts } from 'expo-font';
@@ -82,13 +82,14 @@ function HomeScreen({ navigation }) {
         <TextTicker
           style={{ fontSize: 36 }}
           style={styles.marquee}
-          duration={20000}
+          duration={30000}
           loop
           bounce={false}
           scroll={true}
-          scrollSpeed={10000}
+          scrollSpeed={3000}
           repeatSpacer={0}
           marqueeDelay={0}
+          easing={Easing.linear}
         >
             <Text> 
             <Text style={{fontFamily: 'Podkova', color: '#5B8F9C', paddingRight: 20}}>Миша</Text> <Text style={{fontFamily: 'Bebas', color: '#C2D2C5', textTransform: 'uppercase'}}>Егор</Text> <Text style={{fontFamily: 'Caption', color: '#E1AFA4'}}>Нина</Text> <Text style={{fontFamily: 'Raleway', color: '#242E51'}}>Андрей</Text>  <Text style={{fontFamily: 'Podkova', color: '#5B8F9C'}}>Наташа</Text> <Text style={{fontFamily: 'Bebas', color: '#C2D2C5', textTransform: 'uppercase'}}>Саша</Text> <Text style={{fontFamily: 'Caption', color: '#E1AFA4'}}>Диана</Text> <Text style={{fontFamily: 'Raleway', color: '#242E51'}}>Мария</Text> <Text style={{fontFamily: 'Podkova', color: '#5B8F9C'}}>Степан</Text> <Text style={{fontFamily: 'Bebas', color: '#C2D2C5', textTransform: 'uppercase'}}>Татьяна</Text> <Text style={{fontFamily: 'Caption', color: '#E1AFA4'}}>Роман</Text> <Text style={{fontFamily: 'Raleway', color: '#242E51'}}>Ирина</Text> <Text style={{fontFamily: 'Podkova', color: '#5B8F9C'}}>Тимур</Text> <Text style={{fontFamily: 'Bebas', color: '#C2D2C5', textTransform: 'uppercase'}}>Алина</Text> <Text style={{fontFamily: 'Caption', color: '#E1AFA4'}}>Жасмин</Text> <Text style={{fontFamily: 'Raleway', color: '#242E51'}}>Юлия</Text> <Text style={{fontFamily: 'Podkova', color: '#5B8F9C'}}>Софья</Text> <Text style={{fontFamily: 'Bebas', color: '#C2D2C5', textTransform: 'uppercase'}}>Савва</Text> <Text style={{fontFamily: 'Caption', color: '#E1AFA4'}}>Ника</Text> <Text style={{fontFamily: 'Raleway', color: '#242E51'}}>Юра</Text> </Text>

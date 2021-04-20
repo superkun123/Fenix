@@ -340,6 +340,30 @@ onPress={() => navigation.navigate('ProfileMini', {
 
   ]
 
+
+  const FlatListRender =  () => {
+    if (isLoading == false) {
+      return (
+        <View style={styles.namesContainer}>
+        <FlatList
+        contentContainerStyle={{ paddingBottom: 20 }}
+        data={data}
+        renderItem={renderItem}
+        key={renderItem.item}
+        keyExtractor={(item) => item.id}
+        style={styles.FlatListCatalog}
+      />
+        </View>
+      )
+    } else {
+      return (
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginRight: 20, marginTop: -30}}>
+          <ActivityIndicator style={{marginTop: -30}} size="large" color="#5DADC1"/>
+        </View>
+      )
+    }
+  }
+
  
   return (
   
@@ -369,18 +393,10 @@ onPress={() => navigation.navigate('ProfileMini', {
 </View>
 
 
-<View style={styles.namesContainer}>
-<FlatList
-        contentContainerStyle={{ paddingBottom: 20 }}
-        data={data}
-        renderItem={renderItem}
-        key={renderItem.item}
-        keyExtractor={(item) => item.id}
-        style={styles.FlatListCatalog}
-      />
+<FlatListRender ></FlatListRender>
       
       
-</View>
+
 
 
 </View>

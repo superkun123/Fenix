@@ -198,8 +198,7 @@ const Item = ({ item, onPress, style }) => (
 
   
 
-
-
+ if (isLoading == false) {
   return (
     <View style={styles.catalog}>
   
@@ -230,6 +229,21 @@ const Item = ({ item, onPress, style }) => (
   </View>
   
   );
+ } else {
+   return (
+    <View style={styles.catalog}>
+        
+  <View style={styles.header}>
+        <Text  style={styles.title}>Избранное</Text>
+        <Text></Text>
+  </View>
+  <View style={{flex: 1, justifyContent: 'center', marginTop: -150}}>
+  <ActivityIndicator size="large" color="#5DADC1"/>
+  </View>
+  </View>
+   )
+ }
+
 }
 
 

@@ -64,15 +64,17 @@ export default function App({navigation}) {
 
 
 
+
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('badge')
-      Alert.alert(`${value}`)
+      // Alert.alert(`значение бейджа на главном экране ${value}`)
       if(value !== null) {
-        setBadge(value - 2 + 4)
+        setBadge(value)
         // value previously stored
       }
     } catch(e) {
+      Alert.alert(`error data`)
       setBadge(0)
       // error reading value
     }
@@ -83,7 +85,7 @@ export default function App({navigation}) {
   
 React.useEffect(() => {
     getData()
-}, [getData]);
+}, [badge]);
  
   
 

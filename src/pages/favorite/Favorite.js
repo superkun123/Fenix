@@ -33,8 +33,6 @@ const [badge, setBadge] = useState(0)
 
 
 
-
-
 // 0 будут все, 1 будет никто
 
 
@@ -73,8 +71,8 @@ const getData = async () => {
     const newArray = jsonArray.filter(function(elem, pos) {
       return jsonArray.indexOf(elem) == pos;
   });
-  storeData(newArray.length - 1)
-  setBadge(newArray.length - 1)
+  setBadge(newArray.length - 1 + '')
+  Alert.alert(`бейдж = ${badge}`)
     const jsonSpread = [...newArray]
     const jsonFinal = jsonSpread.join(',')
 
@@ -88,9 +86,11 @@ const getData = async () => {
 
 
 
-const storeData = async (value) => {
+const storeData = async () => {
+  let result = await getData()
   try {
-    await AsyncStorage.setItem('badge', value)
+    Alert.alert(`бейдж во время стора даты в избранном ${badge}`)
+    await AsyncStorage.setItem('badge', badge)
   } catch (e) {
     // saving error
   }
@@ -118,7 +118,8 @@ const storeData = async (value) => {
 
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('focus', () => {
-    getData()
+    // getData()
+    storeData()
   });
 
   // Return the function to unsubscribe from the event so it gets removed on unmount

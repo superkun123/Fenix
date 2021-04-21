@@ -100,7 +100,7 @@ const getData = async () => {
 
 
 
-Alert.alert(`1`)
+
 
  
 

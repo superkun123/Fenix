@@ -70,7 +70,7 @@ const getData = async () => {
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       arrayStore.push(jsonArray)
-      getDataLike()
+      // getDataLike()
     }
 
 

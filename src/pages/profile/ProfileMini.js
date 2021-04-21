@@ -677,7 +677,7 @@ if (isLoading == false) {
         renderCard={Card}
         onSwiped={onSwiped}
         swipeBackCard={true}
-        goBackToPreviousCardOnSwipeLeft={true}
+        // goBackToPreviousCardOnSwipeLeft={true}
         backgroundColor="#fff"
         stackSize={cardStack()}
         stackScale={0}
@@ -685,6 +685,7 @@ if (isLoading == false) {
         stackSeparation={0}
         infinite={true}
         verticalSwipe={false}
+        disableLeftSwipe={true}
         cardIndex={findStartCard()}
         swipeAnimationDuration={500}
         >

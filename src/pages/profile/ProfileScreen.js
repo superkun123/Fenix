@@ -17,6 +17,7 @@ import Svg from 'react-native-svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { abs } from 'react-native-reanimated';
 import { SvgComponentLike } from '../../../assets/jsxSvg/like'
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 
 
@@ -69,7 +70,11 @@ const getData = async () => {
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       arrayStore.push(jsonArray)
+      getDataLike()
     }
+
+
+
 
     // Alert.alert(`${arrayStore}`)
  
@@ -111,9 +116,38 @@ const storeData = async (value) => {
         // Alert.alert(jsonValue)
         AsyncStorage.setItem('favorite', jsonValue)
         setIsFavorite(true)
+        storeDataLike()
       } catch (e) {
         // saving error
       }
+}
+
+
+
+const storeDataLike = async (value) => {
+  // let resutl = await getDataLike()
+  try {
+    await AsyncStorage.setItem('like', `${isFavorite}`)
+  } catch (e) {
+    // saving error
+  }
+}
+
+const getDataLike = async () => {
+  try {
+    const value = await AsyncStorage.getItem('like')
+    if(value !== null) {
+      if(value == 'true') {
+        setIsFavorite(false)
+      } else if (value == 'false') {
+        setIsFavorite(true)
+      }
+      // setIsFavorite(value)
+      // value previously stored
+    }
+  } catch(e) {
+    // error reading value
+  }
 }
 
 
@@ -123,12 +157,12 @@ const deleteData = async (value) => {
   try {
         // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
-        Alert.alert(`${deleteIndex}`)
         if (deleteIndex != -1) {
           arrayStore.splice(deleteIndex)
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)
         setIsFavorite(false)
+        storeDataLike()
         } else {
           
         }
@@ -139,6 +173,8 @@ const deleteData = async (value) => {
 
 
 const Favorite = () => {
+  const currentItem = route.params.description
+  const deleteIndex = arrayStore.indexOf(currentItem)
   if (isFavorite) {
     return ( 
       <TouchableOpacity style={styles.like}  onPress={() => deleteData(`${route.params.description}`)}>
@@ -288,6 +324,18 @@ useEffect(()  => {
     .finally(() => setLoading(false));
 }, [route.params.description, likeColor]);
 
+
+
+
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('focus', () => {
+    // getData()
+    getDataLike()
+  });
+
+  // Return the function to unsubscribe from the event so it gets removed on unmount
+  return unsubscribe;
+}, [navigation]);
 
 
 const inputEl = useRef(null);
@@ -583,6 +631,7 @@ const styles = StyleSheet.create({
   profileCard: {
     flex: 1,
     backgroundColor: '#FFF7ED',
+    zIndex: 1,
   },
   profilteTransText: {
     fontFamily: 'Gilroy',

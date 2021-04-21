@@ -54,6 +54,7 @@ const [fatherSecondNameHook, setSecondNameHook] = useState('')
 const [birthDataHook, setBirthData] = useState('Дефолт')
 const [closeBtn, setCloseBtn] = useState('')
 const [closeLoading, setCloseLoading] = useState(true)
+const [isFavorite, setIsFavorite] = useState(false)
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -91,7 +92,7 @@ const getDataNames = async () => {
     if(fatherFirstNameStore !== null) {
       setFirstNameHook(fatherFirstNameStore)
       setSecondNameHook(fatherSecondNameStore)
-      // setBirthData(birthDate)
+      setBirthData(birthDate)
     }
   } catch(e) {
     Alert.alert('Ошибка соединения с сервером')
@@ -104,12 +105,12 @@ const storeData = async (value) => {
   let result = await getData()
   try {
         arrayStore.push(value)
-        setLikeColor('#FFF')
         // setFavorite(arr => [...arr, value])
         const jsonValue = JSON.stringify(arrayStore)
         
         // Alert.alert(jsonValue)
         AsyncStorage.setItem('favorite', jsonValue)
+        setIsFavorite(true)
       } catch (e) {
         // saving error
       }
@@ -125,15 +126,32 @@ const deleteData = async (value) => {
         Alert.alert(`${deleteIndex}`)
         if (deleteIndex != -1) {
           arrayStore.splice(deleteIndex)
-        setLikeColor('#5DADC1')
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)
+        setIsFavorite(false)
         } else {
           
         }
       } catch (e) {
         // saving error
       }
+}
+
+
+const Favorite = () => {
+  if (isFavorite) {
+    return ( 
+      <TouchableOpacity style={styles.like}  onPress={() => deleteData(`${route.params.description}`)}>
+      <SvgComponentLike color={'#fff'} ></SvgComponentLike>
+    </TouchableOpacity>
+    ) 
+  } else {
+    return (
+      <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
+      <SvgComponentLike color={'#5DADC1'} ></SvgComponentLike>
+    </TouchableOpacity>
+    )
+  }
 }
 
 
@@ -386,17 +404,17 @@ if (isLoading == false) {
         </SvgComponentFlag>
         </View>
 
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
-          {/* <Text>КЛИК</Text> */}
+
+        <Favorite></Favorite>
+
+        {/* <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
           <SvgComponentLike color={likeColor} ></SvgComponentLike>
         </TouchableOpacity>
         
 
         <TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${route.params.description}`)}>
-          {/* <Text>КЛИК</Text> */}
-          {/* <Text>Удалить</Text> */}
           <SvgComponentPlus></SvgComponentPlus>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
     
         

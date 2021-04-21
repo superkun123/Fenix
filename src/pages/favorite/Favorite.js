@@ -72,7 +72,7 @@ const getData = async () => {
       return jsonArray.indexOf(elem) == pos;
   });
   setBadge(newArray.length - 1 + '')
-  Alert.alert(`бейдж = ${badge}`)
+  // Alert.alert(`бейдж = ${badge}`)
     const jsonSpread = [...newArray]
     const jsonFinal = jsonSpread.join(',')
 
@@ -89,7 +89,7 @@ const getData = async () => {
 const storeData = async () => {
   let result = await getData()
   try {
-    Alert.alert(`бейдж во время стора даты в избранном ${badge}`)
+    // Alert.alert(`бейдж во время стора даты в избранном ${badge}`)
     await AsyncStorage.setItem('badge', badge)
   } catch (e) {
     // saving error

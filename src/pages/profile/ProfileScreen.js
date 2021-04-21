@@ -397,8 +397,8 @@ if (isLoading == false) {
     return (
 
       
-      <ScrollView style={styles.profile} ref={scrollRef} bounces={false} >
-
+      <ScrollView style={styles.profile} ref={scrollRef} >
+        <ScrollView style={styles.profileCard} bounce={false}>
         <View style={styles.flagContainer}>
         <SvgComponentFlag style={styles.flag}>
         </SvgComponentFlag>
@@ -552,7 +552,7 @@ if (isLoading == false) {
 
 
     
-
+        </ScrollView>
       </ScrollView>
     );
   } else {
@@ -575,10 +575,14 @@ if (isLoading == false) {
 const styles = StyleSheet.create({ 
   profile: {
     flex: 1,
-    backgroundColor: '#FFF7ED',
+    backgroundColor: '#FFF',
     // paddingLeft: 40,
     // paddingRight: 40,
     zIndex: 0
+  },
+  profileCard: {
+    flex: 1,
+    backgroundColor: '#FFF7ED',
   },
   profilteTransText: {
     fontFamily: 'Gilroy',

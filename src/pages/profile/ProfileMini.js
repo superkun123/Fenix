@@ -734,14 +734,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
     minHeight: 600,
     backgroundColor: '#fff',
-    marginTop: -30
+    marginTop: 0
   },
   profile: {
     flex: 1,
     backgroundColor: '#FFF7ED',
     paddingLeft: 26,
     paddingRight: 26,
-    maxHeight: 500,
+    maxHeight: 480,
     borderRadius: 20,
     shadowOffset:{
     width: 0,
@@ -779,7 +779,7 @@ const styles = StyleSheet.create({
   profile2: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    minHeight: 520,
+    minHeight: 500,
     paddingLeft: 26,
     paddingRight: 26,
     marginRight: 25,
@@ -840,7 +840,7 @@ const styles = StyleSheet.create({
   profile3: {
     flex: 1,
     backgroundColor: '#FFF7ED',
-    minHeight: 500,
+    minHeight: 480,
     paddingLeft: 26,
     paddingRight: 26,
     marginRight: 25,

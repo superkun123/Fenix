@@ -60,7 +60,7 @@ export default function App({navigation}) {
   // }, []);
 
 
-  const [badge, setBadge] = useState(0)
+  const [badgeApp, setBadgeApp] = useState(0)
 
 
 
@@ -70,12 +70,12 @@ export default function App({navigation}) {
       const value = await AsyncStorage.getItem('badge')
       // Alert.alert(`значение бейджа на главном экране ${value}`)
       if(value !== null) {
-        setBadge(value)
+        setBadgeApp(value)
         // value previously stored
       }
     } catch(e) {
       Alert.alert(`error data`)
-      setBadge(0)
+      setBadgeApp(0)
       // error reading value
     }
   }
@@ -85,7 +85,7 @@ export default function App({navigation}) {
   
 React.useEffect(() => {
     getData()
-}, [badge]);
+}, [badgeApp]);
  
   
 
@@ -163,7 +163,7 @@ screenOptions={({ route }) => ({
           />
         <Tab.Screen name="Энциклопедия" component={Catalog} initialParams={{ genderId: '', }} />
         <Tab.Screen name="Подборка" component={Collection}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
-        <Tab.Screen name="Избранное" component={Favorite} options={{ tabBarBadge: badge,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
+        <Tab.Screen name="Избранное" component={Favorite} options={{ tabBarBadge: badgeApp,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
         <Tab.Screen name="Поиск" component={Search} />
 
       </Tab.Navigator>

@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
 
   namesContainer: {
     flex: 1,
-    marginLeft: -30
+    marginLeft: -30,
   },
   header: {
     backgroundColor: '#FAFAFA',
@@ -570,9 +570,18 @@ const styles = StyleSheet.create({
   },
   FlatListCatalog: {
     marginLeft: 60,
-    paddingRight: 60,
+    marginRight: 60,
     flex: 1,
-    paddingTop: 10
+    paddingTop: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    
+    elevation: 4,
   },
   FlatListAlphabet: {
     backgroundColor: '#FAFAFA',

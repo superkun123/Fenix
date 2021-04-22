@@ -33,6 +33,10 @@ import {
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
 import { CustomSplashScreen  } from './src/pages/splash/SplashScreen'
+import { CommonActions, StackActions } from '@react-navigation/native';
+
+
+
 
 
 
@@ -46,6 +50,35 @@ import { CustomSplashScreen  } from './src/pages/splash/SplashScreen'
 
 
 const Tab = createBottomTabNavigator();
+
+
+const TAB_TO_RESET = 'Главная';
+const resetHomeStackOnTabPress = ({ navigation, route }) => ({
+  tabPress: (e) => {
+    const state = navigation.dangerouslyGetState();
+
+    if (state) {
+      // Grab all the tabs that are NOT the one we just pressed
+      const nonTargetTabs = state.routes.filter((r) => r.key !== e.target);
+
+      nonTargetTabs.forEach((tab) => {
+        // Find the tab we want to reset and grab the key of the nested stack
+        const tabName = tab?.name;
+        const stackKey = tab?.state?.key;
+
+        if (stackKey && tabName === TAB_TO_RESET) {
+          // Pass the stack key that we want to reset and use popToTop to reset it
+          navigation.dispatch({
+            ...StackActions.popToTop(),
+            target: stackKey,
+          });
+        }
+      });
+    }
+  },
+});
+
+
 
 export default function App({navigation}) {
 
@@ -157,14 +190,14 @@ screenOptions={({ route }) => ({
                 //  paddingBottom: 3,
                  fontSize: 10
            }}}>
-        <Tab.Screen name="Главная" component={Home} 
+        <Tab.Screen name="Главная" component={Home} listeners={resetHomeStackOnTabPress}
           options={({ }) => ({
             tabBarVisible: false })}  
           />
-        <Tab.Screen name="Энциклопедия" component={Catalog} initialParams={{ genderId: '', }} />
-        <Tab.Screen name="Подборка" component={Collection}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
-        <Tab.Screen name="Избранное" component={Favorite} options={{ tabBarBadge: badgeApp,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
-        <Tab.Screen name="Поиск" component={Search} />
+        <Tab.Screen name="Энциклопедия" component={Catalog} listeners={resetHomeStackOnTabPress} initialParams={{ genderId: '', }} />
+        <Tab.Screen name="Подборка" component={Collection} listeners={resetHomeStackOnTabPress}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
+        <Tab.Screen name="Избранное" component={Favorite} listeners={resetHomeStackOnTabPress} options={{ tabBarBadge: badgeApp,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
+        <Tab.Screen name="Поиск" component={Search} listeners={resetHomeStackOnTabPress} />
 
       </Tab.Navigator>
     </NavigationContainer>

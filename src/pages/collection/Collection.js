@@ -209,6 +209,11 @@ onPress={() => navigation.navigate('ProfileMini', {
   description: item.name_id,
   genderId: route.params.genderId,
   indexElem: index,
+  sort: route.params.sort,
+  category: route.params.category,
+  dayData: route.params.dayData,
+  monthData: route.params.monthData,
+  yearData: route.params.yearData,
   advice: route.params.advice
 } )}
 >

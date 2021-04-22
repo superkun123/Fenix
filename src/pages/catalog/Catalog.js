@@ -136,7 +136,12 @@ onPress={() => navigation.navigate('ProfileMini', {
   description: item.name_id,
   genderId: route.params.genderId,
   indexElem: index,
-  advice: route.params.advice
+  advice: route.params.advice,
+  sort: route.params.sort,
+  category: route.params.category,
+  dayData: route.params.dayData,
+  monthData: route.params.monthData,
+  yearData: route.params.yearData,
 } )}
 >
 
@@ -418,7 +423,7 @@ export function Catalog(route) {
  
   return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '',  category: ''  }} />
+        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '',  category: '', dayData: '', monthData: '', yearData: ''  }} />
         <Stack.Screen name="ProfileMini" component={ProfileMini} initialParams={{advice: 0}}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,

@@ -18,6 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { abs } from 'react-native-reanimated';
 import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+import HTML from "react-native-render-html";
 
 
 
@@ -42,6 +43,7 @@ const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
 const [isModalVisible, setModalVisible] = useState(false);
 const [descText, setText] = useState('123');
+const [descTitle, setTitle] = useState('')
 const scrollRef = useRef(); 
 const [colorExist, setColorExist] = useState(0)
 const [colorLoad, setColorLoad] = useState(false)
@@ -72,11 +74,6 @@ const getData = async () => {
       arrayStore.push(jsonArray)
       // getDataLike()
     }
-
-
-
-
-    // Alert.alert(`${arrayStore}`)
  
     arrayStore = JSON.parse(jsonValue)
     // Alert.alert(` вывожу Дату: ${uniq}`)
@@ -431,6 +428,14 @@ const Colors = () => {
 
 
 
+  const htmlContent = (html) => {
+    return (
+      `${html}`
+    )
+}
+
+
+
 
 // ${route.params.paramKey}
 
@@ -477,11 +482,12 @@ if (isLoading == false) {
             animationInTiming={0}
             hideModalContentWhileAnimating={true}>
             <View style={styles.modalBody}>
-              <Text style={styles.modalTitle}>Характер</Text>
+              <Text style={styles.modalTitle}>{descTitle}</Text>
 
-              
-            
-          <Text style={styles.modalDesc}>{descText}</Text>
+
+          <View style={{textAlign: 'center'}}>
+            <HTML defaultTextProps={{textAlign: 'center'}} containerStyle={styles.modalDesc} baseFontStyle={styles.modalDesc} source={{ html: htmlContent(descText) }}></HTML>
+          </View>
     
    
 
@@ -568,13 +574,17 @@ if (isLoading == false) {
              <Text style={styles.charTitle} key={key}>{prop.title}</Text>
              <TouchableOpacity  onPress={() => {
                 setModalVisible(!isModalVisible);
-                setText(prop.text)
+                setText(prop.desc)
+                setTitle(prop.title)
              }}>
              <Feather name="info" size={18} color="#58A7BB" />
              </TouchableOpacity>
            
              </View>
-            <Text style={styles.charTextContent} key={key}>{prop.text}</Text>
+            {/* <Text style={styles.charTextContent} key={key}>{htmlContent(prop.text)}</Text> */}
+            <View>
+            <HTML containerStyle={styles.charTextContent} baseFontStyle={styles.charTextContent} source={{ html: htmlContent(prop.text) }}></HTML>
+            </View>
 
            </View>
          );

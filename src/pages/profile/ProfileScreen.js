@@ -102,7 +102,7 @@ const getDataNames = async () => {
       setSecondNameHook(fatherSecondNameStore)
     }
     if (birthDay !== null) {
-      setBirthData(`${0 + birthDay}.${0 + birthMonth}.${year}`)
+      setBirthData(`${birthDay}.${birthMonth}.${year}`)
       setBirthDay(birthDay)
       setMonthBirth(birthMonth)
       setYearBirth(year)
@@ -200,51 +200,6 @@ const Favorite = () => {
 
 
 
-// const deleteData = (value) => {
-//   AsyncStorage.clear();
-// }
-
-
-
-
-
-
-// const storeData = async (value) => {
-//   getData()
-//   try {
-//     arrayStore.push(value)
-//     // setFavorite(arr => [...arr, value])
-//     const jsonValue = JSON.stringify(arrayStore)
-    
-//     // Alert.alert(jsonValue)
-//     AsyncStorage.setItem('favorite', jsonValue)
-//   } catch (e) {
-//     // saving error
-//   }
-// }
-
-
-
-// const getData = () => {
-//     arrayStore.push(1)
-//     Alert.alert(`${arrayStore}`)
-// }
-
-
-
-
-// Попробуй избавиться от массива апстор и пушить прям в сторедж
-
-
-
-
-
-// const storeData = (value) => {
-//   getData()
-//   Alert.alert(`${arrayStore}`)
-// }
-
- 
  
 
 
@@ -327,11 +282,11 @@ useEffect(() => {
 
 useEffect(()  => {
   getData()
+  getDataNames()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
-    .then(getDataNames())
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
 }, [route.params.description, likeColor, getData(), getDataNames]);
@@ -365,7 +320,6 @@ const inputEl = useRef(null);
  const RenderFatherName = () => {
    if (data.middle_name == undefined || data.surname == undefined) {
      return    <View style={styles.profileEpmty} >
-     <ActivityIndicator size="small" color="#5DADC1"/>
    </View>
    } else {
      return data.name + ' ' + data.middle_name + ' ' + data.surname
@@ -490,7 +444,6 @@ const DataInfo = () => {
   } else {
     return (
       <View>
-        <ActivityIndicator size="large" color="#5DADC1"/>
       </View>
     )
   }
@@ -648,7 +601,7 @@ if (isLoading == false) {
              </View>
             {/* <Text style={styles.charTextContent} key={key}>{htmlContent(prop.text)}</Text> */}
             <View>
-            <HTML containerStyle={styles.charTextContent} baseFontStyle={styles.charTextContent} source={{ html: htmlContent(prop.text) }}></HTML>
+            <HTML containerStyle={styles.charTextContent} baseFontStyle={styles.charTextContent} source={{html:htmlContent(prop.text)}}></HTML>
             </View>
 
            </View>

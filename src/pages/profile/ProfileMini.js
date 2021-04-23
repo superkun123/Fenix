@@ -58,7 +58,8 @@ let singleId = 1
 
 
 
-const getNameData = async () => {
+
+const getDataNames = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
@@ -67,6 +68,7 @@ const getNameData = async () => {
       setSecondNameHook(fatherSecondNameStore)
     }
   } catch(e) {
+    Alert.alert('Ошибка соединения с сервером')
     // error reading value
   }
 }
@@ -135,13 +137,11 @@ const deleteData = async (value) => {
 
 
 
-getNameData()
 
 
 
 
 useEffect(() => {
-  // getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_block?block_id=5`)
     .then((response) => response.json())
@@ -152,7 +152,6 @@ useEffect(() => {
 
 
 useEffect(() => {
-  // getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_advices`)
     .then((response) => response.json())
@@ -163,7 +162,6 @@ useEffect(() => {
 
 
 useEffect(() => {
-  getNameData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_block?block_id=2`)
     .then((response) => response.json())
@@ -190,8 +188,8 @@ useEffect(() => {
 
 
 useEffect(() => {
-  getNameData()
   getData()
+  getDataNames()
   // fetch('https://narekaet.com/api/get_names')
   // fetch(`https://narekaet.com/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
@@ -199,7 +197,7 @@ useEffect(() => {
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId, getNameData(), getData()]);
+}, [route.params.genderId, getData(), getDataNames()]);
 
 
 
@@ -230,20 +228,6 @@ const swipeBackAnim = () => {
   swiperRef.current.swipeBack()
 }
 
-
-const Initials = () => {
-  const fatherSecondLetter =  fatherSecondNameHook.charAt(0);
-  const fatherFirstLetter = fatherFirstNameHook.charAt(0)
-
-}
-
-const fatherFirstLetter = () => {
-  return fatherFirstNameHook.charAt(0)
-}
-
-const fatherSecondName = () => {
-
-}
 
 
 
@@ -379,18 +363,30 @@ const CardAdvice = (card , data) => {
 const Card = (card , data) => {
 
 
+  // const RenderFatherName = () => {
+  //   if (card.middle_name == undefined || card.surname == undefined) {
+  //   <Text style={styles.profileSureName}>
+  //       {' '}
+  //     </Text> 
+  //   return ''
+  //   } else {
+  //     return  <Text style={styles.profileSureName}>
+  //       {card.name + ' ' + card.middle_name + ' ' + card.surname}
+  //     </Text> 
+  //   }
+  // }
+
+
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
-    <Text style={styles.profileSureName}>
-        {' '}
-      </Text> 
-    return ''
+      return    <View style={styles.profileEpmty} >
+      <ActivityIndicator size="small" color="#5DADC1"/>
+    </View>
     } else {
-      return  <Text style={styles.profileSureName}>
-        {card.name + ' ' + card.middle_name + ' ' + card.surname}
-      </Text> 
+      return card.name + ' ' + card.middle_name + ' ' + card.surname
     }
   }
+ 
 
 
 
@@ -441,8 +437,8 @@ singleId = id
      <Colors id={id} > </Colors>
   
      <Text style={styles.profileSureName}>
+       <RenderFatherName></RenderFatherName>
      {/* Иван Петрович Николаев ИПН, НИП */}
-     <RenderFatherName></RenderFatherName>
      </Text>
     
   

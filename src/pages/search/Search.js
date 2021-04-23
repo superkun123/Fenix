@@ -181,6 +181,7 @@ const renderItem = ({ item }) => {
         autoCorrect={false}
         clearButtonMode="always"
         value={query}
+        clearButtonMode={'never'}
         onChangeText={queryText => handleSearch(queryText)}
         placeholder="Начните вводить имя"
         style={{ backgroundColor: '#fff', paddingHorizontal: 0}}

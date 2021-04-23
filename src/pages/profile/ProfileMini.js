@@ -364,14 +364,12 @@ const Card = (card , data) => {
 
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
-    <Text style={styles.profileSureName}>
-        {' '}
-      </Text> 
-    return ''
+      return(
+        <Text style={styles.profileSureName}>{' '}</Text> 
+      )
+    
     } else {
-      return  <Text style={styles.profileSureName}>
-        {card.name + ' ' + card.middle_name + ' ' + card.surname}
-      </Text> 
+      return  <Text style={styles.profileSureName}>{card.name + ' ' + card.middle_name + ' ' + card.surname}</Text> 
     }
   }
 
@@ -516,9 +514,9 @@ singleId = id
   
      <View style={styles.profileSureNameBlock}>
      
-     <Text style={styles.profileSureName}>
+     <View style={styles.profileSureName}>
      <RenderFatherName></RenderFatherName> 
-     </Text>
+     </View>
      <Text style={styles.profileSureName}>{card.initials}</Text>
  </View>
 

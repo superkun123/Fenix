@@ -429,7 +429,7 @@ export function Catalog(route) {
  
   return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '',  category: '', dayData: '', monthData: '', yearData: ''  }} />
+        <Stack.Screen options={{headerShown: false}} name="CatalogScreen" component={CatalogScreen} initialParams={{sort:'',  genderId: '', fatherFirstName: '', fatherSecondName: '',  category: '', dayData: '', monthData: '', yearData: ''  }} />
         <Stack.Screen name="ProfileMini" component={ProfileMini} initialParams={{advice: 0}}  options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,

@@ -190,9 +190,8 @@ useEffect(() => {
 useEffect(() => {
   getData()
   getDataNames()
-  // fetch('https://narekaet.com/api/get_names')
-  // fetch(`https://narekaet.com/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
-    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
+  fetch(`https://narekaet.com/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
+    // fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
@@ -380,7 +379,7 @@ const Card = (card , data) => {
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
       return    <View style={styles.profileEpmty} >
-      <ActivityIndicator size="small" color="#5DADC1"/>
+      {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
     </View>
     } else {
       return card.name + ' ' + card.middle_name + ' ' + card.surname
@@ -433,6 +432,9 @@ singleId = id
      <Text style={styles.profileName} >
      {card.name}
      </Text>
+
+
+    
   
      <Colors id={id} > </Colors>
   

@@ -179,9 +179,7 @@ const renderItem = ({ item }) => {
      <Text style={styles.icon}><Ionicons name="search" size={17} color={iconColor} /></Text>
       <TextInput
         autoCorrect={false}
-        clearButtonMode="always"
         value={query}
-        clearButtonMode={'never'}
         onChangeText={queryText => handleSearch(queryText)}
         placeholder="Начните вводить имя"
         style={{ backgroundColor: '#fff', paddingHorizontal: 0}}

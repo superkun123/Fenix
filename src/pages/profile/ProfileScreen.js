@@ -474,6 +474,7 @@ if (isLoading == false) {
 
 
 
+
         <Favorite></Favorite>
 
         {/* <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>

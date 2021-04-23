@@ -191,6 +191,7 @@ useEffect(() => {
 
 useEffect(() => {
   getNameData()
+  getData()
   // fetch('https://narekaet.com/api/get_names')
   // fetch(`https://narekaet.com/api/get_names?name_ids=true&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
     fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
@@ -198,7 +199,7 @@ useEffect(() => {
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId, getNameData]);
+}, [route.params.genderId, getNameData(), getData()]);
 
 
 
@@ -751,7 +752,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
-    shadowColor: "#E9E1D6"
+    shadowColor: "#FF4D2D"
   },
   adviceBg: {
     position: 'absolute'

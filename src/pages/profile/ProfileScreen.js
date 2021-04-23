@@ -58,6 +58,9 @@ const [birthDataHook, setBirthData] = useState('Дефолт')
 const [closeBtn, setCloseBtn] = useState('')
 const [closeLoading, setCloseLoading] = useState(true)
 const [isFavorite, setIsFavorite] = useState(false)
+const [dayBirth, setBirthDay] = useState('')
+const [monthBirth, setMonthBirth] = useState('')
+const [yearBirth, setYearBirth] = useState('')
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -90,11 +93,19 @@ const getDataNames = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
-    const birthDate = await AsyncStorage.getItem('BirthData')
+
+    const birthDay = await AsyncStorage.getItem('day')
+    const birthMonth = await AsyncStorage.getItem('month')
+    const year = await AsyncStorage.getItem('year')
     if(fatherFirstNameStore !== null) {
       setFirstNameHook(fatherFirstNameStore)
       setSecondNameHook(fatherSecondNameStore)
-      setBirthData(birthDate)
+    }
+    if (birthDay !== null) {
+      setBirthData(`${0 + birthDay}.${0 + birthMonth}.${year}`)
+      setBirthDay(birthDay)
+      setMonthBirth(birthMonth)
+      setYearBirth(year)
     }
   } catch(e) {
     Alert.alert('Ошибка соединения с сервером')
@@ -251,6 +262,52 @@ const onPressTouch = () => {
 }
 
 
+const DataInfo = () => {
+  if(birthDataHook !== '') {
+    return (
+
+      <View style={styles.charTextBlock}>  
+       <Text style={styles.charTitleBirth}>День рождения {birthDataHook}</Text>
+
+       {data.props_date.map((prop, key) => {
+     return (
+  
+       <View>
+         <View style={{
+           flexDirection: 'row',
+           justifyContent: 'space-between',
+         }}>
+         <Text style={styles.charTitle} key={key}>{prop.title}</Text>
+         {/* <TouchableOpacity  onPress={() => {
+            setModalVisible(!isModalVisible);
+            setText(prop.desc)
+            setTitle(prop.title)
+         }}>
+         <Feather name="info" size={18} color="#58A7BB" />
+         </TouchableOpacity>
+        */}
+         </View>
+        <Text style={styles.charTextContent} key={key}>{prop.text}</Text>
+       
+
+       </View>
+     );
+  })}
+
+
+
+
+    
+    </View>
+    )
+  } else {
+    return (
+      <View></View>
+    )
+  }
+}
+
+
 
 
 
@@ -313,13 +370,14 @@ useEffect(() => {
 
 useEffect(()  => {
   getDataNames()
+  getData()
   // fetch('https://narekaet.com/api/get_names')
-  fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}e&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1`)
+  fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, likeColor]);
+}, [route.params.description, likeColor, getData(), getDataNames]);
 
 
 
@@ -350,7 +408,7 @@ const inputEl = useRef(null);
  const RenderFatherName = () => {
    if (data.middle_name == undefined || data.surname == undefined) {
      return    <View style={styles.profileEpmty} >
-     {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
+     <ActivityIndicator size="small" color="#5DADC1"/>
    </View>
    } else {
      return data.name + ' ' + data.middle_name + ' ' + data.surname
@@ -458,6 +516,7 @@ if (isLoading == false) {
         </View>
 
 
+
         <Favorite></Favorite>
 
         {/* <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
@@ -526,16 +585,18 @@ if (isLoading == false) {
       })}
           
          </View> */}
-         <Text style={styles.profileSureName}>
+         <View style={styles.profileSureNameBlock}>
          {/* {data.name + ' '}
          <RenderSurname></RenderSurname> */}
-         <RenderFatherName></RenderFatherName>
+         <Text style={styles.profileSureName}>
+         <RenderFatherName></RenderFatherName> 
+         </Text>
+         <Text style={styles.profileSureName}>{data.initials}</Text>
          {/* {data.middle_name + ' '} 
          {data.surname + ''} */}
 
          {/* Иван Петрович Николаев ИПН, НИП */}
-         </Text>
-         {/* <Text> Дата: {birthDataHook}</Text> */}
+         </View>
          <View style={styles.profileTranscription}>
      {/* {data.name_translit} */}
      <Text style={styles.profilteTransText}>{data.name_translit}</Text>
@@ -592,6 +653,12 @@ if (isLoading == false) {
 
         
         </View>
+
+
+        <DataInfo></DataInfo>
+
+
+     
 
 
         <View style={styles.upBtnContainer}>
@@ -692,12 +759,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy',
     textAlign: 'center',
     fontSize: 14,
+    marginBottom: 5,
     color: '#3C3C3C',
-    marginBottom: 28,
+  },
+  profileSureNameBlock: {
     paddingLeft: 32,
     paddingRight: 32,
-    lineHeight: 23
-
+    marginBottom: 28
   },
   profileHeader: {
     textAlign: 'center',
@@ -768,7 +836,15 @@ const styles = StyleSheet.create({
   },
   charTitle: {
     marginBottom: 10,
-    fontSize: 16
+    fontSize: 16,
+    maxWidth: '80%',
+    fontFamily: 'GilroyMedium'
+  },
+  charTitleBirth: {
+    marginBottom: 30,
+    fontSize: 16,
+    maxWidth: '80%',
+    fontFamily: 'GilroyMedium',
   },
   modalBody: {
     backgroundColor: '#fff',

@@ -351,7 +351,13 @@ onPress={() => navigation.navigate('ProfileMini', {
       return (
         <View style={styles.namesContainer}>
         <FlatList
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{ paddingBottom: 20,  shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,  }}
         data={data}
         renderItem={renderItem}
         key={renderItem.item}

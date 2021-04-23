@@ -503,7 +503,7 @@ if (isLoading == false) {
 
 
           <View style={{textAlign: 'center'}}>
-            <HTML defaultTextProps={{textAlign: 'center'}} containerStyle={styles.modalDesc} baseFontStyle={styles.modalDesc} source={{ html: htmlContent(descText) }}></HTML>
+            <HTML  containerStyle={styles.modalDesc} baseFontStyle={styles.modalDesc} source={{ html: htmlContent(descText) }}></HTML>
           </View>
     
    

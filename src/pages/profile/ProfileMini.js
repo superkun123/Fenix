@@ -438,10 +438,13 @@ singleId = id
   
      <Colors id={id} > </Colors>
   
-     <Text style={styles.profileSureName}>
-       <RenderFatherName></RenderFatherName>
-     {/* Иван Петрович Николаев ИПН, НИП */}
-     </Text>
+     <View style={styles.profileSureNameBlock}>
+     
+         <Text style={styles.profileSureName}>
+         <RenderFatherName></RenderFatherName> 
+         </Text>
+         <Text style={styles.profileSureName}>{card.initials}</Text>
+     </View>
     
   
      <View style={styles.profileTranscription}>
@@ -511,10 +514,14 @@ singleId = id
   
      <Colors id={id} > </Colors>
   
+     <View style={styles.profileSureNameBlock}>
+     
      <Text style={styles.profileSureName}>
-     {/* Иван Петрович Николаев ИПН, НИП */}
-     <RenderFatherName></RenderFatherName>
+     <RenderFatherName></RenderFatherName> 
      </Text>
+     <Text style={styles.profileSureName}>{card.initials}</Text>
+ </View>
+
     
   
      <View style={styles.profileTranscription}>
@@ -880,13 +887,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy',
     textAlign: 'center',
     fontSize: 14,
+    marginBottom: 5,
     color: '#3C3C3C',
-    marginBottom: 28,
+  },
+  profileSureNameBlock: {
     paddingLeft: 32,
     paddingRight: 32,
-    lineHeight: 23,
-    marginBottom: '12%'
-
+    marginBottom: 28
   },
   profileHeader: {
     textAlign: 'center',

@@ -262,50 +262,7 @@ const onPressTouch = () => {
 }
 
 
-const DataInfo = () => {
-  if(birthDataHook !== '') {
-    return (
 
-      <View style={styles.charTextBlock}>  
-       <Text style={styles.charTitleBirth}>День рождения {birthDataHook}</Text>
-
-       {data.props_date.map((prop, key) => {
-     return (
-  
-       <View>
-         <View style={{
-           flexDirection: 'row',
-           justifyContent: 'space-between',
-         }}>
-         <Text style={styles.charTitle} key={key}>{prop.title}</Text>
-         {/* <TouchableOpacity  onPress={() => {
-            setModalVisible(!isModalVisible);
-            setText(prop.desc)
-            setTitle(prop.title)
-         }}>
-         <Feather name="info" size={18} color="#58A7BB" />
-         </TouchableOpacity>
-        */}
-         </View>
-        <Text style={styles.charTextContent} key={key}>{prop.text}</Text>
-       
-
-       </View>
-     );
-  })}
-
-
-
-
-    
-    </View>
-    )
-  } else {
-    return (
-      <View></View>
-    )
-  }
-}
 
 
 
@@ -369,12 +326,12 @@ useEffect(() => {
 
 
 useEffect(()  => {
-  getDataNames()
   getData()
   // fetch('https://narekaet.com/api/get_names')
-  fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&is_full=1&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}`)
+  fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
+    .then(getDataNames())
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
 }, [route.params.description, likeColor, getData(), getDataNames]);
@@ -490,6 +447,53 @@ const Colors = () => {
     return (
       `${html}`
     )
+}
+
+
+const DataInfo = () => {
+  if(data.props_date !== undefined) {
+    return (
+
+      <View style={styles.charTextBlock}>  
+       <Text style={styles.charTitleBirth}>День рождения {birthDataHook}</Text>
+
+       {data.props_date.map((prop, key) => {
+     return (
+  
+       <View>
+         <View style={{
+           flexDirection: 'row',
+           justifyContent: 'space-between',
+         }}>
+         <Text style={styles.charTitle} key={key}>{prop.title}</Text>
+         <TouchableOpacity  onPress={() => {
+            setModalVisible(!isModalVisible);
+            setText(prop.desc)
+            setTitle(prop.title)
+         }}>
+         <Feather name="info" size={18} color="#58A7BB" />
+         </TouchableOpacity>
+       
+         </View>
+        <Text style={styles.charTextContent} key={key}>{prop.text}</Text>
+       
+       </View>
+     );
+  })}
+
+
+
+
+    
+    </View>
+    )
+  } else {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#5DADC1"/>
+      </View>
+    )
+  }
 }
 
 

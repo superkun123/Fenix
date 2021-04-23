@@ -362,29 +362,29 @@ const CardAdvice = (card , data) => {
 const Card = (card , data) => {
 
 
-  // const RenderFatherName = () => {
-  //   if (card.middle_name == undefined || card.surname == undefined) {
-  //   <Text style={styles.profileSureName}>
-  //       {' '}
-  //     </Text> 
-  //   return ''
-  //   } else {
-  //     return  <Text style={styles.profileSureName}>
-  //       {card.name + ' ' + card.middle_name + ' ' + card.surname}
-  //     </Text> 
-  //   }
-  // }
-
-
   const RenderFatherName = () => {
     if (card.middle_name == undefined || card.surname == undefined) {
-      return    <View style={styles.profileEpmty} >
-      {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
-    </View>
+    <Text style={styles.profileSureName}>
+        {' '}
+      </Text> 
+    return ''
     } else {
-      return card.name + ' ' + card.middle_name + ' ' + card.surname
+      return  <Text style={styles.profileSureName}>
+        {card.name + ' ' + card.middle_name + ' ' + card.surname}
+      </Text> 
     }
   }
+
+
+  // const RenderFatherName = () => {
+  //   if (card.middle_name == undefined || card.surname == undefined) {
+  //     return    <View style={styles.profileEpmty} >
+  //     {/* <ActivityIndicator size="small" color="#5DADC1"/> */}
+  //   </View>
+  //   } else {
+  //     return card.name + ' ' + card.middle_name + ' ' + card.surname
+  //   }
+  // }
  
 
 
@@ -440,9 +440,9 @@ singleId = id
   
      <View style={styles.profileSureNameBlock}>
      
-         <Text style={styles.profileSureName}>
+         <View style={styles.profileSureName}>
          <RenderFatherName></RenderFatherName> 
-         </Text>
+         </View>
          <Text style={styles.profileSureName}>{card.initials}</Text>
      </View>
     

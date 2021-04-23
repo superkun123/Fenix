@@ -122,12 +122,13 @@ function CatalogScreen({ navigation, route }) {
 <Pressable
    style={({pressed}) => [
     {
-      backgroundColor: pressed ? '#5DADC1' : '#FFF7ED',
+      elevation: pressed ? 5 : 0,
+      shadowRadius: pressed ? 2.22 : 0
     },
     styles.nameBtn,
   ]}
 children={({ pressed }) => (
-  <Text style={{ color: pressed ? '#FFF' : '#222'}}>
+  <Text style={{ color: pressed ? '#222' : '#222'}}>
     {item.name}
   </Text>)}
 onPress={() => navigation.navigate('ProfileMini', {
@@ -525,6 +526,7 @@ const styles = StyleSheet.create({
   nameBtn: {
     fontFamily: 'Gilroy',
     color: '#5DADC1',
+    backgroundColor: '#FFF7ED',
     paddingTop: 19,
     paddingBottom: 18,
     alignItems: "center",
@@ -584,7 +586,7 @@ const styles = StyleSheet.create({
     marginRight: 60,
     flex: 1,
     paddingTop: 10,
-    shadowColor: "#000",
+    shadowColor: "#F4E9DC",
     shadowOffset: {
       width: 0,
       height: 2,

@@ -195,12 +195,13 @@ const year = () => {
 <Pressable
    style={({pressed}) => [
     {
-      backgroundColor: pressed ? '#5DADC1' : '#FFF7ED',
+      elevation: pressed ? 5 : 0,
+      shadowRadius: pressed ? 2.22 : 0
     },
     styles.nameBtn,
   ]}
 children={({ pressed }) => (
-  <Text style={{ color: pressed ? '#FFF' : '#222'}}>
+  <Text style={{ color: pressed ? '#222' : '#222'}}>
     {item.name}
   </Text>)}
 onPress={() => navigation.navigate('ProfileMini', {
@@ -589,6 +590,7 @@ const styles = StyleSheet.create({
   nameBtn: {
     fontFamily: 'Gilroy',
     color: '#5DADC1',
+    backgroundColor: '#FFF7ED',
     paddingTop: 19,
     paddingBottom: 18,
     alignItems: "center",
@@ -645,9 +647,18 @@ const styles = StyleSheet.create({
   },
   FlatListCatalog: {
     marginLeft: 60,
-    paddingRight: 60,
+    marginRight: 60,
     flex: 1,
-    paddingTop: 10
+    paddingTop: 10,
+    shadowColor: "#F4E9DC",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    
+    elevation: 4,
   },
   FlatListAlphabet: {
     backgroundColor: '#FAFAFA',

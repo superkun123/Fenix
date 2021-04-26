@@ -134,6 +134,7 @@ React.useEffect(() => {
     Bebas: require('./assets/fonts/BebasNeue-Regular.ttf'),
     Caption: require('./assets/fonts/PTSerifCaption-Italic.ttf'),
     Raleway:  require('./assets/fonts/Raleway-Bold.ttf'),
+    GilroyItalic: require('./assets/fonts/Gilroy-RegularItalic.ttf')
 
   });
   

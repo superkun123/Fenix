@@ -405,6 +405,7 @@ const Colors = () => {
 }
 
 
+
 const DataInfo = () => {
   if(data.props_date !== undefined) {
     return (
@@ -500,7 +501,7 @@ if (isLoading == false) {
 
 
           <View style={{textAlign: 'center'}}>
-            <HTML  containerStyle={styles.modalDesc} baseFontStyle={styles.modalDesc} source={{ html: htmlContent(descText) }}></HTML>
+            <HTML tagsStyles={{strong: {fontFamily: 'GilroyMedium'}, em: {fontFamily: 'GilroyItalic', fontWeight: 'normal'}}}  containerStyle={styles.modalDesc} baseFontStyle={styles.modalDesc} source={{ html: htmlContent(descText) }}></HTML>
           </View>
     
    
@@ -600,7 +601,7 @@ if (isLoading == false) {
              </View>
             {/* <Text style={styles.charTextContent} key={key}>{htmlContent(prop.text)}</Text> */}
            
-            <HTML containerStyle={styles.charTextContent} baseFontStyle={styles.charTextContent} source={{html:htmlContent(prop.text)}}></HTML>
+            <HTML tagsStyles={{strong: {fontFamily: 'GilroyMedium'}, em: {fontFamily: 'GilroyItalic', fontWeight: 'normal'}}} containerStyle={styles.charTextContent} baseFontStyle={styles.charTextContent} source={{html:htmlContent(prop.text)}}></HTML>
            
 
            </View>
@@ -646,7 +647,6 @@ if (isLoading == false) {
 
   }
   }
-
 
 
 
@@ -722,6 +722,15 @@ const styles = StyleSheet.create({
     paddingLeft: 32,
     paddingRight: 32,
     marginBottom: 28
+  },
+  bold: {
+    fontFamily: 'GilroyMedium',
+    color: '#000'
+  },
+  italic: {
+    fontFamily: 'GilroyItalic',
+    fontWeight: 'normal',
+    color: '#000'
   },
   profileHeader: {
     textAlign: 'center',
@@ -840,6 +849,9 @@ const styles = StyleSheet.create({
     fontFamily: 'GilroyMedium',
     textAlign: 'center'
   },
+  yellow: {
+    color: '#5DADC1'
+  },
   closeModal: {
     width: '100%',
     textAlign: 'center',
@@ -869,3 +881,5 @@ const styles = StyleSheet.create({
 
 
 })
+
+

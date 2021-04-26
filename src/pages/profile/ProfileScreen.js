@@ -104,7 +104,6 @@ const getData = async () => {
 
 
 const getDataNames = async () => {
-  Alert.alert('получение имени отработало')
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
@@ -269,7 +268,7 @@ useEffect(() => {
 }, []);
 
 
-useEffect(()  => {
+useEffect (()  => {
   getDataNames()
   // getData()
   // fetch('https://narekaet.com/api/get_names')
@@ -278,7 +277,7 @@ useEffect(()  => {
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, likeColor]);
+}, [route.params.description, likeColor, fatherFirstNameHook, fatherSecondNameHook, dayBirth ]);
 
 
 

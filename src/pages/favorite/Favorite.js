@@ -78,7 +78,6 @@ const getData = async () => {
 
     if(jsonFinal.length > 1) {
       setFavorite(jsonFinal)
-      Alert.alert(jsonFinal)
     } else {
       setFavorite([1])
     }

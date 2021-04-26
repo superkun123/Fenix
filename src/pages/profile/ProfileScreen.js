@@ -77,7 +77,6 @@ const getData = async () => {
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       // Здесь я проверяю, не пустой ли сторедж, если пустой - сгружаю в него то что у меня в фейворит
       arrayStore.push(jsonArray)
-      Alert.alert(`${jsonArray}`)
      
     } else {
       // Здесь мы проверяем, есть ли элемент в массиве

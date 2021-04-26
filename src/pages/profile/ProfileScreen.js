@@ -19,6 +19,7 @@ import { abs } from 'react-native-reanimated';
 import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 import HTML from "react-native-render-html";
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 
@@ -492,12 +493,8 @@ if (isLoading == false) {
         <View>
 
         <Modal isVisible={isModalVisible} 
-          animationOutTiming={0}
           onBackdropPress={() => setModalVisible(false)}
-          backdropTransitionInTiming={0}
-            backdropTransitionOutTiming={0}
-            animationInTiming={0}
-            hideModalContentWhileAnimating={true}>
+          >
             <View style={styles.modalBody}>
               <Text style={styles.modalTitle}>{descTitle}</Text>
 
@@ -527,7 +524,8 @@ if (isLoading == false) {
 
         <View style={styles.profileHeader}>
           <TouchableOpacity style={styles.share} onPress={onShare}>
-          <SvgComponentShare></SvgComponentShare>
+          <Ionicons name="share-social-sharp" size={24} color="black" />
+          {/* <SvgComponentShare></SvgComponentShare> */}
           </TouchableOpacity>
          <Text style={styles.profileName}>
          {route.params.paramKey}
@@ -601,9 +599,9 @@ if (isLoading == false) {
            
              </View>
             {/* <Text style={styles.charTextContent} key={key}>{htmlContent(prop.text)}</Text> */}
-            <View>
+           
             <HTML containerStyle={styles.charTextContent} baseFontStyle={styles.charTextContent} source={{html:htmlContent(prop.text)}}></HTML>
-            </View>
+           
 
            </View>
          );
@@ -710,7 +708,7 @@ const styles = StyleSheet.create({
   share: {
     marginTop: 30,
     marginBottom: -40,
-    maxWidth: 26,
+    maxWidth: 32,
     padding: 5
   },
   profileSureName: {

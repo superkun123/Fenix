@@ -494,7 +494,7 @@ export function Collection(route) {
  
   return (
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen options={{headerShown: false}} name="CollectionScreen" component={CollectionScreen} initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: '', category: '', dayData: '', monthData: '', yearData: ''   }} />
+        <Stack.Screen options={{headerShown: false}} name="CollectionScreen" component={CollectionScreen} initialParams={{ genderId: '', sort: '', fatherFirstName: '', fatherSecondName: '', category: '', dayData: '', monthData: '', yearData: ''   }} />
         <Stack.Screen name="ProfileMini" component={ProfileMini} initialParams={{advice: 0}} options={{ title: 'Подробнее', headerTitleStyle: {
             fontFamily: 'GilroyMedium',
             shadowOpacity: 0,

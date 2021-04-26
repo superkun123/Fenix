@@ -75,9 +75,24 @@ const getData = async () => {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
+      // Здесь я проверяю, не пустой ли сторедж, если пустой - сгружаю в него то что у меня в фейворит
       arrayStore.push(jsonArray)
-      // getDataLike()
+      Alert.alert(`${jsonArray}`)
+     
+    } else {
+      // Здесь мы проверяем, есть ли элемент в массиве
+      if(jsonArray.indexOf(`${route.params.description}`) !== -1) {
+        setIsFavorite(true)
+        Alert.alert('Элемент в избранном')
+      } else {
+        setIsFavorite(false)
+        Alert.alert('Элемент не в избранном')
+      }
+
+      
     }
+
+
  
     arrayStore = JSON.parse(jsonValue)
     // Alert.alert(` вывожу Дату: ${uniq}`)
@@ -94,7 +109,6 @@ const getDataNames = async () => {
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
-
     const birthDay = await AsyncStorage.getItem('day')
     const birthMonth = await AsyncStorage.getItem('month')
     const year = await AsyncStorage.getItem('year')
@@ -125,7 +139,8 @@ const storeData = async (value) => {
         // Alert.alert(jsonValue)
         AsyncStorage.setItem('favorite', jsonValue)
         setIsFavorite(true)
-        storeDataLike()
+        // storeDataLike()
+        Alert.alert('storeDataLike')
       } catch (e) {
         // saving error
       }
@@ -133,31 +148,31 @@ const storeData = async (value) => {
 
 
 
-const storeDataLike = async (value) => {
-  // let resutl = await getDataLike()
-  try {
-    await AsyncStorage.setItem('like', `${isFavorite}`)
-  } catch (e) {
-    // saving error
-  }
-}
+// const storeDataLike = async (value) => {
+//   // let resutl = await getDataLike()
+//   try {
+//     await AsyncStorage.setItem('like', `${isFavorite}`)
+//   } catch (e) {
+//     // saving error
+//   }
+// }
 
-const getDataLike = async () => {
-  try {
-    const value = await AsyncStorage.getItem('like')
-    if(value !== null) {
-      if(value == 'true') {
-        setIsFavorite(false)
-      } else if (value == 'false') {
-        setIsFavorite(true)
-      }
-      // setIsFavorite(value)
-      // value previously stored
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
+// const getDataLike = async () => {
+//   try {
+//     const value = await AsyncStorage.getItem('like')
+//     if(value !== null) {
+//       if(value == 'true') {
+//         setIsFavorite(false)
+//       } else if (value == 'false') {
+//         setIsFavorite(true)
+//       }
+//       // setIsFavorite(value)
+//       // value previously stored
+//     }
+//   } catch(e) {
+//     // error reading value
+//   }
+// }
 
 
 const deleteData = async (value) => {
@@ -282,15 +297,14 @@ useEffect(() => {
 
 
 useEffect(()  => {
-  getData()
-  getDataNames()
+  // getData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, likeColor, getData(), getDataNames]);
+}, [route.params.description, likeColor,]);
 
 
 
@@ -298,7 +312,9 @@ useEffect(()  => {
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('focus', () => {
     // getData()
-    getDataLike()
+    getData()
+    // getDataNames()
+    // getDataLike()
   });
 
   // Return the function to unsubscribe from the event so it gets removed on unmount

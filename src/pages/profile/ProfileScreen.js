@@ -83,10 +83,8 @@ const getData = async () => {
       // Здесь мы проверяем, есть ли элемент в массиве
       if(jsonArray.indexOf(`${route.params.description}`) !== -1) {
         setIsFavorite(true)
-        Alert.alert('Элемент в избранном')
       } else {
         setIsFavorite(false)
-        Alert.alert('Элемент не в избранном')
       }
 
       
@@ -106,6 +104,7 @@ const getData = async () => {
 
 
 const getDataNames = async () => {
+  Alert.alert('получение имени отработало')
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
@@ -140,7 +139,6 @@ const storeData = async (value) => {
         AsyncStorage.setItem('favorite', jsonValue)
         setIsFavorite(true)
         // storeDataLike()
-        Alert.alert('storeDataLike')
       } catch (e) {
         // saving error
       }
@@ -148,31 +146,6 @@ const storeData = async (value) => {
 
 
 
-// const storeDataLike = async (value) => {
-//   // let resutl = await getDataLike()
-//   try {
-//     await AsyncStorage.setItem('like', `${isFavorite}`)
-//   } catch (e) {
-//     // saving error
-//   }
-// }
-
-// const getDataLike = async () => {
-//   try {
-//     const value = await AsyncStorage.getItem('like')
-//     if(value !== null) {
-//       if(value == 'true') {
-//         setIsFavorite(false)
-//       } else if (value == 'false') {
-//         setIsFavorite(true)
-//       }
-//       // setIsFavorite(value)
-//       // value previously stored
-//     }
-//   } catch(e) {
-//     // error reading value
-//   }
-// }
 
 
 const deleteData = async (value) => {
@@ -297,6 +270,7 @@ useEffect(() => {
 
 
 useEffect(()  => {
+  getDataNames()
   // getData()
   // fetch('https://narekaet.com/api/get_names')
   fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}&is_full=1`)
@@ -304,7 +278,7 @@ useEffect(()  => {
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, likeColor,]);
+}, [route.params.description, likeColor]);
 
 
 

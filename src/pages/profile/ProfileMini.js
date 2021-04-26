@@ -60,6 +60,7 @@ let singleId = 1
 
 
 const getDataNames = async () => {
+  
   try {
     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')

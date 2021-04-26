@@ -76,7 +76,12 @@ const getData = async () => {
     const jsonSpread = [...newArray]
     const jsonFinal = jsonSpread.join(',')
 
-    setFavorite(jsonFinal)
+    if(jsonFinal.length > 1) {
+      setFavorite(jsonFinal)
+      Alert.alert(jsonFinal)
+    } else {
+      setFavorite([1])
+    }
 
   } catch(e) {
     Alert.alert(`Ошибка сети`)

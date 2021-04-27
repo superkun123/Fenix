@@ -77,10 +77,8 @@ const getData = async () => {
     } else {
       if(jsonArray.indexOf(`${currentId}`) !== -1) {
         setIsFavorite(true)
-        Alert.alert(`тру - ${isFavorite}`)
       } else {
         setIsFavorite(false)
-        Alert.alert(`фолс - ${isFavorite}`)
       }
 
     }
@@ -121,7 +119,6 @@ const storeData = async (value) => {
       arrayStore.push(value)
       const jsonValue = JSON.stringify(arrayStore)
       AsyncStorage.setItem('favorite', jsonValue)
-      Alert.alert(`положил в дату - ${isFavorite}`)
       setIsFavorite(true)
     }
       } catch (e) {
@@ -134,16 +131,13 @@ const storeData = async (value) => {
 
 const deleteData = async (value) => {
   let result = await getData()
-  // let storeResult = await storeData()
   try {
-        // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
         if (deleteIndex !== -1) {
           arrayStore.splice(deleteIndex)
           const jsonValue = JSON.stringify(arrayStore)
           AsyncStorage.setItem('favorite', jsonValue)
           setIsFavorite(false)
-          Alert.alert(`убрал из даты - ${isFavorite}`)
         } else {
           
         }
@@ -477,7 +471,6 @@ singleId = id
      <Text style={styles.profileName} >
      {card.name}
      </Text>
-     <Text>{currentId}</Text>
    
 
 

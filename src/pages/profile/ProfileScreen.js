@@ -276,7 +276,7 @@ useEffect (()  => {
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, likeColor, fatherFirstNameHook, fatherSecondNameHook, dayBirth ]);
+}, [route.params.description, likeColor, fatherFirstNameHook, fatherSecondNameHook, dayBirth, monthBirth, yearBirth]);
 
 
 

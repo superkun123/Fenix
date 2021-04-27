@@ -54,6 +54,8 @@ const [indexOfAdvice, setIndexOfAdvice] = useState(1)
 const [advicePer, setAdvicePred] = useState(2)
 const [adviceLoad, setAdviceLoad] = useState(false)
 const [likeColor, setLikeColor] = useState('#5DADC1')
+const [isFavorite, setIsFavorite] = useState(false)
+const [currentId, setCurrentId] = useState()
 let singleId = 1
 
 
@@ -77,15 +79,21 @@ const getDataNames = async () => {
 let arrayStore = []
 
 
+
 const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('favorite')
     const jsonArray = JSON.parse(jsonValue)
     if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
       arrayStore.push(jsonArray)
-      setLikeColor('#FFF')
+     
     } else {
-      setLikeColor('#5DADC1')
+      if(jsonArray.indexOf(`${currentId}`) !== -1) {
+        setIsFavorite(true)
+      } else {
+        setIsFavorite(false)
+      }
+
     }
     // Alert.alert(`${arrayStore}`)
  
@@ -110,6 +118,7 @@ const storeData = async (value) => {
         
         // Alert.alert(jsonValue)
         AsyncStorage.setItem('favorite', jsonValue)
+        setIsFavorite(true)
       } catch (e) {
         // saving error
       }
@@ -127,6 +136,7 @@ const deleteData = async (value) => {
           setLikeColor('#5DADC1')
           const jsonValue = JSON.stringify(arrayStore)
           AsyncStorage.setItem('favorite', jsonValue)
+          setIsFavorite(false)
         } else {
           
         }
@@ -375,6 +385,27 @@ const Card = (card , data) => {
   }
 
 
+
+  const Favorite = () => {
+    // const currentItem = route.params.description
+    // const deleteIndex = arrayStore.indexOf(currentItem)
+    if (isFavorite) {
+      return ( 
+        <TouchableOpacity style={styles.like}  onPress={() => deleteData(`${card.name_id}`)}>
+        <SvgComponentLike color={'#fff'} ></SvgComponentLike>
+      </TouchableOpacity>
+      ) 
+    } else {
+      return (
+        <TouchableOpacity style={styles.like} onPress={() => storeData(`${card.name_id}`)}>
+        <SvgComponentLike color={'#5DADC1'} ></SvgComponentLike>
+      </TouchableOpacity>
+      )
+    }
+  }
+  
+
+
   // const RenderFatherName = () => {
   //   if (card.middle_name == undefined || card.surname == undefined) {
   //     return    <View style={styles.profileEpmty} >
@@ -392,6 +423,7 @@ const Card = (card , data) => {
   
 const name = card.name
 const id = card.name_id
+setCurrentId(card.name_id)
 singleId = id
 
 
@@ -413,17 +445,8 @@ singleId = id
         </View>
 
 
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${id}`)}>
-          {/* <Text>КЛИК</Text> */}
-          <SvgComponentLike color={likeColor} ></SvgComponentLike>
-        </TouchableOpacity>
+        <Favorite></Favorite>
 
-              
-<TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${id}`)}>
-
-<SvgComponentPlus></SvgComponentPlus>
-</TouchableOpacity>
-        
 
 
   
@@ -431,6 +454,7 @@ singleId = id
      <Text style={styles.profileName} >
      {card.name}
      </Text>
+   
 
 
     
@@ -500,11 +524,7 @@ singleId = id
         </SvgComponentFlag>
         </View>
 
-
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${id}`)}>
-          {/* <Text>КЛИК</Text> */}
-          <SvgComponentLike color={likeColor} ></SvgComponentLike>
-        </TouchableOpacity>
+        <Favorite></Favorite>
   
     <View style={styles.profileHeader}>
      <Text style={styles.profileName} >
@@ -574,17 +594,7 @@ singleId = id
         </View>
 
 
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${id}`)}>
-          {/* <Text>КЛИК</Text> */}
-          <SvgComponentLike color={likeColor} ></SvgComponentLike>
-        </TouchableOpacity>
-
-              
-<TouchableOpacity style={styles.plus}  onPress={() => deleteData(`${id}`)}>
-
-<SvgComponentPlus></SvgComponentPlus>
-</TouchableOpacity>
-        
+        <Favorite></Favorite>
 
 
   

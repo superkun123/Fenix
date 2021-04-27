@@ -157,7 +157,7 @@ const deleteData = async (value) => {
         const jsonValue = JSON.stringify(arrayStore)
         AsyncStorage.setItem('favorite', jsonValue)
         setIsFavorite(false)
-        storeDataLike()
+        // storeDataLike()
         } else {
           
         }

@@ -393,13 +393,32 @@ const Colors = () => {
 }
 
 
+const dayFormat = () => {
+  if(dayBirth.length == 1) {
+    return `0${dayBirth}`
+  } else {
+    return dayBirth
+  }
+}
+
+
+const MonthFormat = () => {
+  if(monthBirth.length == 1) {
+    Alert.alert(`${monthBirth.length}`)
+    return `0${monthBirth}`
+  } else {
+    return monthBirth
+  }
+}
+
+
 
 const DataInfo = () => {
   if(data.props_date !== undefined) {
     return (
 
       <View style={styles.charTextBlock}>  
-       <Text style={styles.charTitleBirth}>День рождения {birthDataHook}</Text>
+       <Text style={styles.charTitleBirth}>День рождения {dayFormat()}.{MonthFormat()}.{yearBirth}</Text>
 
        {data.props_date.map((prop, key) => {
      return (

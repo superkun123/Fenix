@@ -55,10 +55,46 @@ const [advicePer, setAdvicePred] = useState(2)
 const [adviceLoad, setAdviceLoad] = useState(false)
 const [likeColor, setLikeColor] = useState('#5DADC1')
 const [isFavorite, setIsFavorite] = useState(false)
-const [currentId, setCurrentId] = useState()
+const [currentId, setCurrentId] = useState(route.params.description)
 let singleId = 1
 
 
+
+
+
+
+let arrayStore = []
+
+
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('favorite')
+    const jsonArray = JSON.parse(jsonValue)
+    if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
+      arrayStore.push(jsonArray)
+     
+    } else {
+      if(jsonArray.indexOf(`${currentId}`) !== -1) {
+        setIsFavorite(true)
+        Alert.alert(`тру - ${isFavorite}`)
+      } else {
+        setIsFavorite(false)
+        Alert.alert(`фолс - ${isFavorite}`)
+      }
+
+    }
+    // Alert.alert(`${arrayStore}`)
+ 
+    arrayStore = JSON.parse(jsonValue)
+    // Alert.alert(` вывожу Дату: ${uniq}`)
+    // Alert.alert(`${arrayStore}`)
+
+  } catch(e) {
+    Alert.alert('error')
+    // error reading value
+  }
+}
 
 
 const getDataNames = async () => {
@@ -76,53 +112,24 @@ const getDataNames = async () => {
   }
 }
 
-let arrayStore = []
-
-
-
-const getData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('favorite')
-    const jsonArray = JSON.parse(jsonValue)
-    if (arrayStore.indexOf(jsonArray) !== -1 || jsonValue == [0, 1]) {
-      arrayStore.push(jsonArray)
-     
-    } else {
-      if(jsonArray.indexOf(`${currentId}`) !== -1) {
-        setIsFavorite(true)
-      } else {
-        setIsFavorite(false)
-      }
-
-    }
-    // Alert.alert(`${arrayStore}`)
- 
-    arrayStore = JSON.parse(jsonValue)
-    // Alert.alert(` вывожу Дату: ${uniq}`)
-    // Alert.alert(`${arrayStore}`)
-
-  } catch(e) {
-    Alert.alert('error')
-    // error reading value
-  }
-}
-
 
 const storeData = async (value) => {
   let result = await getData()
   try {
-        arrayStore.push(value)
-        setLikeColor('#FFF')
-        // setFavorite(arr => [...arr, value])
-        const jsonValue = JSON.stringify(arrayStore)
-        
-        // Alert.alert(jsonValue)
-        AsyncStorage.setItem('favorite', jsonValue)
-        setIsFavorite(true)
+    const deleteIndex = arrayStore.indexOf(value)
+    if (deleteIndex == -1) {
+      arrayStore.push(value)
+      const jsonValue = JSON.stringify(arrayStore)
+      AsyncStorage.setItem('favorite', jsonValue)
+      Alert.alert(`положил в дату - ${isFavorite}`)
+      setIsFavorite(true)
+    }
       } catch (e) {
         // saving error
       }
 }
+
+
 
 
 const deleteData = async (value) => {
@@ -131,12 +138,12 @@ const deleteData = async (value) => {
   try {
         // Alert.alert(`${arrayStore}`)
         const deleteIndex = arrayStore.indexOf(value)
-        if (deleteIndex != -1) {
+        if (deleteIndex !== -1) {
           arrayStore.splice(deleteIndex)
-          setLikeColor('#5DADC1')
           const jsonValue = JSON.stringify(arrayStore)
           AsyncStorage.setItem('favorite', jsonValue)
           setIsFavorite(false)
+          Alert.alert(`убрал из даты - ${isFavorite}`)
         } else {
           
         }
@@ -207,7 +214,7 @@ useEffect(() => {
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId, getData(), getDataNames()]);
+}, [route.params.genderId, fatherFirstNameHook, fatherSecondNameHook, currentId]);
 
 
 
@@ -229,7 +236,11 @@ useEffect(() => {
 
 
 
-
+  const click = () => {
+    setIsFavorite(true)
+    Alert.alert(`Проверю favorite ${isFavorite}`)
+  }
+  
 
 
 
@@ -384,7 +395,7 @@ const Card = (card , data) => {
     }
   }
 
-
+  setCurrentId(card.name_id)
 
   const Favorite = () => {
     // const currentItem = route.params.description
@@ -406,6 +417,7 @@ const Card = (card , data) => {
   
 
 
+
   // const RenderFatherName = () => {
   //   if (card.middle_name == undefined || card.surname == undefined) {
   //     return    <View style={styles.profileEpmty} >
@@ -423,7 +435,6 @@ const Card = (card , data) => {
   
 const name = card.name
 const id = card.name_id
-setCurrentId(card.name_id)
 singleId = id
 
 
@@ -454,6 +465,7 @@ singleId = id
      <Text style={styles.profileName} >
      {card.name}
      </Text>
+     <Text>{currentId}</Text>
    
 
 

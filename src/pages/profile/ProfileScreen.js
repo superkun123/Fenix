@@ -404,7 +404,6 @@ const dayFormat = () => {
 
 const MonthFormat = () => {
   if(monthBirth.length == 1) {
-    Alert.alert(`${monthBirth.length}`)
     return `0${monthBirth}`
   } else {
     return monthBirth

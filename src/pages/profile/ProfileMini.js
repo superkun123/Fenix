@@ -57,6 +57,7 @@ const [likeColor, setLikeColor] = useState('#5DADC1')
 const [isFavorite, setIsFavorite] = useState(false)
 const [currentId, setCurrentId] = useState(route.params.description)
 const [nameDataLoad, isNameDataLoad] = useState(false)
+const [storeName, isStoreName] = useState(0)
 let singleId = 1
 
 
@@ -78,9 +79,7 @@ const getData = async () => {
     } else {
       if(jsonArray.indexOf(`${currentId}`) !== -1) {
         setIsFavorite(true)
-        Alert.alert(`гетДата - тру - ${isFavorite}`)
       } else {
-        Alert.alert(`гетДата - фолс - ${isFavorite}`)
         setIsFavorite(false)
       }
 
@@ -124,12 +123,12 @@ const storeData = async (value) => {
       const jsonValue = JSON.stringify(arrayStore)
       AsyncStorage.setItem('favorite', jsonValue)
       setIsFavorite(true)
-      Alert.alert(`${isFavorite}`)
     }
       } catch (e) {
         // saving error
       }
       setIsFavorite(true)
+      isStoreName(1)
 }
 
 
@@ -224,7 +223,7 @@ useEffect(() => {
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
   }
-}, [route.params.genderId, nameDataLoad, currentId]);
+}, [route.params.genderId, nameDataLoad, currentId, isFavorite, storeName]);
 
 
 
@@ -397,6 +396,8 @@ const CardAdvice = (card , data) => {
 
 
 const Card = (card , data) => {
+
+  
 
 
   const RenderFatherName = () => {
@@ -698,11 +699,11 @@ singleId = id
 
 
 const findStartCard = () => {
+  getData()
   let searchTerm = route.params.description
   let currentElem  =   data.findIndex(elem => elem.name_id == searchTerm)
   return currentElem
 }
-
 
 
 

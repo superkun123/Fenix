@@ -20,6 +20,7 @@ import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 import HTML from "react-native-render-html";
 import { Ionicons } from '@expo/vector-icons'; 
+import { back } from 'react-native/Libraries/Animated/src/Easing';
 
 
 
@@ -504,6 +505,7 @@ if (isLoading == false) {
 
 
 
+
         <Favorite></Favorite>
 
         {/* <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
@@ -715,6 +717,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     minHeight: 32,
+    shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 2,
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+elevation: 3
   },
   profileName: {
     fontFamily: 'Gilroy',
@@ -897,6 +907,7 @@ const styles = StyleSheet.create({
     padding: 5,
     transform: [{ translateY: 20 }],
     zIndex: 110,
+    elevation: 10
   },
   upBtn: {
     alignItems: 'center',

@@ -97,6 +97,18 @@ function BirthdayScreen({ navigation, route }) {
     )
 
 
+    const jumpToAction2 = TabActions.jumpTo('Подборка', {
+      screen: 'CollectionScreen',
+      params: { 
+        genderId: route.params.genderId,
+        fatherFirstName: route.params.fatherFirstName,
+        fatherSecondName: route.params.fatherSecondName,
+      },
+    },
+    )
+
+
+
    
 
     const storeData = async (day, month, year) => {
@@ -180,7 +192,7 @@ function BirthdayScreen({ navigation, route }) {
           }]}></SvgComponentArrowRight>
         </LinearGradient>
     </Pressable>
-    <Pressable  onPress={() => navigation.dispatch(jumpToAction)} style={styles.hollowBtn}>
+    <Pressable  onPress={() => navigation.dispatch(jumpToAction2)} style={styles.hollowBtn}>
             <Text style={styles.hollowBtnText}>Пропустить</Text>
           </Pressable>
 

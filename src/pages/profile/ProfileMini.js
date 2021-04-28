@@ -56,6 +56,7 @@ const [adviceLoad, setAdviceLoad] = useState(false)
 const [likeColor, setLikeColor] = useState('#5DADC1')
 const [isFavorite, setIsFavorite] = useState(false)
 const [currentId, setCurrentId] = useState(route.params.description)
+const [nameDataLoad, isNameDataLoad] = useState(false)
 let singleId = 1
 
 
@@ -77,7 +78,9 @@ const getData = async () => {
     } else {
       if(jsonArray.indexOf(`${currentId}`) !== -1) {
         setIsFavorite(true)
+        Alert.alert(`гетДата - тру - ${isFavorite}`)
       } else {
+        Alert.alert(`гетДата - фолс - ${isFavorite}`)
         setIsFavorite(false)
       }
 
@@ -104,6 +107,7 @@ const getDataNames = async () => {
       setFirstNameHook(fatherFirstNameStore)
       setSecondNameHook(fatherSecondNameStore)
     }
+    isNameDataLoad(true)
   } catch(e) {
     Alert.alert('Ошибка соединения с сервером')
     // error reading value
@@ -112,7 +116,7 @@ const getDataNames = async () => {
 
 
 const storeData = async (value) => {
-  let result = await getData()
+  // let result = await getData()
   try {
     const deleteIndex = arrayStore.indexOf(value)
     if (deleteIndex == -1) {
@@ -120,10 +124,12 @@ const storeData = async (value) => {
       const jsonValue = JSON.stringify(arrayStore)
       AsyncStorage.setItem('favorite', jsonValue)
       setIsFavorite(true)
+      Alert.alert(`${isFavorite}`)
     }
       } catch (e) {
         // saving error
       }
+      setIsFavorite(true)
 }
 
 
@@ -150,6 +156,15 @@ const deleteData = async (value) => {
 
 
 
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('focus', () => {
+    getData()
+    getDataNames()
+  });
+
+  // Return the function to unsubscribe from the event so it gets removed on unmount
+  return unsubscribe;
+}, [navigation]);
 
 
 
@@ -200,26 +215,19 @@ useEffect(() => {
 
 
 useEffect(() => {
-  // getData()
-  getDataNames()
-  fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=${route.params.yearData}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&gender_id=${route.params.genderId}&is_full=1`)
+  getData()
+  if (nameDataLoad) {
+    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=${route.params.yearData}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&gender_id=${route.params.genderId}&is_full=1`)
     // fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.names))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.genderId, fatherFirstNameHook, fatherSecondNameHook, currentId]);
+  }
+}, [route.params.genderId, nameDataLoad, currentId]);
 
 
 
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('focus', () => {
-    getData()
-  });
-
-  // Return the function to unsubscribe from the event so it gets removed on unmount
-  return unsubscribe;
-}, [navigation]);
 
 
 
@@ -252,6 +260,7 @@ React.useEffect(() => {
 
 
 const swipeBackAnim = () => {
+  getData()
   swiperRef.current.swipeBack()
 }
 
@@ -401,6 +410,15 @@ const Card = (card , data) => {
     }
   }
 
+  const InitialsText = () => {
+    if(card.initials.length < 2) {
+      return <Text style={styles.profileSureName}></Text>
+    } else {
+      return <Text style={styles.profileSureName}>{card.initials}</Text> 
+    }
+  }
+  
+
   setCurrentId(card.name_id)
 
   const Favorite = () => {
@@ -482,8 +500,9 @@ singleId = id
      
          <View style={styles.profileSureName}>
          <RenderFatherName></RenderFatherName> 
+         <InitialsText></InitialsText>
          </View>
-         <Text style={styles.profileSureName}>{card.initials}</Text>
+
      </View>
     
   
@@ -553,9 +572,9 @@ singleId = id
      <View style={styles.profileSureNameBlock}>
      
      <View style={styles.profileSureName}>
-     <RenderFatherName></RenderFatherName> 
+        <RenderFatherName></RenderFatherName> 
+         <InitialsText></InitialsText>
      </View>
-     <Text style={styles.profileSureName}>{card.initials}</Text>
  </View>
 
     
@@ -622,10 +641,10 @@ singleId = id
   
      <Colors id={id} > </Colors>
   
-     <Text style={styles.profileSureName}>
-     {/* Иван Петрович Николаев ИПН, НИП */}
-     <RenderFatherName></RenderFatherName>
-     </Text>
+     <View style={styles.profileSureName}>
+        <RenderFatherName></RenderFatherName> 
+         <InitialsText></InitialsText>
+     </View>
     
   
      <View style={styles.profileTranscription}>

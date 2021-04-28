@@ -62,6 +62,8 @@ const [isFavorite, setIsFavorite] = useState(false)
 const [dayBirth, setBirthDay] = useState('')
 const [monthBirth, setMonthBirth] = useState('')
 const [yearBirth, setYearBirth] = useState('')
+const [birthDataLoad, isBirthDataLoad] = useState(false)
+const [nameDataLoad, isNameDataLoad] = useState(false)
 // const [favorite, setFavorite] = useState([1])
 
 
@@ -119,6 +121,8 @@ const getDataNames = async () => {
       setMonthBirth(birthMonth)
       setYearBirth(year)
     }
+    isBirthDataLoad(true)
+    isNameDataLoad(true)
   } catch(e) {
     Alert.alert('Ошибка соединения с сервером')
     // error reading value
@@ -221,6 +225,21 @@ const onPressTouch = () => {
 
 
 
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('focus', () => {
+    // getData()
+    getData()
+    getDataNames()
+    // getDataNames()
+    // getDataLike()
+  });
+
+  // Return the function to unsubscribe from the event so it gets removed on unmount
+  return unsubscribe;
+}, [navigation]);
+
+
+
 useEffect(() => {
   // getData()
   // fetch('https://narekaet.com/api/get_names')
@@ -268,30 +287,21 @@ useEffect(() => {
 
 
 useEffect (()  => {
-  getDataNames()
+  // getDataNames()
   // getData()
   // fetch('https://narekaet.com/api/get_names')
-  fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=${route.params.genderId}&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}&is_full=1`)
+  if (birthDataLoad && nameDataLoad) {
+    fetch(`https://narekaet.com/api/get_name?name_id=${route.params.description}&gender_id=&father_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&day=${dayBirth}&month=${monthBirth}&year=${yearBirth}&is_full=1`)
     .then((response) => response.json())
     .then((json) => setData(json.name))
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
-}, [route.params.description, likeColor, fatherFirstNameHook, fatherSecondNameHook, dayBirth, monthBirth, yearBirth]);
+  } 
+}, [route.params.description, birthDataLoad, nameDataLoad]);
 
 
 
 
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('focus', () => {
-    // getData()
-    getData()
-    // getDataNames()
-    // getDataLike()
-  });
-
-  // Return the function to unsubscribe from the event so it gets removed on unmount
-  return unsubscribe;
-}, [navigation]);
 
 
 const inputEl = useRef(null);
@@ -307,8 +317,8 @@ const inputEl = useRef(null);
 //  }
  
  const RenderFatherName = () => {
-   if (data.middle_name == undefined || data.surname == undefined) {
-     return    <View style={styles.profileEpmty} >
+   if (data.middle_name == undefined && nameDataLoad == true || data.surname == undefined && nameDataLoad == true) {
+     return    <View style={styles.emptyCheck} >
    </View>
    } else {
      return data.name + ' ' + data.middle_name + ' ' + data.surname
@@ -386,6 +396,16 @@ const Colors = () => {
 
 
 
+  const InitialsText = () => {
+    if(data.initials.length < 2) {
+      return <Text style={styles.profileSureName}></Text>
+    } else {
+      return <Text style={styles.profileSureName}>{data.initials}</Text> 
+    }
+  }
+
+
+
   const htmlContent = (html) => {
     return (
       `${html}`
@@ -413,7 +433,7 @@ const MonthFormat = () => {
 
 
 const DataInfo = () => {
-  if(data.props_date !== undefined) {
+  if(data.props_date !== undefined && birthDataLoad == true) {
     return (
 
       <View style={styles.charTextBlock}>  
@@ -452,6 +472,7 @@ const DataInfo = () => {
   } else {
     return (
       <View>
+       
       </View>
     )
   }
@@ -554,7 +575,7 @@ if (isLoading == false) {
          <Text style={styles.profileSureName}>
          <RenderFatherName></RenderFatherName> 
          </Text>
-         <Text style={styles.profileSureName}>{data.initials}</Text>
+        <InitialsText></InitialsText>
          {/* {data.middle_name + ' '} 
          {data.surname + ''} */}
 
@@ -678,6 +699,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   profileEpmty: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#FFF7ED',
+  },
+  emptyCheck: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,

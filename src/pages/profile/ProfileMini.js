@@ -427,15 +427,15 @@ const Card = (card , data) => {
     // const deleteIndex = arrayStore.indexOf(currentItem)
     if (isFavorite) {
       return ( 
-        <TouchableOpacity style={styles.like}  onPress={() => deleteData(`${card.name_id}`)}>
+        <View style={styles.like}>
         <SvgComponentLike color={'#fff'} ></SvgComponentLike>
-      </TouchableOpacity>
+      </View>
       ) 
     } else {
       return (
-        <TouchableOpacity style={styles.like} onPress={() => storeData(`${card.name_id}`)}>
+        <View style={styles.like}>
         <SvgComponentLike color={'#5DADC1'} ></SvgComponentLike>
-      </TouchableOpacity>
+      </View>
       )
     }
   }

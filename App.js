@@ -103,7 +103,7 @@ export default function App({navigation}) {
       const value = await AsyncStorage.getItem('badge')
       // Alert.alert(`значение бейджа на главном экране ${value}`)
       if(value !== null) {
-        setBadgeApp(value)
+        setBadgeApp(value -1 + 2)
         // value previously stored
       }
     } catch(e) {

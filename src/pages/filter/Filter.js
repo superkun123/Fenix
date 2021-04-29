@@ -106,6 +106,26 @@ const getData = async () => {
 getData()
 
 
+
+const dayFormat = () => {
+  if(birthDayHook.length == 1) {
+    return `0${birthDayHook}`
+  } else {
+    return birthDayHook
+  }
+}
+
+
+const MonthFormat = () => {
+  if(birthMonthHook.length == 1) {
+    return `0${birthMonthHook}`
+  } else {
+    return birthMonthHook
+  }
+}
+
+
+
 const FatherNameField = () => {
   if (fatherFirstNameHook !== '' && fatherSecondNameHook !== '' ) {
     return  (
@@ -154,7 +174,7 @@ flex: 1,
 flex: 0.6,
 }}>
 
-<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{birthDayHook} {monthValidator()} {birthMonthHook} {birthYearHook}</Text>
+<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{dayFormat()} {MonthFormat()} {birthYearHook}</Text>
 
 </View>
 
@@ -305,7 +325,7 @@ flex: 0.67,
 <Picker
 selectedValue={selectedSort}
 style={styles.picker}
-itemStyle={{height: 70}}
+itemStyle={{height: Platform.OS === 'ios' ? 150 : 70}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedSort(itemValue)
 }>
@@ -367,7 +387,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontFamily:'Gilroy',
     fontSize: 10,
-    height: 70
+    height: Platform.OS === 'ios' ? 150 : 70
     // flexDirection: 'row',
     // justifyContent: 'flex-end',
     // alignItems: 'flex-end',

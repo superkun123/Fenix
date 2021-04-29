@@ -138,7 +138,7 @@ const year = () => {
     setLoading(true);
   
     // fetch('http://www.s1928.konversia.net/api/get_names?name_ids=true?sort=asc')
-    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=2021=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
+    fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${route.params.dayData}&month=${route.params.monthData}&year=${route.params.yearData}&dfather_name=${route.params.fatherFirstName}&father_surname=${route.params.fatherSecondName}&gender_id=${route.params.genderId}`)
     // fetch(`https://narekaet.com/api/get_names?name_ids=true&sort=${route.params.sort}&name_type_id=${route.params.category}&day=${birthDayHook}&month=${birthMonthHook}&year=2021=${birthYearHook}&dfather_name=${fatherFirstNameHook}&father_surname=${fatherSecondNameHook}&gender_id=${route.params.genderId}`)
       .then(response => response.json())
       .then(response => {

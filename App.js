@@ -197,7 +197,7 @@ screenOptions={({ route }) => ({
           />
         <Tab.Screen name="Энциклопедия" component={Catalog} listeners={resetHomeStackOnTabPress} initialParams={{ genderId: '', }} />
         <Tab.Screen name="Подборка" component={Collection} listeners={resetHomeStackOnTabPress}  initialParams={{ genderId: '', fatherFirstName: '', fatherSecondName: ''  }} />
-        <Tab.Screen name="Избранное" component={Favorite} listeners={resetHomeStackOnTabPress} options={{ tabBarBadge: badgeApp,  tabBarBadgeStyle: { backgroundColor: '#5DADC1', color: '#fff', width: 10, height: 18, fontSize: 10 } }}   />
+        <Tab.Screen name="Избранное" component={Favorite} listeners={resetHomeStackOnTabPress}    />
         <Tab.Screen name="Поиск" component={Search} listeners={resetHomeStackOnTabPress} />
 
       </Tab.Navigator>

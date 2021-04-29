@@ -620,9 +620,9 @@ singleId = id
   </View>
   )
  } else {
+   Alert.alert('прыг')
   return ( 
     <View style={styles.profile}>
-      <Text>{route.params.advice}</Text>
 
 
      <View style={styles.flagContainer}>

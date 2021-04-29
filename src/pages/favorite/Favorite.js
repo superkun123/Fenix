@@ -94,7 +94,7 @@ const storeData = async () => {
   let result = await getData()
   try {
     // Alert.alert(`бейдж во время стора даты в избранном ${badge}`)
-    await AsyncStorage.setItem('badge', badge)
+    await AsyncStorage.setItem('badge', `${badge}`)
   } catch (e) {
     // saving error
   }
@@ -128,7 +128,7 @@ React.useEffect(() => {
 
   // Return the function to unsubscribe from the event so it gets removed on unmount
   return unsubscribe;
-}, [navigation, badge]);
+}, [navigation]);
 
 
 

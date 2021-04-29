@@ -103,6 +103,9 @@ function BirthdayScreen({ navigation, route }) {
         genderId: route.params.genderId,
         fatherFirstName: route.params.fatherFirstName,
         fatherSecondName: route.params.fatherSecondName,
+        yearData: ``,
+        monthData: ``,
+        dayData: ``
       },
     },
     )

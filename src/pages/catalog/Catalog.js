@@ -122,13 +122,12 @@ function CatalogScreen({ navigation, route }) {
 <Pressable
    style={({pressed}) => [
     {
-      elevation: pressed ? 5 : 0,
-      shadowRadius: pressed ? 2.22 : 0
+      backgroundColor: pressed ? '#5DADC1' : '#FFF7ED',
     },
     styles.nameBtn,
   ]}
 children={({ pressed }) => (
-  <Text style={{ color: pressed ? '#222' : '#222'}}>
+  <Text style={{ color: pressed ? '#fff' : '#222'}}>
     {item.name}
   </Text>)}
 onPress={() => navigation.navigate('ProfileMini', {
@@ -404,8 +403,9 @@ onPress={() => navigation.navigate('ProfileMini', {
       />
 </View>
 
-
 <FlatListRender ></FlatListRender>
+
+
       
       
 
@@ -525,8 +525,8 @@ const styles = StyleSheet.create({
   },
   nameBtn: {
     fontFamily: 'Gilroy',
-    color: '#5DADC1',
-    backgroundColor: '#FFF7ED',
+    // color: '#5DADC1',
+    // backgroundColor: '#FFF7ED',
     paddingTop: 19,
     paddingBottom: 18,
     alignItems: "center",
@@ -586,15 +586,14 @@ const styles = StyleSheet.create({
     marginRight: 60,
     flex: 1,
     paddingTop: 10,
-    shadowColor: "#F4E9DC",
+    shadowColor: "#FFF7ED",
     shadowOffset: {
-      width: 0,
-      height: 2,
+	   width: 0,
+	   height: 5,
     },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    
-    elevation: 4,
+   shadowOpacity: 0.34,
+   shadowRadius: 6.27,
+   elevation: 10,
   },
   FlatListAlphabet: {
     backgroundColor: '#FAFAFA',

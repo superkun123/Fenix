@@ -81,29 +81,29 @@ const categoryType = () => {
 }
 
 
-const getData = async () => {
-  try {
-    const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
-    const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
-    const birthDay = await AsyncStorage.getItem('day')
-    const birthMonth = await AsyncStorage.getItem('month')
-    const birthYear = await AsyncStorage.getItem('year')
-    if(fatherFirstNameStore !== null) {
-      setFirstNameHook(fatherFirstNameStore)
-      setSecondNameHook(fatherSecondNameStore)
-    }
-    if (birthDay !== null) {
-      setBirthDayHook(birthDay)
-      setBirthMonthyHook(birthMonth)
-      setBirthYearHook(birthYear)
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
+// const getData = async () => {
+//   try {
+//     const fatherFirstNameStore = await AsyncStorage.getItem('fatherFirstName')
+//     const fatherSecondNameStore = await AsyncStorage.getItem('fatherSecondName')
+//     const birthDay = await AsyncStorage.getItem('day')
+//     const birthMonth = await AsyncStorage.getItem('month')
+//     const birthYear = await AsyncStorage.getItem('year')
+//     if(fatherFirstNameStore !== null) {
+//       setFirstNameHook(fatherFirstNameStore)
+//       setSecondNameHook(fatherSecondNameStore)
+//     }
+//     if (birthDay !== null) {
+//       setBirthDayHook(birthDay)
+//       setBirthMonthyHook(birthMonth)
+//       setBirthYearHook(birthYear)
+//     }
+//   } catch(e) {
+//     // error reading value
+//   }
+// }
 
 
-getData()
+// getData()
 
 
 
@@ -126,67 +126,67 @@ const MonthFormat = () => {
 
 
 
-const FatherNameField = () => {
-  if (fatherFirstNameHook !== '' && fatherSecondNameHook !== '' ) {
-    return  (
-      <View style={styles.labelfieldStatic}>
+// const FatherNameField = () => {
+//   if (fatherFirstNameHook !== '' && fatherSecondNameHook !== '' ) {
+//     return  (
+//       <View style={styles.labelfieldStatic}>
 
-<View style={{
-flex: 1,
-}}>
-<Text  style={styles.label}>Имя отца</Text>
-</View>
-
-
-
-<View style={{
-flex: 0.6,
-}}>
-
-<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{fatherFirstNameHook} {fatherSecondNameHook}</Text>
-
-</View>
-
-</View>
-
-    )
-  } else {
-   return (
-    <View></View>
-   ) 
-  }
-}
-
-const BirdthField = () => {
-  if (birthDayHook !== '') {
-    return  (
-      <View style={styles.labelfieldStatic}>
-
-<View style={{
-flex: 1,
-}}>
-<Text  style={styles.label}>Дата рождения ребёнка:</Text>
-</View>
+// <View style={{
+// flex: 1,
+// }}>
+// <Text  style={styles.label}>Имя отца</Text>
+// </View>
 
 
 
-<View style={{
-flex: 0.6,
-}}>
+// <View style={{
+// flex: 0.6,
+// }}>
 
-<Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{dayFormat()} {MonthFormat()} {birthYearHook}</Text>
+// <Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{fatherFirstNameHook} {fatherSecondNameHook}</Text>
 
-</View>
+// </View>
 
-</View>
+// </View>
 
-    )
-  } else {
-   return (
-    <View></View>
-   ) 
-  }
-}
+//     )
+//   } else {
+//    return (
+//     <View></View>
+//    ) 
+//   }
+// }
+
+// const BirdthField = () => {
+//   if (birthDayHook !== '') {
+//     return  (
+//       <View style={styles.labelfieldStatic}>
+
+// <View style={{
+// flex: 1,
+// }}>
+// <Text  style={styles.label}>Дата рождения ребёнка:</Text>
+// </View>
+
+
+
+// <View style={{
+// flex: 0.6,
+// }}>
+
+// <Text  style={{fontFamily:'Gilroy', fontSize: 15}}>{dayFormat()} {MonthFormat()} {birthYearHook}</Text>
+
+// </View>
+
+// </View>
+
+//     )
+//   } else {
+//    return (
+//     <View></View>
+//    ) 
+//   }
+// }
 
 
 const parentPage = route.params.parentPage
@@ -221,7 +221,7 @@ const AllCategory = () => {
       <Picker
 selectedValue={selectedCategory}
 style={styles.picker}
-itemStyle={{height: 70}}
+itemStyle={{height: 90}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedCategory(itemValue)
 }>
@@ -265,7 +265,7 @@ setSelectedCategory(itemValue)
 <Picker
   selectedValue={selectedmale}
   style={styles.picker}
-  itemStyle={{height: 70}}
+  itemStyle={{height: 90}}
   onValueChange={(itemValue, itemIndex) =>
     setSelectedmale(itemValue)
   }>
@@ -302,8 +302,8 @@ flex: 0.67,
 </View>
 
 
-<FatherNameField ></FatherNameField>
-<BirdthField ></BirdthField>
+{/* <FatherNameField ></FatherNameField>
+<BirdthField ></BirdthField> */}
 
 
 
@@ -325,7 +325,7 @@ flex: 0.67,
 <Picker
 selectedValue={selectedSort}
 style={styles.picker}
-itemStyle={{height: Platform.OS === 'ios' ? 150 : 70}}
+itemStyle={{height: Platform.OS === 'ios' ? 90 : 90}}
 onValueChange={(itemValue, itemIndex) =>
 setSelectedSort(itemValue)
 }>
@@ -387,7 +387,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontFamily:'Gilroy',
     fontSize: 10,
-    height: Platform.OS === 'ios' ? 150 : 70
+    height: Platform.OS === 'ios' ? 90 : 70
     // flexDirection: 'row',
     // justifyContent: 'flex-end',
     // alignItems: 'flex-end',

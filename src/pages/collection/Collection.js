@@ -650,15 +650,14 @@ const styles = StyleSheet.create({
     marginRight: 60,
     flex: 1,
     paddingTop: 10,
-    shadowColor: "#F4E9DC",
+    shadowColor: "#FFF7ED",
     shadowOffset: {
-      width: 0,
-      height: 2,
+	   width: 0,
+	   height: 5,
     },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    
-    elevation: 4,
+   shadowOpacity: 0.34,
+   shadowRadius: 6.27,
+   elevation: 10,
   },
   FlatListAlphabet: {
     backgroundColor: '#FAFAFA',

@@ -12,6 +12,7 @@ import { useFonts } from 'expo-font';
 import { Filter } from '../filter/Filter'
 import filter from 'lodash.filter';
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
+import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 
 
 
@@ -122,14 +123,23 @@ function CatalogScreen({ navigation, route }) {
 <Pressable
    style={({pressed}) => [
     {
-      backgroundColor: pressed ? '#5DADC1' : '#FFF7ED',
+      elevation: pressed ? 5 : 0,
+      shadowRadius: pressed ? 2.22 : 0,
+      shadowOffset: {
+	    width: 0,
+	    height: pressed ? 2: 0,
+     },
+     shadowOpacity: 0.25,
     },
     styles.nameBtn,
   ]}
 children={({ pressed }) => (
-  <Text style={{ color: pressed ? '#fff' : '#222'}}>
+  <View style={{ color: pressed ? '#222' : '#222', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center',  width: 130, textAlign: 'center'}}>
+    <Text style={{textAlign: 'center'}}>
     {item.name}
-  </Text>)}
+    </Text>
+    <SvgComponentLike color={'#FFF7ED'} secondColor={'#444'} style={styles.like} ></SvgComponentLike>
+  </View>)}
 onPress={() => navigation.navigate('ProfileMini', {
   // paramKey: userName,
   // paramKey: item.name,
@@ -166,7 +176,7 @@ onPress={() => navigation.navigate('ProfileMini', {
       
     ]}
   children={({ pressed }) => (
-    <Text style={{ color: pressed ? '#FFF' : '#222'}}>
+    <Text style={{ color: pressed ? '#FFF' : '#979797'}}>
       {item.title}
     </Text>)}
     onPress={() => handleSearch(item.title)}
@@ -363,6 +373,8 @@ onPress={() => navigation.navigate('ProfileMini', {
         key={renderItem.item}
         keyExtractor={(item) => item.id}
         style={styles.FlatListCatalog}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
         </View>
       )
@@ -525,8 +537,8 @@ const styles = StyleSheet.create({
   },
   nameBtn: {
     fontFamily: 'Gilroy',
-    // color: '#5DADC1',
-    // backgroundColor: '#FFF7ED',
+    color: '#5DADC1',
+    backgroundColor: '#FFF7ED',
     paddingTop: 19,
     paddingBottom: 18,
     alignItems: "center",
@@ -567,6 +579,10 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: "#FAFAFA",
   },
+  like: {
+    position: 'absolute',
+    right: '-20%'
+  },
   alphabet: {
     // flex: 0.1,
     color: "#292929",
@@ -575,7 +591,7 @@ const styles = StyleSheet.create({
     zIndex: 10
   },
   alphaword: {
-    marginBottom: 5,
+    marginBottom: 2,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,

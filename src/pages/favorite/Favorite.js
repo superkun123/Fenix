@@ -341,7 +341,7 @@ width: 0,
 height: 0,
 },
 shadowOpacity: 0.1,
-shadowRadius: 8,
+shadowRadius: 5,
 elevation: 5,
     marginBottom: 6,
     marginRight: 16,
@@ -374,6 +374,7 @@ elevation: 5,
   },
   FlatListCatalog: {
     flex: 1,
+    paddingTop: 10
   },
   FlatListAlphabet: {
     paddingHorizontal: 2.5

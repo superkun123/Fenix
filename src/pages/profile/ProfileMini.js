@@ -434,7 +434,7 @@ const Card = (card , data) => {
     } else {
       return (
         <View style={styles.like}>
-        <SvgComponentLike color={'#5DADC1'} ></SvgComponentLike>
+        <SvgComponentLike color={'#5DADC1'} secondColor={'#fff'} ></SvgComponentLike>
       </View>
       )
     }

@@ -13,6 +13,8 @@ import { Filter } from '../filter/Filter'
 import filter from 'lodash.filter';
 import { SvgComponentArrowRight } from '../../../assets/jsxSvg/arrowRightWhite'
 import { Birthday } from '../birthday/Birthday';
+import { SvgComponentAdvice } from '../../../assets/jsxSvg/advice';
+import { SvgComponentLike } from '../../../assets/jsxSvg/like'
 
 
 
@@ -196,14 +198,22 @@ const year = () => {
    style={({pressed}) => [
     {
       elevation: pressed ? 5 : 0,
-      shadowRadius: pressed ? 2.22 : 0
+      shadowRadius: pressed ? 2.22 : 0,
+      shadowOffset: {
+        width: 0,
+        height: pressed ? 2: 0,
+       },
+       shadowOpacity: 0.25,
     },
     styles.nameBtn,
   ]}
 children={({ pressed }) => (
-  <Text style={{ color: pressed ? '#222' : '#222'}}>
+  <View style={{ color: pressed ? '#222' : '#222', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center',  width: 130, textAlign: 'center'}}>
+    <Text style={{textAlign: 'center'}}>
     {item.name}
-  </Text>)}
+    </Text>
+    <SvgComponentLike color={'#FFF7ED'} secondColor={'#444'} style={styles.like} ></SvgComponentLike>
+  </View>)}
 onPress={() => navigation.navigate('ProfileMini', {
   // paramKey: userName,
   // paramKey: item.name,
@@ -218,6 +228,7 @@ onPress={() => navigation.navigate('ProfileMini', {
   advice: route.params.advice
 } )}
 >
+
 
 
 {/* <Text style={styles.namebtnText}>{item.name}</Text> */}
@@ -240,7 +251,7 @@ onPress={() => navigation.navigate('ProfileMini', {
       
     ]}
   children={({ pressed }) => (
-    <Text style={{ color: pressed ? '#FFF' : '#222'}}>
+    <Text style={{ color: pressed ? '#FFF' : '#979797'}}>
       {item.title}
     </Text>)}
     onPress={() => handleSearch(item.title)}
@@ -431,6 +442,8 @@ onPress={() => navigation.navigate('ProfileMini', {
         key={renderItem.item}
         keyExtractor={(item) => item.id}
         style={styles.FlatListCatalog}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
         </View>
       )
@@ -576,7 +589,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
     maxWidth: 30,
     marginLeft: 10,
-    marginRight: -5
+    marginRight: -5,
+    color: '#fff'
   },
 
   namesContainer: {
@@ -598,8 +612,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F5EDE4',
     marginRight: 10,
     marginLeft: 10,
+    position: 'relative'
   },
-
+  like: {
+    position: 'absolute',
+    right: '-20%'
+  },
   nameBtnContainer: {
     flex: 1,
     justifyContent: "center",
@@ -639,7 +657,7 @@ const styles = StyleSheet.create({
     zIndex: 10
   },
   alphaword: {
-    marginBottom: 5,
+    marginBottom: 2,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,

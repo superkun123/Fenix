@@ -178,13 +178,13 @@ const Favorite = () => {
   if (isFavorite) {
     return ( 
       <TouchableOpacity style={styles.like}  onPress={() => deleteData(`${route.params.description}`)}>
-      <SvgComponentLike color={'#fff'} ></SvgComponentLike>
+      <SvgComponentLike color={'#fff'} secondColor={'#fff'} ></SvgComponentLike>
     </TouchableOpacity>
     ) 
   } else {
     return (
       <TouchableOpacity style={styles.like} onPress={() => storeData(`${route.params.description}`)}>
-      <SvgComponentLike color={'#5DADC1'} ></SvgComponentLike>
+      <SvgComponentLike color={'#5DADC1'} secondColor={'#fff'} ></SvgComponentLike>
     </TouchableOpacity>
     )
   }

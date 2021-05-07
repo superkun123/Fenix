@@ -176,11 +176,11 @@ const Item = ({ item, onPress, style }) => (
       styles.nameBtn,
     ]}
   children={({ pressed }) => (
-    <View style={{ color: pressed ? '#222' : '#222', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center',  width: 130, textAlign: 'center'}}>
+    <View style={{ color: pressed ? '#222' : '#222', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center',  width: '100%', textAlign: 'center', position: 'relative'}}>
     <Text style={{textAlign: 'center'}}>
     {item.name}
     </Text>
-    <SvgComponentLike color={'#444'} secondColor={'#444'} style={styles.like} ></SvgComponentLike>
+    <SvgComponentLike color={'#5DADC1'} secondColor={'#5DADC1'} style={styles.like} ></SvgComponentLike>
   </View>
       )}
   onPress={() => navigation.navigate('ProfileScreen', {
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   },
   like: {
     position: 'absolute',
-    right: '-25%'
+    right: 0
   },
   alphabet2: {
     flex: 0.1,

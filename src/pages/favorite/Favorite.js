@@ -164,17 +164,24 @@ const Item = ({ item, onPress, style }) => (
   <Pressable
      style={({pressed}) => [
       {
-        backgroundColor: pressed ? '#5DADC1' : '#fff',
+        elevation: pressed ? 5 : 0,
+        shadowRadius: pressed ? 2.22 : 0,
+        zIndex: pressed ? 110 : 1,
+        shadowOffset: {
+          width: 0,
+          height: pressed ? 2: 0,
+         },
+         shadowOpacity: 0.25,
       },
       styles.nameBtn,
     ]}
   children={({ pressed }) => (
-    <View>
-    <Text style={{ color: pressed ? '#FFF' : '#222'}}>
-      {item.name}
+    <View style={{ color: pressed ? '#222' : '#222', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center',  width: 130, textAlign: 'center'}}>
+    <Text style={{textAlign: 'center'}}>
+    {item.name}
     </Text>
-    <SvgComponentLike color={'#5DADC1'} style={styles.like}></SvgComponentLike>
-    </View>
+    <SvgComponentLike color={'#444'} secondColor={'#444'} style={styles.like} ></SvgComponentLike>
+  </View>
       )}
   onPress={() => navigation.navigate('ProfileScreen', {
     // paramKey: userName,
@@ -219,6 +226,14 @@ const Item = ({ item, onPress, style }) => (
     
   <View style={styles.namesContainer}>
   <FlatList
+  contentContainerStyle={{ paddingBottom: 20,  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.23,
+  shadowRadius: 2.62,  
+  elevation: 5 }}
           data={data}
           renderItem={renderItem}
           key={renderItem.item}
@@ -308,7 +323,7 @@ const styles = StyleSheet.create({
   },
   like: {
     position: 'absolute',
-    right: 0,
+    right: '-25%'
   },
   alphabet2: {
     flex: 0.1,
@@ -329,24 +344,26 @@ const styles = StyleSheet.create({
   },
   nameBtn: {
     fontFamily: 'Gilroy',
-    color: '#5DADC1',
+    backgroundColor: '#FFF7ED',
     paddingTop: 19,
     paddingBottom: 18,
     paddingHorizontal: 20,
-    // alignItems: "center",
-    borderRadius: 6,
-    shadowColor: "#333",
-shadowOffset:{
-width: 0,
-height: 0,
-},
-shadowOpacity: 0.1,
-shadowRadius: 5,
-elevation: 5,
-    marginBottom: 6,
-    marginRight: 16,
-    marginLeft: 16,
-    marginTop: 6
+    textAlign: 'center',
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: '#F5EDE4',
+//     shadowColor: "#333",
+// shadowOffset:{
+// width: 0,
+// height: 0,
+// },
+// shadowOpacity: 0.1,
+// shadowRadius: 5,
+// elevation: 5,
+marginRight: 50,
+marginLeft: 50,
+marginBottom: 0.5,
+marginTop: 1
   },
 
   nameBtnContainer: {
@@ -374,7 +391,15 @@ elevation: 5,
   },
   FlatListCatalog: {
     flex: 1,
-    paddingTop: 10
+    paddingTop: 10,
+    paddingBottom: 10,
+    shadowColor: "#FFF7ED",
+    shadowOffset: {
+	   width: 0,
+	   height: 5,
+    },
+   shadowOpacity: 0.34,
+   shadowRadius: 6.27,
   },
   FlatListAlphabet: {
     paddingHorizontal: 2.5

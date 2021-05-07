@@ -199,6 +199,7 @@ const year = () => {
     {
       elevation: pressed ? 5 : 0,
       shadowRadius: pressed ? 2.22 : 0,
+      zIndex: pressed ? 110 : 1,
       shadowOffset: {
         width: 0,
         height: pressed ? 2: 0,
@@ -436,7 +437,14 @@ onPress={() => navigation.navigate('ProfileMini', {
       return (
         <View style={styles.namesContainer}>
         <FlatList
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{ paddingBottom: 20,  shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62, 
+        elevation: 5 }}
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
@@ -595,11 +603,11 @@ const styles = StyleSheet.create({
 
   namesContainer: {
     flex: 1,
-    marginLeft: -30
+    marginLeft: -30,
   },
   header: {
     backgroundColor: '#FAFAFA',
-    marginTop: 40
+    marginTop: 40,
   },
   nameBtn: {
     fontFamily: 'Gilroy',
@@ -612,11 +620,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F5EDE4',
     marginRight: 10,
     marginLeft: 10,
+    marginBottom: 0.5,
     position: 'relative'
   },
   like: {
     position: 'absolute',
-    right: '-20%'
+    right: '-25%'
   },
   nameBtnContainer: {
     flex: 1,
@@ -664,8 +673,8 @@ const styles = StyleSheet.create({
     paddingVertical: 2.5
   },
   FlatListCatalog: {
-    marginLeft: 60,
-    marginRight: 60,
+    marginLeft: 50,
+    marginRight: 50,
     flex: 1,
     paddingTop: 10,
     shadowColor: "#FFF7ED",

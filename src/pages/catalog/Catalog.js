@@ -367,7 +367,8 @@ onPress={() => navigation.navigate('ProfileMini', {
           height: 2,
         },
         shadowOpacity: 0.23,
-        shadowRadius: 2.62,  }}
+        shadowRadius: 2.62,  
+        elevation: 5 }}
         data={data}
         renderItem={renderItem}
         key={renderItem.item}
@@ -546,6 +547,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F5EDE4',
     marginRight: 10,
     marginLeft: 10,
+    marginBottom: 0.5
   },
 
   nameBtnContainer: {
@@ -581,7 +583,7 @@ const styles = StyleSheet.create({
   },
   like: {
     position: 'absolute',
-    right: '-20%'
+    right: '-25%'
   },
   alphabet: {
     // flex: 0.1,
@@ -598,8 +600,8 @@ const styles = StyleSheet.create({
     paddingVertical: 2.5
   },
   FlatListCatalog: {
-    marginLeft: 60,
-    marginRight: 60,
+    marginLeft: 50,
+    marginRight: 50,
     flex: 1,
     paddingTop: 10,
     shadowColor: "#FFF7ED",
